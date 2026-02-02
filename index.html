@@ -1,182 +1,1634 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>humaneed - Vertical Flow</title>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#000;color:#fff;line-height:1.5;}
-  .flow-container{max-width:500px;margin:0 auto;padding:24px;display:flex;flex-direction:column;gap:32px;}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>humaneed</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-  .block{background:#0a0a0a;border:1px solid #1a1a1a;border-radius:12px;padding:20px;position:relative;transition:all 0.2s;}
-  .block h2{font-size:18px;margin-bottom:12px;color:#fff;}
-  .block p{font-size:14px;color:#999;margin-bottom:12px;}
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.5;
+      overflow-x: hidden;
+      padding-bottom: 80px;
+    }
 
-  .state-block{text-align:center;}
-  .state-emoji{font-size:64px;margin-bottom:12px;}
-  .state-name{font-size:32px;font-weight:300;margin-bottom:6px;}
+    /* CONTAINER */
+    .view {
+      display: none;
+      min-height: 100vh;
+    }
 
-  .impulse-list{display:flex;flex-direction:column;gap:12px;}
-  .impulse-card{border:1px solid #1a1a1a;border-radius:10px;padding:16px;cursor:pointer;transition:all 0.2s;}
-  .impulse-card:active{transform:scale(0.98);}
-  .impulse-name{font-size:16px;font-weight:500;}
-  .impulse-desc{font-size:14px;color:#999;margin-top:4px;}
-  .impulse-impact{font-size:12px;color:#666;margin-top:8px;border-top:1px solid #1a1a1a;padding-top:4px;}
+    .view.active {
+      display: block;
+    }
 
-  .maslow-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
-  .slider{width:70%;}
-  input[type="number"]{width:70px;background:#000;border:1px solid #1a1a1a;color:#fff;padding:6px;border-radius:6px;}
+    .section {
+      padding: 32px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
 
-  .budget-row{display:flex;justify-content:space-between;margin-top:8px;}
-  .good{color:#00ff00;}
-  .warning{color:#ff6b35;}
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #666;
+      margin-bottom: 16px;
+      text-align: center;
+    }
 
-  .feedback-options{display:flex;justify-content:space-around;margin-top:12px;}
-  .feedback-btn{padding:12px 16px;border-radius:8px;border:1px solid #1a1a1a;background:#0a0a0a;color:#fff;cursor:pointer;transition:all 0.2s;}
-  .feedback-btn:active{transform:scale(0.95);}
+    /* STATE DISPLAY */
+    .state-hero {
+      text-align: center;
+      padding: 48px 20px;
+      animation: fadeIn 0.5s;
+    }
 
-  .timer-display{font-size:14px;color:#0f0;margin-top:6px;text-align:center;}
-  .hidden{display:none;}
-</style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .state-label {
+      font-size: 13px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .state-emoji {
+      font-size: 72px;
+      margin-bottom: 16px;
+    }
+
+    .state-name {
+      font-size: 42px;
+      font-weight: 300;
+      margin-bottom: 12px;
+    }
+
+    .state-desc {
+      font-size: 15px;
+      color: #999;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    /* QUICK CORRECTION */
+    .quick-fix {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .state-pill {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 20px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .state-pill:active {
+      transform: scale(0.95);
+    }
+
+    /* CARDS */
+    .card {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .card:active {
+      transform: scale(0.98);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .card-meta {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #999;
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .card-footer {
+      font-size: 11px;
+      color: #666;
+      padding-top: 8px;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    .card.priority {
+      border-color: #ff6b35;
+      background: rgba(255, 107, 53, 0.05);
+    }
+
+    .priority-badge {
+      color: #ff6b35;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* NEED GRID */
+    .need-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .need-card {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .need-card:active {
+      transform: scale(0.95);
+    }
+
+    .need-card.selected {
+      background: #1a1a1a;
+      border-color: #fff;
+    }
+
+    .need-emoji {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .need-name {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .need-desc {
+      font-size: 11px;
+      color: #666;
+    }
+
+    /* IMPULSE BOX */
+    .impulse-result {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .impulse-connections {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #1a1a1a;
+      font-size: 12px;
+      color: #999;
+    }
+
+    /* BUDGET */
+    .budget-hero {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 32px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .budget-amount {
+      font-size: 48px;
+      font-weight: 300;
+      margin-bottom: 8px;
+    }
+
+    .budget-amount.low {
+      color: #ff6b35;
+    }
+
+    .budget-label {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .category-btn {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 12px 8px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+      color: #999;
+    }
+
+    .category-btn.active {
+      background: #1a1a1a;
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    input {
+      flex: 1;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #333;
+    }
+
+    .btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:active {
+      transform: scale(0.95);
+    }
+
+    /* HEALTH TRACKER */
+    .health-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .health-item:last-child {
+      border-bottom: none;
+    }
+
+    .health-label {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .health-value {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .health-value.good { color: #00ff00; }
+    .health-value.warning { color: #ff6b35; }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: #1a1a1a;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dot.active {
+      background: #fff;
+    }
+
+    .slider {
+      width: 100%;
+      height: 2px;
+      background: #1a1a1a;
+      border-radius: 1px;
+      outline: none;
+      -webkit-appearance: none;
+      margin-top: 8px;
+    }
+
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px;
+      height: 14px;
+      background: #fff;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* INTERVENTION ACTIVE */
+    .intervention-display {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 16px;
+    }
+
+    .timer-display {
+      text-align: center;
+      font-size: 56px;
+      font-weight: 300;
+      margin: 24px 0;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .decision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .decision-quadrant {
+      background: #000;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .quadrant-label {
+      font-size: 10px;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .quadrant-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 0;
+    }
+
+    .quadrant-input:focus {
+      outline: none;
+    }
+
+    textarea {
+      width: 100%;
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 12px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: #333;
+    }
+
+    /* SYSTEM CONNECTIONS */
+    .connections-box {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 12px;
+      color: #999;
+    }
+
+    .connection-item {
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .connection-item.highlight {
+      color: #ff6b35;
+    }
+
+    /* FEEDBACK */
+    .feedback-prompt {
+      text-align: center;
+      padding: 32px 20px;
+    }
+
+    .feedback-question {
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .feedback-btn {
+      background: #0a0a0a;
+      border: 1px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 20px 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .feedback-btn:active {
+      transform: scale(0.95);
+    }
+
+    .feedback-emoji {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .feedback-label {
+      font-size: 13px;
+    }
+
+    /* BOTTOM NAV */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #000;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      padding: 8px;
+      z-index: 100;
+    }
+
+    .nav-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      padding: 8px;
+      color: #666;
+      font-size: 11px;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-align: center;
+    }
+
+    .nav-btn.active {
+      color: #fff;
+    }
+
+    .nav-icon {
+      font-size: 24px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    /* HIDDEN */
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
-<div class="flow-container" id="flowContainer">
-  <!-- Dynamische Blöcke werden hier erzeugt -->
-</div>
-<script>
-// =====================================
-// SYSTEM STATE
-// =====================================
-const system={water:0,sleep:7,activity:0,budget:30,spent:0,energy:50,currentState:null,lastImpulse:null,history:[]};
+  <!-- FLOW VIEW (Vertical Scroll All) -->
+  <div id="flowView" class="view active">
+    <div id="flowContent"></div>
+  </div>
 
-const STATES={
-  exhausted:{name:'Erschöpft',emoji:'😴',desc:'Körper und Geist brauchen Pause',triggers:{sleep:'<6',water:'<3',activity:'>60'}},
-  restless:{name:'Unruhig',emoji:'😰',desc:'Innere Spannung',triggers:{sleep:'<5',activity:'0'}},
-  overwhelmed:{name:'Überladen',emoji:'🤯',desc:'Zu viele offene Schleifen',triggers:{budget:'<5',activity:'0'}},
-  empty:{name:'Leer',emoji:'😶',desc:'Antriebslos',triggers:{activity:'0',water:'<4'}},
-  clear:{name:'Klar',emoji:'✨',desc:'Fokussiert',triggers:{sleep:'>=7',water:'>=6',activity:'>0'}},
-  blocked:{name:'Blockiert',emoji:'🧱',desc:'Festgefahren',triggers:{activity:'0'}},
-  stable:{name:'Stabil',emoji:'🟢',desc:'Grundbedürfnisse erfüllt',triggers:{sleep:'>=7',water:'>=5',budget:'>10'}},
-  tense:{name:'Angespannt',emoji:'😬',desc:'Körperlich verkrampft',triggers:{activity:'0',sleep:'<6'}}
-};
+  <!-- NEEDS VIEW -->
+  <div id="needsView" class="view">
+    <div class="section">
+      <div class="section-title">Was fehlt gerade?</div>
+      <div class="need-grid" id="needGrid"></div>
+      <div id="needImpulse"></div>
+    </div>
+  </div>
 
-const IMPULSES={
-  breath_478:{name:'4-7-8 Atmung',desc:'Einatmen 4 Sek, halten 7 Sek, ausatmen 8 Sek. 3x wiederholen.',time:'90 Sek',energy:'niedrig',impact:'Beruhigt Nervensystem',states:['restless','tense','overwhelmed'],effect:{state:'stable',energy:10}},
-  water_now:{name:'Wasser trinken',desc:'Ein Glas Wasser trinken.',time:'30 Sek',energy:'niedrig',impact:'Hydration verbessert Konzentration',states:['exhausted','empty','blocked'],effect:{water:1,energy:5}},
-  movement_burst:{name:'Bewegungs-Burst',desc:'Arme kreisen, auf der Stelle laufen.',time:'2 Min',energy:'mittel',impact:'Aktiviert Kreislauf',states:['empty','blocked','tense'],effect:{activity:2,energy:15}}
-};
+  <!-- FINANCE VIEW -->
+  <div id="financeView" class="view">
+    <div class="section">
+      <div class="section-title">Budget-Tracking</div>
+      <div class="budget-hero">
+        <div class="budget-amount" id="budgetAmountFinance">30.00€</div>
+        <div class="budget-label">Verfügbar</div>
+      </div>
+      <div class="category-grid" id="categoryGrid"></div>
+      <div class="input-group">
+        <input type="number" id="spendInput" placeholder="Betrag" step="0.01">
+        <button class="btn" onclick="addSpending()">Add</button>
+      </div>
+      <div id="financeInsights"></div>
+    </div>
+  </div>
 
-// =====================================
-// STATE CALCULATION
-// =====================================
-function calculateState(){
-  let scores={};
-  for(let [key,state] of Object.entries(STATES)){
-    let score=0;
-    if(state.triggers.sleep){if(state.triggers.sleep.includes('<')){if(system.sleep<parseFloat(state.triggers.sleep.replace('<','')))score+=3;}else if(state.triggers.sleep.includes('>=')){if(system.sleep>=parseFloat(state.triggers.sleep.replace('>=','')))score+=3;}}
-    if(state.triggers.water){if(state.triggers.water.includes('<')){if(system.water<parseFloat(state.triggers.water.replace('<','')))score+=2;}else if(state.triggers.water.includes('>=')){if(system.water>=parseFloat(state.triggers.water.replace('>=','')))score+=2;}}
-    if(state.triggers.activity){if(state.triggers.activity==='0'&&system.activity===0)score+=2;else if(state.triggers.activity.includes('>')){if(system.activity>parseFloat(state.triggers.activity.replace('>','')))score+=2;}}
-    if(state.triggers.budget){const remaining=system.budget-system.spent;if(state.triggers.budget.includes('<')){if(remaining<parseFloat(state.triggers.budget.replace('<','')))score+=2;}else if(state.triggers.budget.includes('>')){if(remaining>parseFloat(state.triggers.budget.replace('>','')))score+=1;}}
-    scores[key]=score;
-  }
-  let best=Object.entries(scores).reduce((a,b)=>a[1]>b[1]?a:b);
-  if(best[1]===0)return 'empty';
-  return best[0];
-}
+  <!-- TOOLS VIEW -->
+  <div id="toolsView" class="view">
+    <div class="section">
+      <div class="section-title">System-Eingriffe</div>
+      
+      <div class="card" onclick="startFocusSession()">
+        <div class="card-header">
+          <div class="card-title">Fokus-Session</div>
+          <div class="card-meta">25 Min</div>
+        </div>
+        <div class="card-desc">Deep Work Session mit System-Impact</div>
+        <div class="card-footer">→ Aktivität +25 → System-Update</div>
+      </div>
 
-function getImpulsesForState(stateKey){
-  return Object.values(IMPULSES).filter(i=>i.states.includes(stateKey)).slice(0,3);
-}
+      <div class="card" onclick="startClarityCheck()">
+        <div class="card-header">
+          <div class="card-title">Klarheits-Check</div>
+          <div class="card-meta">3 Min</div>
+        </div>
+        <div class="card-desc">3 Fragen zur Auto-Kategorisierung</div>
+        <div class="card-footer">→ Bedürfnis erkannt → Impuls generiert</div>
+      </div>
 
-// =====================================
-// RENDER FLOW
-// =====================================
-function renderFlow(){
-  const container=document.getElementById('flowContainer');
-  container.innerHTML='';
-  const stateKey=calculateState();
-  system.currentState=stateKey;
-  const state=STATES[stateKey];
+      <div class="card" onclick="startDecisionMatrix()">
+        <div class="card-header">
+          <div class="card-title">Entscheidungs-Matrix</div>
+          <div class="card-meta">5 Min</div>
+        </div>
+        <div class="card-desc">Best/Worst Case mit Budget-Check</div>
+        <div class="card-footer">→ System analysiert Kosten/Zeit</div>
+      </div>
 
-  // Zustand Block
-  const stateBlock=document.createElement('div');
-  stateBlock.className='block state-block';
-  stateBlock.innerHTML=`<div class="state-emoji">${state.emoji}</div><div class="state-name">${state.name}</div><p>${state.desc}</p>`;
-  container.appendChild(stateBlock);
+      <div id="toolDisplay"></div>
+    </div>
+  </div>
 
-  // Impulse Block
-  const impulses=getImpulsesForState(stateKey);
-  if(impulses.length>0){
-    const impulseBlock=document.createElement('div');
-    impulseBlock.className='block';
-    impulseBlock.innerHTML='<h2>Was jetzt hilft</h2>';
-    const list=document.createElement('div'); list.className='impulse-list';
-    impulses.forEach(imp=>{
-      const card=document.createElement('div'); card.className='impulse-card';
-      card.innerHTML=`<div class="impulse-name">${imp.name}</div><div class="impulse-desc">${imp.desc}</div><div class="impulse-impact">→ ${imp.impact}</div>`;
-      card.onclick=()=>executeImpulse(imp.name,imp.effect);
-      list.appendChild(card);
+  <!-- DATA VIEW -->
+  <div id="dataView" class="view">
+    <div class="section">
+      <div class="section-title">Basis-Parameter</div>
+      
+      <div class="card">
+        <div class="health-item">
+          <div class="health-label">Wasser</div>
+          <div class="health-value" id="waterValue">0/8</div>
+        </div>
+        <div class="dots" id="waterDots"></div>
+      </div>
+
+      <div class="card">
+        <div class="health-item">
+          <div class="health-label">Schlaf</div>
+          <div class="health-value" id="sleepValue">7h</div>
+        </div>
+        <input type="range" class="slider" id="sleepSlider" min="0" max="12" step="0.5" value="7">
+      </div>
+
+      <div class="card">
+        <div class="health-item">
+          <div class="health-label">Aktivität</div>
+          <div class="health-value" id="activityValue">0 Min</div>
+        </div>
+        <input type="number" id="activityInput" placeholder="Minuten" style="margin-top: 12px; width: 100%;">
+      </div>
+
+      <div class="card">
+        <div class="health-item">
+          <div class="health-label">Budget verfügbar</div>
+          <div class="health-value" id="budgetValueData">30.00€</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="health-item">
+          <div class="health-label">Aktionen heute</div>
+          <div class="health-value" id="actionsToday">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <button class="nav-btn active" onclick="switchView('flow')">
+      <span class="nav-icon">🎯</span>
+      Flow
+    </button>
+    <button class="nav-btn" onclick="switchView('needs')">
+      <span class="nav-icon">💭</span>
+      Bedürfnisse
+    </button>
+    <button class="nav-btn" onclick="switchView('finance')">
+      <span class="nav-icon">💰</span>
+      Finanz
+    </button>
+    <button class="nav-btn" onclick="switchView('tools')">
+      <span class="nav-icon">🛠️</span>
+      Tools
+    </button>
+    <button class="nav-btn" onclick="switchView('data')">
+      <span class="nav-icon">📊</span>
+      Daten
+    </button>
+  </div>
+
+  <script>
+    // ==========================================
+    // DATABASE
+    // ==========================================
+
+    const STATES = {
+      exhausted: {
+        name: 'Erschöpft',
+        emoji: '😴',
+        desc: 'Körper und Geist brauchen Pause',
+        triggers: { sleep: '<6', water: '<3', activity: '>60' }
+      },
+      restless: {
+        name: 'Unruhig',
+        emoji: '😰',
+        desc: 'Innere Spannung, schwer zu fokussieren',
+        triggers: { sleep: '<5', activity: '0' }
+      },
+      overwhelmed: {
+        name: 'Überladen',
+        emoji: '🤯',
+        desc: 'Zu viele offene Schleifen',
+        triggers: { budget: '<5' }
+      },
+      empty: {
+        name: 'Leer',
+        emoji: '😶',
+        desc: 'Antriebslos, keine Richtung',
+        triggers: { activity: '0', water: '<4' }
+      },
+      clear: {
+        name: 'Klar',
+        emoji: '✨',
+        desc: 'Fokussiert und handlungsfähig',
+        triggers: { sleep: '>=7', water: '>=6', activity: '>0' }
+      },
+      blocked: {
+        name: 'Blockiert',
+        emoji: '🧱',
+        desc: 'Festgefahren, komme nicht weiter',
+        triggers: { activity: '0' }
+      },
+      stable: {
+        name: 'Stabil',
+        emoji: '🟢',
+        desc: 'Grundbedürfnisse erfüllt',
+        triggers: { sleep: '>=7', water: '>=5', budget: '>10' }
+      },
+      tense: {
+        name: 'Angespannt',
+        emoji: '😬',
+        desc: 'Körperlich verkrampft',
+        triggers: { activity: '0', sleep: '<6' }
+      }
+    };
+
+    const IMPULSES = {
+      breath_478: {
+        name: '4-7-8 Atmung',
+        desc: 'Einatmen 4 Sek, halten 7 Sek, ausatmen 8 Sek. 3x wiederholen.',
+        time: '90s',
+        impact: 'Beruhigt Nervensystem',
+        states: ['restless', 'tense', 'overwhelmed'],
+        effect: { energy: +10 }
+      },
+      water_now: {
+        name: 'Wasser trinken',
+        desc: 'Ein volles Glas Wasser, langsam trinken.',
+        time: '30s',
+        impact: 'Hydration → Konzentration',
+        states: ['exhausted', 'empty', 'blocked'],
+        effect: { water: +1, energy: +5 }
+      },
+      movement_burst: {
+        name: 'Bewegungs-Burst',
+        desc: 'Arme kreisen, auf der Stelle laufen, Schultern lockern.',
+        time: '2 Min',
+        impact: 'Aktiviert Kreislauf',
+        states: ['empty', 'blocked', 'tense'],
+        effect: { activity: +2, energy: +15 }
+      },
+      eyes_closed: {
+        name: 'Augen zu',
+        desc: 'Augen schließen, 30 Sekunden nichts tun.',
+        time: '30s',
+        impact: 'Mentale Pause',
+        states: ['overwhelmed', 'restless', 'exhausted'],
+        effect: { energy: +5 }
+      },
+      micro_reflection: {
+        name: 'Mikro-Reflexion',
+        desc: 'Eine Frage: "Was brauche ich jetzt wirklich?"',
+        time: '1 Min',
+        impact: 'Klarheit über Bedürfnis',
+        states: ['empty', 'blocked', 'overwhelmed'],
+        effect: {}
+      },
+      cold_water_face: {
+        name: 'Kaltes Wasser',
+        desc: 'Gesicht mit kaltem Wasser waschen.',
+        time: '1 Min',
+        impact: 'Wach-Kick',
+        states: ['exhausted', 'empty'],
+        effect: { energy: +20 }
+      },
+      ground_feet: {
+        name: 'Füße spüren',
+        desc: 'Schuhe aus. Füße fest auf Boden. 60 Sekunden.',
+        time: '1 Min',
+        impact: 'Grounding',
+        states: ['restless', 'overwhelmed', 'tense'],
+        effect: {}
+      },
+      stretch_shoulders: {
+        name: 'Schultern lösen',
+        desc: 'Schultern hochziehen, halten, fallen lassen. 5x.',
+        time: '1 Min',
+        impact: 'Löst Spannung',
+        states: ['tense', 'exhausted'],
+        effect: { energy: +5 }
+      },
+      write_one_thing: {
+        name: 'Eine Sache notieren',
+        desc: 'Was im Kopf kreist - aufschreiben.',
+        time: '2 Min',
+        impact: 'Entlastet Arbeitsgedächtnis',
+        states: ['overwhelmed', 'restless', 'blocked'],
+        effect: {}
+      },
+      power_pose: {
+        name: 'Power Pose',
+        desc: 'Arme hoch, Brust raus, 2 Minuten halten.',
+        time: '2 Min',
+        impact: 'Selbstwirksamkeit',
+        states: ['empty', 'blocked'],
+        effect: { energy: +10 }
+      }
+    };
+
+    const NEEDS = {
+      physical: {
+        emoji: '🏠',
+        name: 'Körper',
+        desc: 'Müde, erschöpft',
+        impulses: [
+          'Dein Körper braucht Basics. Was ist am dringendsten?',
+          'Physiologische Bedürfnisse sind fundamental.',
+          'Ohne Basis läuft nichts.'
+        ]
+      },
+      safety: {
+        emoji: '🛡️',
+        name: 'Struktur',
+        desc: 'Chaos, unsicher',
+        impulses: [
+          'Struktur schafft Sicherheit. Was kannst du ordnen?',
+          'Chaos macht Stress. Reduziere aufs Wesentliche.',
+          'Du brauchst einen Plan.'
+        ]
+      },
+      belonging: {
+        emoji: '💬',
+        name: 'Verbindung',
+        desc: 'Allein, isoliert',
+        impulses: [
+          'Menschen sind soziale Wesen.',
+          'Einsamkeit ist ein Signal.',
+          'Du bist nicht allein damit.'
+        ]
+      },
+      esteem: {
+        emoji: '⭐',
+        name: 'Wert',
+        desc: 'Wertlos, nutzlos',
+        impulses: [
+          'Dein Wert ist nicht deine Produktivität.',
+          'Auch Kleinigkeiten zählen.',
+          'Du bist genug.'
+        ]
+      },
+      growth: {
+        emoji: '🚀',
+        name: 'Wachstum',
+        desc: 'Festgefahren',
+        impulses: [
+          'Wachstum braucht Richtung.',
+          'Sinn entsteht durch Tun.',
+          'Potential ist Prozess.'
+        ]
+      }
+    };
+
+    // ==========================================
+    // SYSTEM STATE
+    // ==========================================
+
+    const system = {
+      water: 0,
+      sleep: 7,
+      activity: 0,
+      budget: 30,
+      spent: 0,
+      spendingByCategory: {
+        food: 0,
+        transport: 0,
+        other: 0
+      },
+      selectedCategory: 'other',
+      energy: 50,
+      currentState: null,
+      selectedNeed: null,
+      lastImpulse: null,
+      history: []
+    };
+
+    function loadSystem() {
+      const saved = localStorage.getItem('humaneed_system');
+      if (saved) {
+        Object.assign(system, JSON.parse(saved));
+      }
+    }
+
+    function saveSystem() {
+      localStorage.setItem('humaneed_system', JSON.stringify(system));
+    }
+
+    // ==========================================
+    // STATE CALCULATOR
+    // ==========================================
+
+    function calculateState() {
+      let scores = {};
+      
+      for (let [key, state] of Object.entries(STATES)) {
+        let score = 0;
+        
+        if (state.triggers.sleep) {
+          const op = state.triggers.sleep.includes('<') ? '<' : '>=';
+          const threshold = parseFloat(state.triggers.sleep.replace(/[<>=]/g, ''));
+          if (op === '<' && system.sleep < threshold) score += 3;
+          if (op === '>=' && system.sleep >= threshold) score += 3;
+        }
+        
+        if (state.triggers.water) {
+          const op = state.triggers.water.includes('<') ? '<' : '>=';
+          const threshold = parseFloat(state.triggers.water.replace(/[<>=]/g, ''));
+          if (op === '<' && system.water < threshold) score += 2;
+          if (op === '>=' && system.water >= threshold) score += 2;
+        }
+        
+        if (state.triggers.activity) {
+          if (state.triggers.activity === '0' && system.activity === 0) {
+            score += 2;
+          } else if (state.triggers.activity.includes('>')) {
+            const threshold = parseFloat(state.triggers.activity.replace('>', ''));
+            if (system.activity > threshold) score += 2;
+          }
+        }
+        
+        if (state.triggers.budget) {
+          const remaining = system.budget - system.spent;
+          const op = state.triggers.budget.includes('<') ? '<' : '>';
+          const threshold = parseFloat(state.triggers.budget.replace(/[<>]/g, ''));
+          if (op === '<' && remaining < threshold) score += 2;
+          if (op === '>' && remaining > threshold) score += 1;
+        }
+        
+        scores[key] = score;
+      }
+      
+      let bestState = Object.entries(scores).reduce((a, b) => a[1] > b[1] ? a : b);
+      
+      if (bestState[1] === 0) return 'empty';
+      
+      return bestState[0];
+    }
+
+    function getImpulsesForState(stateKey) {
+      const matched = [];
+      
+      for (let [key, impulse] of Object.entries(IMPULSES)) {
+        if (impulse.states.includes(stateKey)) {
+          matched.push({ key, ...impulse });
+        }
+      }
+      
+      matched.sort((a, b) => {
+        if (stateKey === 'exhausted') {
+          return a.time.includes('30s') ? -1 : 1;
+        }
+        return 0;
+      });
+      
+      return matched.slice(0, 3);
+    }
+
+    function getSystemConnections() {
+      const connections = [];
+      
+      if (system.water < 4 && system.energy < 50) {
+        connections.push('Niedrige Hydration senkt Energie');
+      }
+      
+      if (system.sleep < 6 && system.currentState === 'exhausted') {
+        connections.push('Schlaf-Defizit → Erschöpfung erkannt');
+      }
+      
+      const remaining = system.budget - system.spent;
+      if (remaining < 5 && system.currentState === 'overwhelmed') {
+        connections.push('Budget-Stress → Überladen');
+      }
+      
+      if (system.activity === 0 && system.currentState === 'blocked') {
+        connections.push('Keine Bewegung → Blockiert');
+      }
+      
+      if (system.activity > 30) {
+        connections.push('Bewegung steigert Energie');
+      }
+      
+      return connections;
+    }
+
+    // ==========================================
+    // RENDER FLOW (TikTok Style)
+    // ==========================================
+
+    function renderFlow() {
+      const stateKey = calculateState();
+      system.currentState = stateKey;
+      const state = STATES[stateKey];
+      const impulses = getImpulsesForState(stateKey);
+      const connections = getSystemConnections();
+      const remaining = system.budget - system.spent;
+      
+      // Other states for quick correction
+      const otherStates = Object.entries(STATES)
+        .filter(([key]) => key !== stateKey)
+        .slice(0, 4);
+      
+      document.getElementById('flowContent').innerHTML = `
+        <!-- STATE HERO -->
+        <div class="state-hero">
+          <div class="state-label">Du bist gerade</div>
+          <div class="state-emoji">${state.emoji}</div>
+          <div class="state-name">${state.name}</div>
+          <div class="state-desc">${state.desc}</div>
+          
+          <div class="quick-fix">
+            ${otherStates.map(([key, s]) => `
+              <div class="state-pill" onclick="correctState('${key}')">
+                <span>${s.emoji}</span>
+                <span>${s.name}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+        
+        <!-- IMPULSES -->
+        <div class="section">
+          <div class="section-title">Was jetzt hilft</div>
+          ${impulses.map(imp => `
+            <div class="card" onclick="executeImpulse('${imp.key}')">
+              <div class="card-header">
+                <div class="card-title">${imp.name}</div>
+                <div class="card-meta">${imp.time}</div>
+              </div>
+              <div class="card-desc">${imp.desc}</div>
+              <div class="card-footer">→ ${imp.impact}</div>
+            </div>
+          `).join('')}
+        </div>
+        
+        <!-- BOOSTER ADAPTIVE -->
+        <div class="section">
+          <div class="section-title">Lebens-Booster</div>
+          ${renderBoosterCards()}
+        </div>
+        
+        <!-- BUDGET SNAPSHOT -->
+        <div class="section">
+          <div class="section-title">Budget-Status</div>
+          <div class="budget-hero">
+            <div class="budget-amount ${remaining < 10 ? 'low' : ''}">${remaining.toFixed(2)}€</div>
+            <div class="budget-label">Verfügbar</div>
+          </div>
+        </div>
+        
+        <!-- HEALTH SNAPSHOT -->
+        <div class="section">
+          <div class="section-title">Basis-Parameter</div>
+          <div class="card">
+            <div class="health-item">
+              <div class="health-label">Wasser</div>
+              <div class="health-value ${system.water >= 6 ? 'good' : system.water < 4 ? 'warning' : ''}">${system.water}/8</div>
+            </div>
+            <div class="health-item">
+              <div class="health-label">Schlaf</div>
+              <div class="health-value ${system.sleep >= 7 ? 'good' : system.sleep < 6 ? 'warning' : ''}">${system.sleep}h</div>
+            </div>
+            <div class="health-item">
+              <div class="health-label">Aktivität</div>
+              <div class="health-value">${system.activity} Min</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- SYSTEM CONNECTIONS -->
+        ${connections.length > 0 ? `
+          <div class="section">
+            <div class="section-title">System-Zusammenhänge</div>
+            <div class="connections-box">
+              ${connections.map(c => `<div class="connection-item">→ ${c}</div>`).join('')}
+            </div>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    function renderBoosterCards() {
+      const boosters = [
+        {
+          id: 'breath',
+          name: 'Atmung 4-7-8',
+          desc: '90 Sekunden Beruhigung',
+          priority: system.sleep < 6 || system.energy < 50,
+          reason: system.sleep < 6 ? 'Schlaf niedrig' : 'Energie niedrig'
+        },
+        {
+          id: 'water',
+          name: 'Hydration',
+          desc: '30 Sekunden',
+          priority: system.water < 4,
+          reason: 'Zu wenig getrunken'
+        },
+        {
+          id: 'move',
+          name: 'Bewegung',
+          desc: '2 Minuten Aktivierung',
+          priority: system.activity === 0,
+          reason: 'Keine Aktivität'
+        }
+      ].sort((a, b) => a.priority === b.priority ? 0 : a.priority ? -1 : 1);
+      
+      return boosters.map(b => `
+        <div class="card ${b.priority ? 'priority' : ''}" onclick="executeBooster('${b.id}')">
+          <div class="card-header">
+            <div class="card-title">${b.name}</div>
+            ${b.priority ? `<div class="priority-badge">!</div>` : `<div class="card-meta">${b.desc}</div>`}
+          </div>
+          ${b.priority ? `<div class="card-desc">→ ${b.reason}</div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function correctState(stateKey) {
+      system.currentState = stateKey;
+      system.history.push({
+        type: 'correction',
+        to: stateKey,
+        timestamp: Date.now()
+      });
+      saveSystem();
+      renderFlow();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function executeImpulse(impulseKey) {
+      const impulse = IMPULSES[impulseKey];
+      
+      if (impulse.effect.water) {
+        system.water = Math.min(8, system.water + impulse.effect.water);
+      }
+      if (impulse.effect.activity) {
+        system.activity += impulse.effect.activity;
+      }
+      if (impulse.effect.energy) {
+        system.energy = Math.max(0, Math.min(100, system.energy + impulse.effect.energy));
+      }
+      
+      system.history.push({
+        type: 'impulse',
+        impulse: impulseKey,
+        timestamp: Date.now()
+      });
+      
+      saveSystem();
+      showFeedback();
+    }
+
+    function executeBooster(id) {
+      const actions = {
+        breath: '4 Sek ein\n7 Sek halten\n8 Sek aus\n\n3x',
+        water: 'Trink jetzt ein Glas Wasser',
+        move: '2 Min:\nArme kreisen\nLaufen\nDehnen'
+      };
+      
+      alert(actions[id]);
+      
+      if (id === 'water') {
+        system.water = Math.min(8, system.water + 1);
+      }
+      if (id === 'move') {
+        system.activity += 2;
+      }
+      
+      saveSystem();
+      showFeedback();
+    }
+
+    function showFeedback() {
+      const feedback = document.createElement('div');
+      feedback.className = 'feedback-prompt';
+      feedback.innerHTML = `
+        <div class="feedback-question">Wie fühlst du dich jetzt?</div>
+        <div class="feedback-grid">
+          <div class="feedback-btn" onclick="handleFeedback('better')">
+            <div class="feedback-emoji">✅</div>
+            <div class="feedback-label">Besser</div>
+          </div>
+          <div class="feedback-btn" onclick="handleFeedback('same')">
+            <div class="feedback-emoji">➖</div>
+            <div class="feedback-label">Gleich</div>
+          </div>
+          <div class="feedback-btn" onclick="handleFeedback('worse')">
+            <div class="feedback-emoji">⬇️</div>
+            <div class="feedback-label">Schlechter</div>
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('flowContent').appendChild(feedback);
+      feedback.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function handleFeedback(response) {
+      system.history.push({
+        type: 'feedback',
+        response: response,
+        timestamp: Date.now()
+      });
+      
+      if (response === 'better') {
+        system.energy = Math.min(100, system.energy + 10);
+      } else if (response === 'worse') {
+        system.energy = Math.max(0, system.energy - 10);
+      }
+      
+      saveSystem();
+      renderFlow();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==========================================
+    // NEEDS VIEW
+    // ==========================================
+
+    function renderNeedsView() {
+      document.getElementById('needGrid').innerHTML = Object.entries(NEEDS).map(([key, need]) => `
+        <div class="need-card ${system.selectedNeed === key ? 'selected' : ''}" onclick="selectNeed('${key}')">
+          <div class="need-emoji">${need.emoji}</div>
+          <div class="need-name">${need.name}</div>
+          <div class="need-desc">${need.desc}</div>
+        </div>
+      `).join('');
+      
+      if (system.selectedNeed) {
+        const need = NEEDS[system.selectedNeed];
+        const impulse = need.impulses[Math.floor(Math.random() * need.impulses.length)];
+        
+        const connections = [];
+        if (system.selectedNeed === 'physical' && system.water < 4) {
+          connections.push('System: Hydration niedrig');
+        }
+        if (system.selectedNeed === 'physical' && system.sleep < 6) {
+          connections.push('System: Schlaf-Defizit');
+        }
+        if (system.selectedNeed === 'safety' && (system.budget - system.spent) < 5) {
+          connections.push('System: Budget-Stress');
+        }
+        
+        document.getElementById('needImpulse').innerHTML = `
+          <div class="impulse-result">
+            ${impulse}
+            ${connections.length > 0 ? `
+              <div class="impulse-connections">
+                ${connections.map(c => `→ ${c}`).join('<br>')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+    }
+
+    function selectNeed(needKey) {
+      system.selectedNeed = needKey;
+      system.history.push({
+        type: 'need',
+        need: needKey,
+        timestamp: Date.now()
+      });
+      saveSystem();
+      renderNeedsView();
+    }
+
+    // ==========================================
+    // FINANCE VIEW
+    // ==========================================
+
+    function renderFinanceView() {
+      const remaining = system.budget - system.spent;
+      
+      document.getElementById('budgetAmountFinance').textContent = remaining.toFixed(2) + '€';
+      document.getElementById('budgetAmountFinance').className = 'budget-amount' + (remaining < 10 ? ' low' : '');
+      
+      const categories = ['Essen', 'Transport', 'Sonstiges'];
+      const keys = ['food', 'transport', 'other'];
+      
+      document.getElementById('categoryGrid').innerHTML = categories.map((cat, i) => `
+        <div class="category-btn ${system.selectedCategory === keys[i] ? 'active' : ''}" onclick="selectCategory('${keys[i]}')">
+          ${cat}<br>
+          <span style="font-size: 10px; opacity: 0.6;">${system.spendingByCategory[keys[i]].toFixed(0)}€</span>
+        </div>
+      `).join('');
+      
+      const insights = [];
+      if (remaining < 5) insights.push('Budget kritisch');
+      
+      const maxCat = Object.entries(system.spendingByCategory).reduce((a, b) => a[1] > b[1] ? a : b);
+      if (maxCat[1] > system.budget * 0.5) {
+        const catNames = { food: 'Essen', transport: 'Transport', other: 'Sonstiges' };
+        insights.push(`${catNames[maxCat[0]]}: ${((maxCat[1]/system.spent)*100).toFixed(0)}% der Ausgaben`);
+      }
+      
+      if (insights.length > 0) {
+        document.getElementById('financeInsights').innerHTML = `
+          <div class="connections-box">
+            ${insights.map(i => `<div class="connection-item highlight">• ${i}</div>`).join('')}
+          </div>
+        `;
+      } else {
+        document.getElementById('financeInsights').innerHTML = '';
+      }
+    }
+
+    function selectCategory(cat) {
+      system.selectedCategory = cat;
+      saveSystem();
+      renderFinanceView();
+    }
+
+    function addSpending() {
+      const input = document.getElementById('spendInput');
+      const amount = parseFloat(input.value);
+      
+      if (amount > 0) {
+        system.spent += amount;
+        system.spendingByCategory[system.selectedCategory] += amount;
+        
+        system.history.push({
+          type: 'spending',
+          amount: amount,
+          category: system.selectedCategory,
+          timestamp: Date.now()
+        });
+        
+        input.value = '';
+        saveSystem();
+        renderFinanceView();
+      }
+    }
+
+    // ==========================================
+    // TOOLS VIEW
+    // ==========================================
+
+    let focusTimer = null;
+    let focusSeconds = 25 * 60;
+    let focusRunning = false;
+
+    function startFocusSession() {
+      if (focusRunning) return;
+
+      document.getElementById('toolDisplay').innerHTML = `
+        <div class="intervention-display">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+          <button class="btn" style="width: 100%;" onclick="cancelFocus()">Abbrechen</button>
+        </div>
+      `;
+
+      focusRunning = true;
+      focusSeconds = 25 * 60;
+
+      focusTimer = setInterval(() => {
+        focusSeconds--;
+        const mins = Math.floor(focusSeconds / 60);
+        const secs = focusSeconds % 60;
+        const display = document.getElementById('timerDisplay');
+        if (display) {
+          display.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        if (focusSeconds === 0) {
+          clearInterval(focusTimer);
+          focusRunning = false;
+          
+          system.activity += 25;
+          system.history.push({
+            type: 'focus_session',
+            duration: 25,
+            timestamp: Date.now()
+          });
+          
+          saveSystem();
+          
+          document.getElementById('toolDisplay').innerHTML = `
+            <div class="impulse-result">
+              Session complete. +25 Min Aktivität.
+              ${system.activity >= 60 ? '<br><br>→ Genug für heute?' : ''}
+            </div>
+          `;
+        }
+      }, 1000);
+    }
+
+    function cancelFocus() {
+      clearInterval(focusTimer);
+      focusRunning = false;
+      focusSeconds = 25 * 60;
+      document.getElementById('toolDisplay').innerHTML = '';
+    }
+
+    function startClarityCheck() {
+      document.getElementById('toolDisplay').innerHTML = `
+        <div class="intervention-display">
+          <div style="margin-bottom: 12px;">
+            <div style="font-size: 13px; color: #999; margin-bottom: 8px;">Was will ich WIRKLICH?</div>
+            <input type="text" id="clarityQ1" class="quadrant-input" style="width: 100%; background: #000; border: 1px solid #1a1a1a; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            
+            <div style="font-size: 13px; color: #999; margin-bottom: 8px;">Was hält mich ab?</div>
+            <input type="text" id="clarityQ2" class="quadrant-input" style="width: 100%; background: #000; border: 1px solid #1a1a1a; border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+            
+            <div style="font-size: 13px; color: #999; margin-bottom: 8px;">Kleinster Schritt?</div>
+            <input type="text" id="clarityQ3" class="quadrant-input" style="width: 100%; background: #000; border: 1px solid #1a1a1a; border-radius: 8px; padding: 12px; margin-bottom: 16px;">
+          </div>
+          <button class="btn" style="width: 100%;" onclick="processClarity()">Analysieren</button>
+        </div>
+      `;
+      
+      setTimeout(() => document.getElementById('clarityQ1').focus(), 100);
+    }
+
+    function processClarity() {
+      const q1 = document.getElementById('clarityQ1').value.trim();
+      const q2 = document.getElementById('clarityQ2').value.trim();
+      const q3 = document.getElementById('clarityQ3').value.trim();
+      
+      if (!q1 || !q2 || !q3) return;
+      
+      const text = (q1 + ' ' + q2 + ' ' + q3).toLowerCase();
+      let detectedNeed = 'growth';
+      
+      if (text.match(/müde|erschöpft|schlaf/)) detectedNeed = 'physical';
+      else if (text.match(/chaos|struktur|plan/)) detectedNeed = 'safety';
+      else if (text.match(/allein|kontakt/)) detectedNeed = 'belonging';
+      else if (text.match(/wertlos|gescheitert/)) detectedNeed = 'esteem';
+      
+      system.selectedNeed = detectedNeed;
+      system.history.push({
+        type: 'clarity',
+        need: detectedNeed,
+        step: q3,
+        timestamp: Date.now()
+      });
+      
+      saveSystem();
+      
+      document.getElementById('toolDisplay').innerHTML = `
+        <div class="impulse-result">
+          <div style="font-size: 11px; color: #666; margin-bottom: 8px;">ERKANNT: ${NEEDS[detectedNeed].emoji} ${NEEDS[detectedNeed].name}</div>
+          <div style="font-size: 14px; margin-bottom: 8px;">Dein Schritt:</div>
+          <div style="font-size: 15px; font-weight: 500;">"${q3}"</div>
+        </div>
+      `;
+    }
+
+    function startDecisionMatrix() {
+      document.getElementById('toolDisplay').innerHTML = `
+        <div class="intervention-display">
+          <div class="decision-grid">
+            <div class="decision-quadrant">
+              <div class="quadrant-label">Best Case</div>
+              <input type="text" class="quadrant-input" id="bestCase">
+            </div>
+            <div class="decision-quadrant">
+              <div class="quadrant-label">Worst Case</div>
+              <input type="text" class="quadrant-input" id="worstCase">
+            </div>
+            <div class="decision-quadrant">
+              <div class="quadrant-label">Kosten €</div>
+              <input type="number" class="quadrant-input" id="decisionCost">
+            </div>
+            <div class="decision-quadrant">
+              <div class="quadrant-label">Zeit Min</div>
+              <input type="number" class="quadrant-input" id="decisionTime">
+            </div>
+          </div>
+          <button class="btn" style="width: 100%;" onclick="processDecision()">Bewerten</button>
+        </div>
+      `;
+    }
+
+    function processDecision() {
+      const best = document.getElementById('bestCase').value.trim();
+      const worst = document.getElementById('worstCase').value.trim();
+      const cost = parseFloat(document.getElementById('decisionCost').value) || 0;
+      const time = parseInt(document.getElementById('decisionTime').value) || 0;
+      
+      if (!best || !worst) return;
+      
+      const remaining = system.budget - system.spent;
+      let rec = '✓ Im Rahmen';
+      
+      if (cost > remaining) {
+        rec = '⚠️ Budget-Konflikt';
+      } else if (cost > remaining * 0.5) {
+        rec = '⚠️ Große Ausgabe';
+      }
+      
+      system.history.push({
+        type: 'decision',
+        cost: cost,
+        time: time,
+        timestamp: Date.now()
+      });
+      
+      saveSystem();
+      
+      document.getElementById('toolDisplay').innerHTML = `
+        <div class="impulse-result">
+          <div style="font-size: 14px; margin-bottom: 12px;">${rec}</div>
+          ${cost > 0 ? `<div style="font-size: 12px; color: #999;">Kosten: ${cost}€ (${remaining.toFixed(0)}€ verfügbar)</div>` : ''}
+          ${time > 0 ? `<div style="font-size: 12px; color: #999;">Zeit: ${time} Min</div>` : ''}
+          <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #1a1a1a; font-size: 12px; color: #999;">
+            Mit Worst Case leben?<br>Ja → Go | Nein → Drop
+          </div>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // DATA VIEW
+    // ==========================================
+
+    function renderDataView() {
+      const remaining = system.budget - system.spent;
+      
+      document.getElementById('waterValue').textContent = `${system.water}/8`;
+      document.getElementById('waterValue').className = 'health-value ' + (system.water >= 6 ? 'good' : system.water < 4 ? 'warning' : '');
+      
+      document.getElementById('sleepValue').textContent = system.sleep + 'h';
+      document.getElementById('sleepValue').className = 'health-value ' + (system.sleep >= 7 ? 'good' : system.sleep < 6 ? 'warning' : '');
+      
+      document.getElementById('activityValue').textContent = system.activity + ' Min';
+      
+      document.getElementById('budgetValueData').textContent = remaining.toFixed(2) + '€';
+      document.getElementById('budgetValueData').className = 'health-value ' + (remaining > 15 ? 'good' : remaining < 5 ? 'warning' : '');
+      
+      document.getElementById('actionsToday').textContent = system.history.filter(h => h.type === 'impulse' || h.type === 'focus_session').length;
+      
+      document.getElementById('sleepSlider').value = system.sleep;
+      document.getElementById('activityInput').value = system.activity;
+      
+      renderWaterDots();
+    }
+
+    function renderWaterDots() {
+      const container = document.getElementById('waterDots');
+      container.innerHTML = '';
+      for (let i = 0; i < 8; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i < system.water ? ' active' : '');
+        dot.onclick = () => {
+          system.water = i + 1;
+          saveSystem();
+          renderDataView();
+        };
+        container.appendChild(dot);
+      }
+    }
+
+    document.getElementById('sleepSlider')?.addEventListener('input', (e) => {
+      system.sleep = parseFloat(e.target.value);
+      saveSystem();
+      renderDataView();
     });
-    impulseBlock.appendChild(list);
-    container.appendChild(impulseBlock);
-  }
 
-  // Maslow Block
-  const maslowBlock=document.createElement('div');
-  maslowBlock.className='block';
-  maslowBlock.innerHTML='<h2>Maslow-Bedürfnisse</h2>';
-  const waterRow=document.createElement('div'); waterRow.className='maslow-row';
-  waterRow.innerHTML=`<label>Wasser: ${system.water}/8</label><input type="range" min="0" max="8" value="${system.water}" class="slider" oninput="updateWater(this.value)">`;
-  maslowBlock.appendChild(waterRow);
-  const sleepRow=document.createElement('div'); sleepRow.className='maslow-row';
-  sleepRow.innerHTML=`<label>Schlaf: ${system.sleep}h</label><input type="range" min="0" max="12" step="0.5" value="${system.sleep}" class="slider" oninput="updateSleep(this.value)">`;
-  maslowBlock.appendChild(sleepRow);
-  const actRow=document.createElement('div'); actRow.className='maslow-row';
-  actRow.innerHTML=`<label>Aktivität: ${system.activity} Min</label><input type="number" value="${system.activity}" oninput="updateActivity(this.value)">`;
-  maslowBlock.appendChild(actRow);
-  container.appendChild(maslowBlock);
+    document.getElementById('activityInput')?.addEventListener('input', (e) => {
+      system.activity = parseInt(e.target.value) || 0;
+      saveSystem();
+      renderDataView();
+    });
 
-  // Budget Block
-  const budgetBlock=document.createElement('div');
-  budgetBlock.className='block';
-  budgetBlock.innerHTML=`<h2>Budget</h2><div class="budget-row"><span>Verfügbar:</span><span class="${(system.budget-system.spent)>15?'good':(system.budget-system.spent)<5?'warning':''}">${(system.budget-system.spent).toFixed(2)}€</span></div><div class="budget-row"><span>Ausgegeben:</span><span>${system.spent.toFixed(2)}€</span></div>`;
-  container.appendChild(budgetBlock);
+    // ==========================================
+    // VIEW SWITCHING
+    // ==========================================
 
-  // Booster / Intervention Block (Timer Beispiel)
-  const boosterBlock=document.createElement('div');
-  boosterBlock.className='block';
-  boosterBlock.innerHTML='<h2>Booster</h2><button onclick="startTimer(30,this)">30s Atemübung starten</button><div class="timer-display hidden" id="timerDisplay">30s</div>';
-  container.appendChild(boosterBlock);
-}
+    function switchView(view) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+      
+      if (view === 'flow') {
+        document.getElementById('flowView').classList.add('active');
+        event.target.closest('.nav-btn').classList.add('active');
+        renderFlow();
+      } else if (view === 'needs') {
+        document.getElementById('needsView').classList.add('active');
+        event.target.closest('.nav-btn').classList.add('active');
+        renderNeedsView();
+      } else if (view === 'finance') {
+        document.getElementById('financeView').classList.add('active');
+        event.target.closest('.nav-btn').classList.add('active');
+        renderFinanceView();
+      } else if (view === 'tools') {
+        document.getElementById('toolsView').classList.add('active');
+        event.target.closest('.nav-btn').classList.add('active');
+      } else if (view === 'data') {
+        document.getElementById('dataView').classList.add('active');
+        event.target.closest('.nav-btn').classList.add('active');
+        renderDataView();
+      }
+      
+      window.scrollTo({ top: 0 });
+    }
 
-function executeImpulse(name,effect){
-  if(effect.water) system.water=Math.min(8,system.water+effect.water);
-  if(effect.activity) system.activity+=effect.activity;
-  if(effect.energy) system.energy=Math.min(100,system.energy+effect.energy);
-  if(effect.state) system.currentState=effect.state;
-  system.history.push({type:'impulse',name,date:Date.now()});
-  renderFlow();
-}
+    // ==========================================
+    // INIT
+    // ==========================================
 
-function updateWater(v){system.water=parseInt(v);renderFlow();}
-function updateSleep(v){system.sleep=parseFloat(v);renderFlow();}
-function updateActivity(v){system.activity=parseInt(v)||0;renderFlow();}
-
-function startTimer(sec,btn){
-  const display=document.getElementById('timerDisplay');
-  display.classList.remove('hidden');
-  let remaining=sec;
-  display.textContent=`${remaining}s`;
-  btn.disabled=true;
-  const interval=setInterval(()=>{
-    remaining--; display.textContent=`${remaining}s`;
-    if(remaining<=0){clearInterval(interval);display.classList.add('hidden');btn.disabled=false;}
-  },1000);
-}
-
-// Init
-renderFlow();
-</script>
+    loadSystem();
+    renderFlow();
+  </script>
 </body>
 </html>
