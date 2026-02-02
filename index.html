@@ -3,152 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>humaneed App v2 - Interaktiv</title>
+<title>humaneed - Flow Vertical</title>
 <style>
-  body{margin:0;padding:0;font-family:sans-serif;background:#000;color:#fff;}
-  .container{max-width:500px;margin:0 auto;padding:24px;min-height:100vh;display:flex;flex-direction:column;}
-  .state-display,.impulses,.feedback,.data-view{margin-bottom:32px;}
-  .state-emoji{font-size:48px;text-align:center;}
-  .state-name{font-size:32px;text-align:center;margin:12px 0;}
-  .state-desc{font-size:16px;text-align:center;color:#aaa;}
-  .state-options{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
-  .state-option{background:#111;padding:12px 16px;border-radius:8px;cursor:pointer;text-align:center;flex:1 0 40%;}
-  .impulse-card{background:#111;padding:16px;border-radius:8px;margin-bottom:12px;cursor:pointer;}
-  .feedback-btn{background:#111;padding:12px;border-radius:8px;cursor:pointer;margin:4px;}
-  .bottom-nav{display:flex;gap:12px;margin-top:auto;}
-  .nav-btn{flex:1;padding:12px;background:#111;border-radius:8px;cursor:pointer;text-align:center;}
-  .nav-btn.active{background:#222;color:#0f0;}
-  .hidden{display:none;}
-  input[type="range"],input[type="number"]{width:100%;margin-top:8px;}
-  .dots{display:flex;gap:4px;margin-top:8px;justify-content:center;}
-  .dot{width:16px;height:16px;border-radius:50%;background:#222;cursor:pointer;}
-  .dot.active{background:#0f0;}
+  * {margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body {font-family:-apple-system, BlinkMacSystemFont,'Segoe UI',sans-serif; background:#000; color:#fff; line-height:1.5;}
+  .flow-container {max-width:500px;margin:0 auto;padding:16px;}
+  .block {margin-bottom:32px;padding:24px;background:#0a0a0a;border:1px solid #1a1a1a;border-radius:12px;transition:transform 0.2s; cursor:default;}
+  .block h2 {margin-bottom:16px;font-size:18px;color:#fff;}
+  .card {background:#1a1a1a;border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:all 0.2s;}
+  .card:active {transform:scale(0.98);}
+  .card h3{margin-bottom:8px;font-size:16px;}
+  .card p{font-size:14px;color:#ccc;}
+  .slider, input[type="number"]{width:100%;margin-top:8px;padding:8px;border-radius:6px;border:1px solid #333;background:#000;color:#fff;}
+  .dots {display:flex;gap:4px;margin-top:8px;}
+  .dot {width:12px;height:12px;background:#1a1a1a;border-radius:50%;cursor:pointer;}
+  .dot.active {background:#fff;}
 </style>
 </head>
 <body>
-<div class="container">
-  <div id="flowView">
-    <div class="state-display" id="stateDisplay"></div>
-    <div class="state-options" id="quickCorrection"></div>
-    <div class="impulses" id="impulsesSection"></div>
-    <div class="feedback hidden" id="feedbackSection"></div>
+<div class="flow-container" id="flow">
+
+  <!-- ZUSTAND + IMPULSE -->
+  <div class="block" id="stateBlock">
+    <h2>Dein Zustand</h2>
+    <div id="stateDisplay"></div>
+    <h3>Hilfreiche Impulse</h3>
+    <div id="impulseList"></div>
   </div>
 
-  <div id="dataView" class="hidden"></div>
-
-  <div class="bottom-nav">
-    <div class="nav-btn active" onclick="showView('flow', this)">🎯 Flow</div>
-    <div class="nav-btn" onclick="showView('data', this)">📊 Daten</div>
+  <!-- MASLOW / BEDÜRFNISSE -->
+  <div class="block" id="needsBlock">
+    <h2>Grundbedürfnisse</h2>
+    <div>
+      <label>Wasser: <span id="waterValue"></span>/8</label>
+      <div class="dots" id="waterDots"></div>
+    </div>
+    <div>
+      <label>Schlaf: <span id="sleepValue"></span>h</label>
+      <input type="range" min="0" max="12" step="0.5" id="sleepSlider">
+    </div>
+    <div>
+      <label>Aktivität: <span id="activityValue"></span> Min</label>
+      <input type="number" id="activityInput" placeholder="Minuten">
+    </div>
   </div>
+
+  <!-- FINANZEN / BUDGET -->
+  <div class="block" id="budgetBlock">
+    <h2>Budget</h2>
+    <div>Verfügbar: <span id="budgetValue"></span>€</div>
+    <div>Ausgegeben: <span id="spentValue"></span>€</div>
+    <input type="number" id="spendInput" placeholder="Ausgabe hinzufügen">
+    <button onclick="addSpend()">Hinzufügen</button>
+  </div>
+
+  <!-- BOOSTER / INTERVENTIONEN -->
+  <div class="block" id="boosterBlock">
+    <h2>Booster / Interventionen</h2>
+    <div id="boosterList"></div>
+  </div>
+
+  <!-- SYSTEM / HISTORIE -->
+  <div class="block" id="systemBlock">
+    <h2>Systemübersicht</h2>
+    <div>Energie: <span id="energyValue"></span>%</div>
+    <div>Zustand: <span id="currentState"></span></div>
+    <div>Aktionen heute: <span id="actionsCount"></span></div>
+  </div>
+
 </div>
 
 <script>
-const STATES={
-  exhausted:{name:'Erschöpft',emoji:'😴',desc:'Körper & Geist brauchen Pause'},
-  restless:{name:'Unruhig',emoji:'😰',desc:'Innere Spannung'},
-  empty:{name:'Leer',emoji:'😶',desc:'Antriebslos'},
-  clear:{name:'Klar',emoji:'✨',desc:'Fokussiert'},
-  stable:{name:'Stabil',emoji:'🟢',desc:'Alles im Gleichgewicht'}
-};
+  // STATES
+  const STATES = {
+    exhausted:{name:'Erschöpft',emoji:'😴',desc:'Körper und Geist brauchen Pause'},
+    restless:{name:'Unruhig',emoji:'😰',desc:'Innere Spannung'},
+    overwhelmed:{name:'Überladen',emoji:'🤯',desc:'Zu viele offene Aufgaben'},
+    empty:{name:'Leer',emoji:'😶',desc:'Antriebslos, keine Richtung'},
+    clear:{name:'Klar',emoji:'✨',desc:'Fokussiert und handlungsfähig'},
+    blocked:{name:'Blockiert',emoji:'🧱',desc:'Festgefahren, komme nicht weiter'},
+    stable:{name:'Stabil',emoji:'🟢',desc:'Grundbedürfnisse erfüllt'},
+    tense:{name:'Angespannt',emoji:'😬',desc:'Körperlich verkrampft'}
+  };
 
-const IMPULSES={
-  water_now:{name:'Wasser trinken',desc:'Glas Wasser trinken',states:['exhausted','empty'],effect:{water:1,energy:5}},
-  breath_478:{name:'4-7-8 Atmung',desc:'Atme tief ein, halte, aus',states:['restless'],effect:{energy:10}},
-  movement_burst:{name:'Bewegung',desc:'Körper kurz bewegen',states:['empty'],effect:{activity:5,energy:10}}
-};
+  // IMPULSES
+  const IMPULSES = [
+    {name:'4-7-8 Atmung',desc:'Atmen: 4/7/8 Sekunden.',states:['restless','tense','overwhelmed'],effect:{energy:+10}},
+    {name:'Wasser trinken',desc:'Volles Glas Wasser.',states:['exhausted','empty','blocked'],effect:{water:+1,energy:+5}},
+    {name:'Bewegungs-Burst',desc:'Kurze Bewegung.',states:['empty','blocked','tense'],effect:{activity:+2,energy:+15}},
+    {name:'Augen zu',desc:'30 Sekunden Pause.',states:['overwhelmed','restless','exhausted'],effect:{energy:+5}},
+    {name:'Power Pose',desc:'2 Min Pose halten.',states:['empty','blocked'],effect:{energy:+10}}
+  ];
 
-const system={water:2,sleep:7,activity:0,energy:50,currentState:null,lastImpulse:null,history:[]};
+  const system = {water:0,sleep:7,activity:0,budget:30,spent:0,energy:50,currentState:'empty',history:[]};
 
-function calculateState(){
-  if(system.sleep<6)return'exhausted';
-  if(system.activity===0 && system.energy<40)return'empty';
-  if(system.activity>0 && system.energy>60)return'clear';
-  return'stable';
-}
-
-function renderFlow(){
-  system.currentState=calculateState();
-  const s=STATES[system.currentState];
-  document.getElementById('stateDisplay').innerHTML=
-    `<div class="state-emoji">${s.emoji}</div>
-     <div class="state-name">${s.name}</div>
-     <div class="state-desc">${s.desc}</div>`;
-
-  const otherStates=Object.keys(STATES).filter(k=>k!==system.currentState);
-  document.getElementById('quickCorrection').innerHTML=
-    otherStates.map(k=>`<div class="state-option" onclick="correctState('${k}')">${STATES[k].emoji}<br>${STATES[k].name}</div>`).join('');
-
-  const impulses=Object.entries(IMPULSES).filter(([k,v])=>v.states.includes(system.currentState));
-  document.getElementById('impulsesSection').innerHTML=impulses.map(([k,v])=>
-    `<div class="impulse-card" onclick="executeImpulse('${k}')">
-      <strong>${v.name}</strong><br>${v.desc}
-    </div>`).join('');
-
-  document.getElementById('feedbackSection').classList.add('hidden');
-}
-
-function correctState(stateKey){system.currentState=stateKey;renderFlow();}
-
-function executeImpulse(impulseKey){
-  const i=IMPULSES[impulseKey];system.lastImpulse=impulseKey;
-  if(i.effect.water)system.water=Math.min(8,system.water+i.effect.water);
-  if(i.effect.activity)system.activity+=i.effect.activity;
-  if(i.effect.energy)system.energy=Math.min(100,system.energy+i.effect.energy);
-  showFeedback();
-}
-
-function showFeedback(){
-  const f=document.getElementById('feedbackSection');f.classList.remove('hidden');
-  f.innerHTML=`<div>Wie fühlst du dich jetzt?</div>
-    <div>
-      <button class="feedback-btn" onclick="handleFeedback('better')">✅ Besser</button>
-      <button class="feedback-btn" onclick="handleFeedback('same')">➖ Gleich</button>
-      <button class="feedback-btn" onclick="handleFeedback('worse')">⬇️ Schlechter</button>
-    </div>`;
-}
-
-function handleFeedback(r){
-  if(r==='better')system.energy=Math.min(100,system.energy+10);
-  if(r==='worse')system.energy=Math.max(0,system.energy-10);
-  renderFlow();
-}
-
-function renderDataView(){
-  const container=document.getElementById('dataView');
-  container.innerHTML=`
-    <div>Wasser:</div>
-    <div class="dots" id="waterDots"></div>
-    <div>Schlaf: ${system.sleep}h</div>
-    <input type="range" min="0" max="12" step="0.5" value="${system.sleep}" oninput="updateSleep(this.value)">
-    <div>Aktivität: ${system.activity} Min</div>
-    <input type="number" value="${system.activity}" oninput="updateActivity(this.value)">
-    <div>Energie: ${system.energy}%</div>
-    <div>Zustand: ${STATES[system.currentState].name}</div>`;
-  renderWaterDots();
-}
-
-function renderWaterDots(){
-  const container=document.getElementById('waterDots');
-  container.innerHTML='';
-  for(let i=0;i<8;i++){
-    const dot=document.createElement('div');
-    dot.className='dot'+(i<system.water?' active':'');
-    dot.onclick=()=>{system.water=i+1;renderDataView();};
-    container.appendChild(dot);
+  function calculateState(){
+    if(system.energy<20) return 'exhausted';
+    if(system.activity===0) return 'empty';
+    if(system.sleep<6) return 'restless';
+    return 'clear';
   }
-}
 
-function updateSleep(v){system.sleep=parseFloat(v);renderDataView();}
-function updateActivity(v){system.activity=parseInt(v)||0;renderDataView();}
+  function renderFlow(){
+    system.currentState = calculateState();
+    const state = STATES[system.currentState];
+    document.getElementById('stateDisplay').innerHTML = `<div>${state.emoji} ${state.name}<br><small>${state.desc}</small></div>`;
+    // Impulses
+    const impulseHTML = IMPULSES.filter(i=>i.states.includes(system.currentState))
+      .map(i=>`<div class="card" onclick="doImpulse('${i.name}')"><h3>${i.name}</h3><p>${i.desc}</p></div>`).join('');
+    document.getElementById('impulseList').innerHTML = impulseHTML;
+    // Maslow
+    document.getElementById('waterValue').innerText = system.water;
+    document.getElementById('sleepValue').innerText = system.sleep;
+    document.getElementById('activityValue').innerText = system.activity;
+    document.getElementById('budgetValue').innerText = (system.budget-system.spent).toFixed(2);
+    document.getElementById('spentValue').innerText = system.spent.toFixed(2);
+    document.getElementById('energyValue').innerText = system.energy;
+    document.getElementById('currentState').innerText = state.name;
+    document.getElementById('actionsCount').innerText = system.history.filter(h=>h.type==='impulse').length;
+    renderWaterDots();
+  }
 
-function showView(view, btn){
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  if(view==='flow'){document.getElementById('flowView').classList.remove('hidden');document.getElementById('dataView').classList.add('hidden');renderFlow();}
-  else{document.getElementById('flowView').classList.add('hidden');document.getElementById('dataView').classList.remove('hidden');renderDataView();}
-}
+  function renderWaterDots(){
+    const container = document.getElementById('waterDots');
+    container.innerHTML='';
+    for(let i=0;i<8;i++){
+      const dot=document.createElement('div');
+      dot.className='dot'+(i<system.water?' active':'');
+      dot.onclick=()=>{system.water=i+1;renderFlow();}
+      container.appendChild(dot);
+    }
+  }
 
-renderFlow();
+  document.getElementById('sleepSlider').addEventListener('input',e=>{system.sleep=parseFloat(e.target.value);renderFlow();});
+  document.getElementById('activityInput').addEventListener('input',e=>{system.activity=parseInt(e.target.value)||0;renderFlow();});
+
+  function addSpend(){
+    const val=parseFloat(document.getElementById('spendInput').value)||0;
+    system.spent+=val;
+    renderFlow();
+  }
+
+  function doImpulse(name){
+    const imp=IMPULSES.find(i=>i.name===name);
+    if(imp.effect.water) system.water=Math.min(8,system.water+imp.effect.water);
+    if(imp.effect.activity) system.activity+=imp.effect.activity;
+    if(imp.effect.energy) system.energy=Math.min(100,system.energy+imp.effect.energy);
+    system.history.push({type:'impulse',name:name,timestamp:Date.now()});
+    renderFlow();
+  }
+
+  renderFlow();
 </script>
 </body>
 </html>
