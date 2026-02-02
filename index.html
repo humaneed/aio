@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>humaneed App v1 - Test</title>
+  <style>
+    body { font-family: sans-serif; background: #000; color: #fff; margin:0; padding:0; }
+    .container { max-width: 500px; margin:0 auto; padding:24px; min-height:100vh; display:flex; flex-direction:column; }
+    .state-display, .impulses, .feedback, .data-view { margin-bottom:32px; }
+    .state-emoji { font-size:48px; text-align:center; }
+    .state-name { font-size:32px; text-align:center; margin:12px 0; }
+    .state-desc { font-size:16px; text-align:center; color:#aaa; }
+    .state-options { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .state-option { background:#111; padding:12px 16px; border-radius:8px; cursor:pointer; text-align:center; flex:1 0 40%; }
+    .impulse-card { background:#111; padding:16px; border-radius:8px; margin-bottom:12px; cursor:pointer; }
+    .feedback-btn { background:#111; padding:12px; border-radius:8px; cursor:pointer; margin:4px; }
+    .bottom-nav { display:flex; gap:12px; margin-top:auto; }
+    .nav-btn { flex:1; padding:12px; background:#111; border-radius:8px; cursor:pointer; text-align:center; }
+    .hidden { display:none; }
+    input[type="range"], input[type="number"] { width:100%; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Flow View -->
+    <div id="flowView">
+      <div class="state-display" id="stateDisplay"></div>
+      <div class="state-options" id="quickCorrection"></div>
+      <div class="impulses" id="impulsesSection"></div>
+      <div class="feedback hidden" id="feedbackSection"></div>
+    </div>
+
+    <!-- Data View -->
+    <div id="dataView" class="hidden"></div>
+
+    <!-- Bottom Nav -->
+    <div class="bottom-nav">
+      <div class="nav-btn active" onclick="showView('flow', this)">🎯 Flow</div>
+      <div class="nav-btn" onclick="showView('data', this)">📊 Daten</div>
+    </div>
+  </div>
+
+  <script>
+    // ========================
+    // STATES
+    // ========================
+    const STATES = {
+      exhausted:{name:'Erschöpft',emoji:'😴',desc:'Körper & Geist brauchen Pause'},
+      restless:{name:'Unruhig',emoji:'😰',desc:'Innere Spannung'},
+      empty:{name:'Leer',emoji:'😶',desc:'Antriebslos'},
+      clear:{name:'Klar',emoji:'✨',desc:'Fokussiert'},
+      stable:{name:'Stabil',emoji:'🟢',desc:'Alles im Gleichgewicht'}
+    };
+
+    // ========================
+    // IMPULSES
+    // ========================
+    const IMPULSES = {
+      water_now:{name:'Wasser trinken',desc:'Glas Wasser trinken',states:['exhausted','empty'],effect:{water:1,energy:5}},
+      breath_478:{name:'4-7-8 Atmung',desc:'Atme tief ein, halte, aus',states:['restless'],effect:{energy:10}},
+      movement_burst:{name:'Bewegung',desc:'Körper kurz bewegen',states:['empty'],effect:{activity:5,energy:10}}
+    };
+
+    // ========================
+    // SYSTEM STATE
+    // ========================
+    const system={water:0, sleep:7, activity:0, energy:50,currentState:null,lastImpulse:null,history:[]};
+
+    // ========================
+    // STATE CALCULATOR
+    // ========================
+    function calculateState(){
+      if(system.sleep<6)return'exhausted';
+      if(system.activity===0 && system.energy<40)return'empty';
+      if(system.activity>0 && system.energy>60)return'clear';
+      return'stable';
+    }
+
+    // ========================
+    // RENDER FLOW
+    // ========================
+    function renderFlow(){
+      system.currentState=calculateState();
+      const s=STATES[system.currentState];
+      // State Display
+      document.getElementById('stateDisplay').innerHTML=
+        `<div class="state-emoji">${s.emoji}</div>
+         <div class="state-name">${s.name}</div>
+         <div class="state-desc">${s.desc}</div>`;
+
+      // Quick Correction
+      const otherStates=Object.keys(STATES).filter(k=>k!==system.currentState);
+      document.getElementById('quickCorrection').innerHTML=
+        otherStates.map(k=>`<div class="state-option" onclick="correctState('${k}')">${STATES[k].emoji}<br>${STATES[k].name}</div>`).join('');
+
+      // Impulses
+      const impulses=Object.entries(IMPULSES).filter(([k,v])=>v.states.includes(system.currentState));
+      document.getElementById('impulsesSection').innerHTML=impulses.map(([k,v])=>
+        `<div class="impulse-card" onclick="executeImpulse('${k}')">
+          <strong>${v.name}</strong><br>${v.desc}
+        </div>`).join('');
+
+      // Hide feedback
+      document.getElementById('feedbackSection').classList.add('hidden');
+    }
+
+    function correctState(stateKey){system.currentState=stateKey;renderFlow();}
+
+    function executeImpulse(impulseKey){
+      const i=IMPULSES[impulseKey];system.lastImpulse=impulseKey;
+      if(i.effect.water)system.water+=i.effect.water;
+      if(i.effect.activity)system.activity+=i.effect.activity;
+      if(i.effect.energy)system.energy=Math.min(100,system.energy+i.effect.energy);
+      showFeedback();
+    }
+
+    function showFeedback(){
+      const f=document.getElementById('feedbackSection');f.classList.remove('hidden');
+      f.innerHTML=`<div>Wie fühlst du dich jetzt?</div>
+        <div>
+          <button class="feedback-btn" onclick="handleFeedback('better')">✅ Besser</button>
+          <button class="feedback-btn" onclick="handleFeedback('same')">➖ Gleich</button>
+          <button class="feedback-btn" onclick="handleFeedback('worse')">⬇️ Schlechter</button>
+        </div>`;
+    }
+
+    function handleFeedback(r){
+      if(r==='better')system.energy=Math.min(100,system.energy+10);
+      if(r==='worse')system.energy=Math.max(0,system.energy-10);
+      renderFlow();
+    }
+
+    // ========================
+    // DATA VIEW
+    // ========================
+    function renderDataView(){
+      document.getElementById('dataView').innerHTML=
+        `<div>Wasser: ${system.water}</div>
+         <div>Schlaf: ${system.sleep}h</div>
+         <div>Aktivität: ${system.activity} Min</div>
+         <div>Energie: ${system.energy}%</div>
+         <div>Zustand: ${STATES[system.currentState].name}</div>`;
+    }
+
+    // ========================
+    // VIEW SWITCH
+    // ========================
+    function showView(view, btn){
+      document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      if(view==='flow'){document.getElementById('flowView').classList.remove('hidden');document.getElementById('dataView').classList.add('hidden');renderFlow();}
+      else{document.getElementById('flowView').classList.add('hidden');document.getElementById('dataView').classList.remove('hidden');renderDataView();}
+    }
+
+    // INIT
+    renderFlow();
+  </script>
+</body>
+</html>
