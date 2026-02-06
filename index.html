@@ -2,371 +2,846 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#000000">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="HUMANEED">
-<meta name="description" content="HUMANEED - Dein persönliches Biological Operating System für Balance, Fokus und Wachstum.">
-<meta name="author" content="humaneed">
-<title>humaneed | OS for Humans</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>HUMANEED | Flow Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+
 <style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   FLOW DESIGN v7 - Minimalist Dark
+   ═══════════════════════════════════════════════════════════════════════════ */
+
 :root {
-    --bg: #000;
-    --card: #0d0d0d;
-    --border: #1e1e1e;
-    --accent: #00ff88;
-    --warning: #ff4757;
-    --text-dim: #888;
-    --text-bright: #fff;
-    --vitality: #ff4757;
-    --resilience: #3742fa;
-    --growth: #a55eea;
-    --glow: rgba(0, 255, 136, 0.3);
+  /* 🎨 Core */
+  --bg-void: #050505;
+  --glass: rgba(255,255,255,0.04);
+  --glass-hover: rgba(255,255,255,0.08);
+  --border: rgba(255,255,255,0.08);
+  
+  --text-main: #ededed;
+  --text-dim: #888;
+  --text-muted: #555;
+  
+  /* 🌊 Tier Colors */
+  --c-tier0: #FF6B35; /* Bio */
+  --c-tier1: #FFB84D; /* Struktur */
+  --c-tier2: #4ECDC4; /* Sozial */
+  --c-tier3: #95E1D3; /* Identität */
+  --c-tier4: #A78BFA; /* Entwicklung */
+  --c-tier5: #F38BA0; /* Bedeutung */
+  
+  /* 💎 Status */
+  --c-green: #32D74B;
+  --c-yellow: #FFD60A;
+  --c-red: #FF453A;
+  
+  /* ⚡ Animation */
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body { 
-    height: 100%; overflow: hidden; 
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-    background: var(--bg); color: var(--text-bright); 
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Base Screens */
-#screens { position: relative; width: 100%; height: 100%; }
-.screen { 
-    position: absolute; width: 100%; height: 100%; 
-    display: flex; flex-direction: column; align-items: center; 
-    padding: 100px 24px 40px; opacity: 0; transform: translateY(20px);
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
-    pointer-events: none; overflow-y: auto;
+body {
+  background: var(--bg-void);
+  color: var(--text-main);
+  font-family: 'Manrope', -apple-system, sans-serif;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
-.screen.active { opacity: 1; transform: translateY(0); pointer-events: all; z-index: 10; }
 
-/* Header Elements */
-.header-stats { 
-    position: fixed; top: 0; width: 100%; padding: 25px 24px; 
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(25px);
-    border-bottom: 1px solid var(--border);
+/* ═══════════════════════════════════════════════════════════════════════════
+   AMBIENCE & LAYOUT
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.ambience {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(circle at 50% -20%, rgba(255,255,255,0.05), transparent 70%);
 }
-.brand { font-size: 13px; font-weight: 900; letter-spacing: 3px; color: var(--text-bright); }
-.streak-box { background: rgba(255, 71, 87, 0.1); padding: 6px 14px; border-radius: 30px; border: 1px solid var(--vitality); font-size: 11px; font-weight: 800; color: var(--vitality); }
 
-/* Dashboard Visuals */
-.status-overview { display: flex; gap: 15px; margin-bottom: 30px; width: 100%; max-width: 360px; justify-content: center; }
-.status-ring { position: relative; width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; }
-.status-ring svg { transform: rotate(-90deg); width: 80px; height: 80px; }
-.status-ring circle { fill: none; stroke-width: 6; stroke-linecap: round; }
-.status-ring .bg { stroke: #1a1a1a; }
-.status-ring .progress { stroke-dasharray: 226; stroke-dashoffset: 226; transition: stroke-dashoffset 1s ease; }
-.status-ring .icon { position: absolute; font-size: 20px; }
-
-/* Components */
-.emoji-hero { font-size: 72px; margin-bottom: 24px; animation: float 4s ease-in-out infinite; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-.title { font-size: 32px; font-weight: 800; text-align: center; margin-bottom: 8px; letter-spacing: -0.5px; }
-.subtitle { font-size: 16px; color: var(--text-dim); text-align: center; max-width: 300px; margin-bottom: 40px; line-height: 1.6; }
-
-.card {
-    background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-    padding: 24px; width: 100%; max-width: 360px; margin-bottom: 16px;
-    cursor: pointer; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative;
-    overflow: hidden;
+.app-container {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+  width: 100%;
 }
-.card:active { transform: scale(0.96); border-color: var(--accent); }
-.card.highlight { background: linear-gradient(145deg, #111, #050505); border-color: #333; }
-.card.accent-border { border-left: 4px solid var(--accent); }
 
-.btn { 
-    width: 100%; max-width: 360px; background: var(--text-bright); color: #000; border: none; 
-    border-radius: 20px; padding: 22px; font-size: 16px; font-weight: 800; 
-    cursor: pointer; margin-top: 12px; transition: 0.3s;
+.header {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-.btn-secondary { background: transparent; color: var(--text-bright); border: 1px solid var(--border); }
 
-/* Inputs */
-.input-group { width: 100%; max-width: 360px; margin-bottom: 24px; }
-.input-label { font-size: 12px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; margin-bottom: 12px; display: block; display: flex; justify-content: space-between; }
-input[type="range"] { width: 100%; height: 8px; border-radius: 10px; background: #1a1a1a; appearance: none; outline: none; margin-bottom: 10px; }
-input[type="range"]::-webkit-slider-thumb { appearance: none; width: 24px; height: 24px; background: var(--accent); border-radius: 50%; cursor: pointer; border: 4px solid #000; box-shadow: 0 0 10px var(--glow); }
-
-/* Science Content Styling */
-.science-box { background: #080808; border-radius: 24px; padding: 24px; margin-top: 20px; border: 1px solid #222; width: 100%; max-width: 360px; }
-.sci-tag { color: var(--accent); font-size: 10px; font-weight: 900; text-transform: uppercase; margin-bottom: 12px; display: block; letter-spacing: 1px; }
-.sci-detail { margin-bottom: 16px; }
-.sci-label { font-size: 10px; color: var(--text-dim); text-transform: uppercase; font-weight: 800; display: block; margin-bottom: 4px; }
-.sci-text { font-size: 14px; line-height: 1.5; color: #ddd; }
-
-/* Diagnostic Animation */
-.scan-line { width: 100%; height: 2px; background: var(--accent); box-shadow: 0 0 15px var(--accent); position: absolute; left: 0; top: -10%; animation: scan 3s linear infinite; }
-@keyframes scan { 0% { top: 0%; opacity: 0; } 50% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
-
-/* Legal Banner */
-#legalBanner {
-    position: fixed; bottom: 20px; left: 20px; right: 20px; background: #0a0a0a; border: 1px solid var(--border);
-    padding: 20px; border-radius: 24px; z-index: 1000; display: flex; flex-direction: column; gap: 10px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+.brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: 1rem;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: opacity 0.3s;
 }
-.hidden { display: none !important; }
+
+.brand:hover {
+  opacity: 1;
+}
+
+.status-pill {
+  font-size: 0.75rem;
+  background: var(--glass);
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   VIEW SYSTEM
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.view {
+  position: absolute;
+  inset: 0;
+  padding: 0 1.5rem 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: transform 0.6s var(--ease), opacity 0.5s ease;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+.view.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+.view::-webkit-scrollbar {
+  width: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+
+.sub {
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BUTTONS & UI
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.btn {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+  text-align: center;
+  font-family: inherit;
+  display: block;
+  width: 100%;
+}
+
+.btn:active { transform: scale(0.98); }
+
+.btn-primary {
+  background: #fff;
+  color: #000;
+  border: none;
+  font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANAMNESE STYLES (NEU)
+   ═══════════════════════════════════════════════════════════════════════════ */
+   
+.ana-progress-container {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.ana-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--c-green);
+  transition: width 0.4s var(--ease);
+}
+
+.ana-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ana-option {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ana-selected {
+  border-color: var(--c-green);
+  background: rgba(50,215,75,0.1);
+  color: #fff;
+}
+
+.ana-nav {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   HOME & RECOMMENDATIONS (NEU)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.rec-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  margin: 0 -1.5rem 2rem; /* Bleed layout */
+  padding: 0 1.5rem 1rem;
+  scrollbar-width: none;
+}
+.rec-scroll::-webkit-scrollbar { display: none; }
+
+.rec-card {
+  min-width: 220px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rec-reason {
+  font-size: 0.75rem;
+  color: var(--c-green);
+  margin-bottom: 6px;
+}
+
+.rec-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SCORE RING
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.score-container { text-align: center; margin: 2rem 0; }
+.score-ring { position: relative; width: 180px; height: 180px; margin: 0 auto 1.5rem; }
+.score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-bg { fill: none; stroke: var(--glass); stroke-width: 10; }
+.ring-progress { 
+  fill: none; stroke: var(--c-green); stroke-width: 10; stroke-linecap: round; 
+  stroke-dasharray: 565; stroke-dashoffset: 565; transition: stroke-dashoffset 1s var(--ease);
+}
+.score-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.score-value { font-size: 2.5rem; font-weight: 300; line-height: 1; }
+.score-label { font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); margin-top: 5px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   TIER GRID
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.tier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding-bottom: 4rem;}
+.tier-card {
+  aspect-ratio: 1.1;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.tier-card:hover { background: var(--glass-hover); transform: translateY(-3px); }
+.tier-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
+.tier-name { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
+.tier-score { font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SHEET
+   ═══════════════════════════════════════════════════════════════════════════ */
+.overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: none; align-items: flex-end; opacity: 0; transition: opacity 0.3s; }
+.overlay.active { display: flex; opacity: 1; }
+.sheet { width: 100%; max-width: 480px; margin: 0 auto; background: #111; border-top: 1px solid #333; border-radius: 24px 24px 0 0; padding: 2rem; transform: translateY(100%); transition: transform 0.4s var(--ease); max-height: 90vh; overflow-y: auto; }
+.overlay.active .sheet { transform: translateY(0); }
+
 </style>
 </head>
 <body>
 
-<div class="header-stats">
-    <div class="brand">HUMANEED OS</div>
-    <div class="streak-box" id="global-streak">🔥 0 STREAK</div>
-</div>
+<div class="ambience"></div>
 
-<div id="screens"></div>
+<div class="app-container">
+  <header class="header">
+    <div class="brand" onclick="navigate('viewHome')">HUMANEED</div>
+    <div class="status-pill" onclick="startAnamnesis()">👤 Profil</div>
+  </header>
 
-<div id="legalBanner">
-    <div style="font-size: 12px; font-weight: 800; letter-spacing: 1px;">HAFTUNGSAUSSCHLUSS</div>
-    <div style="font-size: 11px; color: var(--text-dim); line-height: 1.5;">
-        Die Inhalte dienen ausschließlich der allgemeinen Information und Selbsterfahrung. Sie ersetzen keine professionelle medizinische oder psychologische Diagnose oder Behandlung.
+  <div class="viewport">
+  
+    <div class="view active" id="viewHome">
+      
+      <div id="recommendationsContainer">
+        </div>
+
+      <div class="score-container">
+        <div class="score-ring">
+          <svg viewBox="0 0 200 200">
+            <circle class="ring-bg" cx="100" cy="100" r="90" />
+            <circle class="ring-progress" cx="100" cy="100" r="90" id="scoreRing" />
+          </svg>
+          <div class="score-content">
+            <div class="score-value" id="scoreValue">0</div>
+            <div class="score-label">Flow Level</div>
+          </div>
+        </div>
+        <p class="sub" id="scoreMsg">Sammle XP in den Dimensionen</p>
+      </div>
+      
+      <div class="tier-grid" id="tierGrid"></div>
     </div>
-    <button class="btn" style="padding: 12px; font-size: 12px; margin-top: 10px;" onclick="dismissLegal()">Verstanden</button>
+
+    <div class="view" id="viewAnamnesis">
+      <div class="ana-progress-container">
+        <div class="ana-progress-bar" id="anaProgress"></div>
+      </div>
+      
+      <h1 id="anaQuestion">Frage</h1>
+      <p class="sub" id="anaSub">Klicke alles an, was passt</p>
+      
+      <div class="ana-options" id="anaOptions">
+        </div>
+      
+      <div class="ana-nav">
+        <button class="btn" style="width: auto; padding: 10px 20px; opacity: 0.6;" onclick="navigate('viewHome')">Später</button>
+        <button class="btn btn-primary" style="width: auto; padding: 10px 30px;" onclick="nextQuestion()">Weiter →</button>
+      </div>
+    </div>
+
+    <div class="view" id="viewSkills">
+      <h1 id="skillTierTitle">Dimension</h1>
+      <div class="ana-options" id="skillList" style="margin-top: 1rem;"></div>
+      <button class="btn" style="margin-top: 2rem;" onclick="navigate('viewHome')">Zurück</button>
+    </div>
+
+    <div class="view" id="viewSuccess" style="text-align: center; padding-top: 4rem;">
+      <div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div>
+      <h1>Großartig!</h1>
+      <div style="font-size: 2rem; color: var(--c-green); margin-bottom: 2rem;" id="successPoints">+0 XP</div>
+      <p class="sub" id="synergyMsg" style="opacity: 0.7;">...</p>
+      <button class="btn btn-primary" onclick="navigate('viewHome')">Weiter</button>
+    </div>
+
+  </div> <div class="overlay" id="skillOverlay" onclick="closeSheet(event)">
+    <div class="sheet">
+      <div style="font-size: 0.8rem; color: var(--c-green); text-transform: uppercase; margin-bottom: 10px;" id="sheetTier">DIMENSION</div>
+      <h1 id="sheetTitle" style="font-size: 1.8rem; margin-bottom: 1rem;">Titel</h1>
+      <p style="font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 2rem;" id="sheetDesc">Beschreibung</p>
+      
+      <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
+        <div style="font-weight: 700; margin-bottom: 5px;">⚡ Warum jetzt?</div>
+        <div style="font-size: 0.9rem; color: #aaa;" id="sheetReason">Diese Übung passt zu deinem aktuellen Fokus.</div>
+      </div>
+      
+      <button class="btn btn-primary" onclick="doSkill()">Erledigt (+XP)</button>
+      <button class="btn" style="margin-top: 10px; border: none; background: transparent;" onclick="closeSheet(null, true)">Abbrechen</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-// --- CORE ENGINE DATABASE ---
-const DATABASE = {
-    vitality: {
-        name: 'Vitalität', icon: '🔋', color: 'var(--vitality)',
-        actions: {
-            sun: { title: 'Photonen-Dusche', prompt: 'Geh 5-10 Min. nach draußen (direktes Tageslicht).', xp: 30, why: 'Lichtmangel / Zirkadiane Störung', mechanism: 'Morgenlicht triggert die Cortisol-Ausschüttung (Wachheit) und programmiert die Melatonin-Produktion für ca. 14h später vor.', benefit: 'Besserer Schlaf, höhere Wachheit am Tag.' },
-            ground: { title: 'Earthing', prompt: 'Barfuß auf Gras, Erde oder Stein stehen.', xp: 20, why: 'Elektromagnetische Last / Entzündung', mechanism: 'Elektronen-Austausch mit der Erde reduziert freie Radikale und stabilisiert das vegetative Nervensystem.', benefit: 'Weniger Stress, schnellere Regeneration.' },
-            magnesium: { title: 'Nervenschutz', prompt: 'Nimm Magnesium oder iss eine Handvoll Nüsse.', xp: 15, why: 'Nervöse Unruhe / Verspannung', mechanism: 'Magnesium blockiert NMDA-Rezeptoren und verhindert so eine Übererregung der Nervenzellen.', benefit: 'Entspannte Muskeln, beruhigtes Nervensystem.' }
-        }
-    },
-    resilience: {
-        name: 'Resilienz', icon: '🧠', color: 'var(--resilience)',
-        actions: {
-            dopamine: { title: 'Dopamin-Reset', prompt: 'Leg das Smartphone für 30 Min. in einen anderen Raum.', xp: 40, why: 'Reizüberflutung / Aufmerksamkeitsdefizit', mechanism: 'Reduziert die unnatürlich hohe Reizfrequenz im Belohnungssystem und lässt Dopamin-Rezeptoren regenerieren.', benefit: 'Höhere Konzentrationsfähigkeit, weniger Suchtdruck.' },
-            cold: { title: 'Kälte-Impuls', prompt: 'Gesicht 30s in eiskaltes Wasser tauchen.', xp: 30, why: 'Akuter Stress / Panik-Gefühl', mechanism: 'Aktiviert den "Mammalian Dive Reflex" – senkt sofort die Herzfrequenz und dämpft die Amygdala.', benefit: 'Sofortige Ruhe, emotionaler Stopp.' },
-            box: { title: 'Box-Breathing', prompt: '4s Ein, 4s Halten, 4s Aus, 4s Halten (4x).', xp: 25, why: 'Oberflächliche Atmung / Unruhe', mechanism: 'Synchronisiert Herzfrequenzvariabilität (HRV) und Blutgas-Verhältnis für kognitive Klarheit.', benefit: 'Präsenz, Fokus, Stressabbau.' }
-        }
-    },
-    growth: {
-        name: 'Evolution', icon: '✨', color: 'var(--growth)',
-        actions: {
-            uncomf: { title: 'Willenskraft', prompt: 'Tu etwas Kleines, das dich Überwindung kostet.', xp: 50, why: 'Komfortzonen-Stagnation', mechanism: 'Aktiviert den anterioren cingulären Cortex (aMCC) – das neuronale Zentrum für Zähigkeit.', benefit: 'Höhere Resilienz gegen zukünftige Belastungen.' },
-            journal: { title: 'Neuro-Journaling', prompt: 'Notiere eine Sache, die du heute gelernt hast.', xp: 20, why: 'Zerstreutheit / Mangelnde Reflexion', mechanism: 'Fördert die Neuroplastizität durch bewusste Konsolidierung synaptischer Verbindungen im Hippocampus.', benefit: 'Besseres Gedächtnis, klares Selbstbild.' }
-        }
-    }
-};
+// ─────────────────────────────────────────────────────────────────────────────
+// 🧬 DATEN & KONFIGURATION
+// ─────────────────────────────────────────────────────────────────────────────
 
-const SCAN_RULES = [
-    { id: 'morning_check', cond: (s) => s.hour < 11 && s.energy < 40, res: { state: 'Cortisol-Lag', emoji: '🌅', desc: 'Dein System ist noch im Schlafmodus. Licht-Input dringend empfohlen.', action: 'sun' } },
-    { id: 'burnout_risk', cond: (s) => s.energy < 20 && s.sleep < 6, res: { state: 'Energetisches Defizit', emoji: '🚨', desc: 'Kritische Erschöpfung detektiert. Fokus auf Parasympathikus.', action: 'cold' } },
-    { id: 'brain_fog', cond: (s) => s.water < 3, res: { state: 'Brain Fog', emoji: '☁️', desc: 'Dehydration beeinträchtigt die neuronale Übertragung.', action: 'ground' } }
+// Die neuen, deskriptiven Anamnese-Fragen
+const ANAMNESIS_DATA = [
+  {
+    id: "phase",
+    question: "In welcher Lebensphase bist du?",
+    type: "single",
+    options: [
+      { value: "student", label: "🎓 Student/in, Ausbildung" },
+      { value: "berufsstart", label: "🚀 Berufsstart, unter 30" },
+      { value: "etabliert", label: "⚓ Etabliert, 30-45" },
+      { value: "mid_life", label: "⚖️ Mitte des Lebens, 45-60" },
+      { value: "senior", label: "🌳 Erfahren, 60+" }
+    ]
+  },
+  {
+    id: "alltag",
+    question: "Wie sieht dein typischer Tag aus?",
+    type: "multi",
+    options: [
+      { value: "viel_sitzen", label: "🪑 Viel Sitzen" },
+      { value: "viel_bewegung", label: "🏃 Viel in Bewegung" },
+      { value: "bildschirm", label: "💻 Viel Bildschirmzeit" },
+      { value: "menschen", label: "🗣️ Viel mit Menschen" },
+      { value: "allein", label: "🐺 Viel allein" },
+      { value: "strukturiert", label: "📅 Sehr strukturiert" },
+      { value: "flexibel", label: "🌊 Flexibel / Chaotisch" },
+      { value: "zeitdruck", label: "⏱️ Oft unter Zeitdruck" }
+    ]
+  },
+  {
+    id: "zustand",
+    question: "Wie würdest du deinen aktuellen Zustand beschreiben?",
+    type: "multi",
+    options: [
+      { value: "erschoepft", label: "🔋 Oft erschöpft" },
+      { value: "energiegeladen", label: "⚡ Energiegeladen" },
+      { value: "schlaf_schlecht", label: "😴 Schlaf könnte besser sein" },
+      { value: "gestresst", label: "🤯 Oft gestresst" },
+      { value: "gruebelnd", label: "🤔 Viel Grübeln" },
+      { value: "einsam", label: "🌑 Manchmal einsam" },
+      { value: "suchend", label: "🧭 Suche Sinn / Richtung" }
+    ]
+  },
+  {
+    id: "prioritaeten",
+    question: "Was ist dir gerade am wichtigsten? (Max 3)",
+    type: "multi",
+    max: 3,
+    options: [
+      { value: "mehr_energie", label: "⚡ Mehr Energie" },
+      { value: "weniger_stress", label: "🧘 Weniger Stress" },
+      { value: "verbindung", label: "🤝 Verbindung / Nähe" },
+      { value: "klarheit", label: "👁️ Klarheit & Fokus" },
+      { value: "sinn", label: "🌟 Sinn finden" }
+    ]
+  }
 ];
 
-let system = JSON.parse(localStorage.getItem('hn_v3')) || {
-    sleep: 7, water: 4, energy: 60,
-    xp: { vitality: 0, resilience: 0, growth: 0 },
-    streak: 0, hour: new Date().getHours()
+// Dimensionen (Tiers)
+const TIERS = [
+  { id: 'bio', name: 'Biologie', icon: '💪', color: 'var(--c-tier0)' },
+  { id: 'struktur', name: 'Struktur', icon: '🏠', color: 'var(--c-tier1)' },
+  { id: 'sozial', name: 'Soziales', icon: '❤️', color: 'var(--c-tier2)' },
+  { id: 'identitaet', name: 'Identität', icon: '⭐', color: 'var(--c-tier3)' },
+  { id: 'entwicklung', name: 'Entwicklung', icon: '🚀', color: 'var(--c-tier4)' },
+  { id: 'bedeutung', name: 'Bedeutung', icon: '🌟', color: 'var(--c-tier5)' }
+];
+
+// Beispiel-Skills (Basis-Datenbank)
+const SKILLS_DB = [
+  { id: '478_breath', name: '4-7-8 Atmung', tier: 'bio', xp: 30, desc: '90 Sekunden Reset für das Nervensystem.', tags: ['stress', 'erschoepft'] },
+  { id: 'water', name: 'Glas Wasser', tier: 'bio', xp: 15, desc: 'Hydrierung für sofortige Klarheit.', tags: ['erschoepft'] },
+  { id: 'walk_10', name: '10 Min Spaziergang', tier: 'bio', xp: 50, desc: 'Bewegung baut Stresshormone ab.', tags: ['viel_sitzen', 'stress'] },
+  { id: 'dump_journal', name: 'Gedanken-Dump', tier: 'identitaet', xp: 40, desc: 'Alles aufschreiben, was im Kopf kreist.', tags: ['gruebelnd', 'gestresst'] },
+  { id: 'msg_friend', name: 'Nachricht senden', tier: 'sozial', xp: 30, desc: 'Eine kurze Verbindung herstellen.', tags: ['einsam', 'verbindung'] },
+  { id: '3_wins', name: '3 Tages-Wins', tier: 'struktur', xp: 25, desc: 'Fokus auf das Gelungene.', tags: ['suchend', 'negativ'] },
+  { id: 'values', name: 'Werte-Check', tier: 'bedeutung', xp: 60, desc: 'Lebe ich heute nach meinen Werten?', tags: ['sinn', 'suchend'] }
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🧠 STATE & LOGIC
+// ─────────────────────────────────────────────────────────────────────────────
+
+let state = {
+  xp: 0,
+  level: 1,
+  profile: {},      // Anamnese Daten
+  history: [],      // Erledigte Skills
+  recommendations: [], // Berechnete Empfehlungen
+  synergyContext: {}, // Versteckte Multiplikatoren
+  currentSkill: null
 };
 
-function navigate(screenId, params = {}) {
-    const container = document.getElementById('screens');
-    const oldScreen = container.querySelector('.screen.active');
-    const newScreen = document.createElement('div');
-    newScreen.className = 'screen active';
+// Analyse-Logik (Das Herzstück)
+function analyzeProfile() {
+  const p = state.profile;
+  const recs = [];
+  
+  if (!p || Object.keys(p).length === 0) {
+    state.recommendations = [];
+    return;
+  }
+  
+  // 1. Muster erkennen
+  const patterns = {
+    exhausted: p.zustand?.includes('erschoepft') || p.zustand?.includes('schlaf_schlecht'),
+    isolated: p.zustand?.includes('einsam') || p.alltag?.includes('allein'),
+    stressed: p.zustand?.includes('gestresst') || p.alltag?.includes('zeitdruck'),
+    sedentary: p.alltag?.includes('viel_sitzen') || p.alltag?.includes('bildschirm')
+  };
+  
+  // 2. Synergy Context berechnen (Einflussfaktoren)
+  state.synergyContext = {
+    energy_low: patterns.exhausted,
+    social_low: patterns.isolated,
+    stress_high: patterns.stressed
+  };
+
+  // 3. Empfehlungen generieren (Smart Recommendations)
+  
+  // Bei Erschöpfung/Stress -> Bio-Skills priorisieren
+  if (patterns.exhausted || patterns.stressed) {
+    recs.push({
+      skillId: '478_breath',
+      reason: "Nervensystem beruhigen",
+      priority: 1
+    });
+    recs.push({
+      skillId: 'walk_10',
+      reason: "Stresshormone abbauen",
+      priority: 2
+    });
+  }
+  
+  // Bei Grübeln -> Identität/Struktur
+  if (p.zustand?.includes('gruebelnd')) {
+    recs.push({
+      skillId: 'dump_journal',
+      reason: "Kopf frei bekommen",
+      priority: 1
+    });
+  }
+
+  // Bei Isolation -> Sozial
+  if (patterns.isolated) {
+    recs.push({
+      skillId: 'msg_friend',
+      reason: "Verbindung stärken",
+      priority: 1
+    });
+  }
+
+  // Fallback
+  if (recs.length === 0) {
+    recs.push({ skillId: 'water', reason: "Basis-Versorgung", priority: 3 });
+  }
+
+  state.recommendations = recs.sort((a,b) => a.priority - b.priority);
+  renderHome();
+}
+
+// Berechnet XP basierend auf Kontext (Synergie)
+function calculateSynergyXP(baseXP, tierId) {
+  let multiplier = 1.0;
+  const ctx = state.synergyContext;
+  let msg = "Gute Arbeit!";
+
+  // Logik: Wenn man erschöpft ist, geben Bio-Skills mehr Belohnung (Selbstfürsorge),
+  // aber komplexe Entwicklungs-Skills vielleicht weniger (weil weniger effektiv).
+  
+  if (tierId === 'bio' && ctx.energy_low) {
+    multiplier = 1.5; // Bonus für Selbstfürsorge
+    msg = "Wichtige Selbstfürsorge! (+50% Bonus)";
+  }
+  
+  if (tierId === 'entwicklung' && ctx.stress_high) {
+    multiplier = 0.8; // Schwer zu lernen unter Stress
+    msg = "Trotz Stress erledigt (Resilienz)";
+  }
+
+  return { xp: Math.round(baseXP * multiplier), msg };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 📱 CONTROLLER & NAVIGATION
+// ─────────────────────────────────────────────────────────────────────────────
+
+function init() {
+  // Load State from LocalStorage
+  const saved = localStorage.getItem('humaneed_state_v2');
+  if (saved) {
+    state = JSON.parse(saved);
+    analyzeProfile(); // Re-Analyse beim Laden
+  }
+  renderHome();
+}
+
+function saveState() {
+  localStorage.setItem('humaneed_state_v2', JSON.stringify(state));
+}
+
+function navigate(viewId) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(viewId).classList.add('active');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🖥️ UI RENDERING
+// ─────────────────────────────────────────────────────────────────────────────
+
+function renderHome() {
+  // 1. Score Ring
+  const totalXP = state.xp;
+  const maxXP = state.level * 500;
+  const pct = Math.min((totalXP / maxXP) * 100, 100);
+  const ring = document.getElementById('scoreRing');
+  const circumference = 2 * Math.PI * 90;
+  
+  ring.style.strokeDasharray = `${circumference} ${circumference}`;
+  ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
+  
+  document.getElementById('scoreValue').textContent = state.level;
+  
+  // 2. Smart Recommendations Area
+  const recContainer = document.getElementById('recommendationsContainer');
+  
+  // Zeige Anamnese-Einladung wenn Profil leer
+  if (!state.profile || Object.keys(state.profile).length === 0) {
+    recContainer.innerHTML = `
+      <div style="margin: 0 1.5rem 2rem;">
+        <div class="btn" onclick="startAnamnesis()" style="display:flex; justify-content:space-between; align-items:center; text-align:left;">
+          <div>
+            <div style="font-weight:700;">Profil erstellen</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Für smarte Empfehlungen</div>
+          </div>
+          <span style="font-size:1.5rem">👤</span>
+        </div>
+      </div>
+    `;
+  } 
+  // Oder zeige Empfehlungen
+  else if (state.recommendations.length > 0) {
+    let html = `
+      <div style="margin: 0 1.5rem 0.5rem; font-size: 0.7rem; text-transform:uppercase; color:var(--text-dim); letter-spacing:1px; font-weight:700;">💡 FÜR DICH EMPFOHLEN</div>
+      <div class="rec-scroll">`;
+      
+    state.recommendations.forEach(rec => {
+      const skill = SKILLS_DB.find(s => s.id === rec.skillId);
+      if (!skill) return;
+      html += `
+        <div class="rec-card" onclick="openSkill('${skill.id}', '${rec.reason}')">
+          <div class="rec-reason">${rec.reason}</div>
+          <div class="rec-title">${skill.name}</div>
+          <div class="btn-primary" style="padding:6px 12px; font-size:0.8rem; border-radius:8px; width:auto; display:inline-block;">Jetzt machen</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+    recContainer.innerHTML = html;
+  } else {
+    recContainer.innerHTML = '';
+  }
+
+  // 3. Tier Grid
+  const grid = document.getElementById('tierGrid');
+  grid.innerHTML = '';
+  TIERS.forEach(tier => {
+    // Check if skills available
+    const count = SKILLS_DB.filter(s => s.tier === tier.id).length;
+    const card = document.createElement('div');
+    card.className = 'tier-card';
+    card.innerHTML = `
+      <div class="tier-emoji">${tier.icon}</div>
+      <div class="tier-name">${tier.name}</div>
+      <div class="tier-score" style="color:${tier.color}">${count} Skills</div>
+    `;
+    card.onclick = () => openTier(tier.id);
+    grid.appendChild(card);
+  });
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🧬 ANAMNESE LOGIC
+// ─────────────────────────────────────────────────────────────────────────────
+
+let anaIndex = 0;
+let anaTempAnswers = {};
+
+function startAnamnesis() {
+  anaIndex = 0;
+  anaTempAnswers = {};
+  navigate('viewAnamnesis');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = ANAMNESIS_DATA[anaIndex];
+  if (!q) {
+    // Ende erreicht
+    state.profile = { ...state.profile, ...anaTempAnswers };
+    analyzeProfile(); // Neu berechnen
+    saveState();
+    navigate('viewHome');
+    return;
+  }
+
+  document.getElementById('anaQuestion').textContent = q.question;
+  
+  // Progress Bar
+  const pct = ((anaIndex) / ANAMNESIS_DATA.length) * 100;
+  document.getElementById('anaProgress').style.width = `${pct}%`;
+
+  const container = document.getElementById('anaOptions');
+  container.innerHTML = '';
+
+  q.options.forEach(opt => {
+    const btn = document.createElement('div');
+    btn.className = 'btn ana-option';
+    btn.innerHTML = `<span>${opt.label}</span>`;
     
-    let html = '';
-    switch(screenId) {
-        case 'home':
-            html = `
-                <div class="emoji-hero">🧿</div>
-                <div class="title">System-Status</div>
-                <div class="subtitle">Deine biologische Performance-Übersicht</div>
-                
-                <div class="status-overview">
-                    ${Object.entries(DATABASE).map(([key, data]) => {
-                        const level = Math.floor(system.xp[key] / 100);
-                        const progress = system.xp[key] % 100;
-                        const offset = 226 - (226 * progress / 100);
-                        return `
-                        <div class="status-ring" onclick="navigate('actions', {cat:'${key}'})">
-                            <svg><circle class="bg" cx="40" cy="40" r="36"/><circle class="progress" cx="40" cy="40" r="36" style="stroke:${data.color}; stroke-dashoffset:${offset}"/></svg>
-                            <span class="icon">${data.icon}</span>
-                        </div>`;
-                    }).join('')}
-                </div>
-
-                <div class="card highlight accent-border" onclick="navigate('input')">
-                    <div style="font-weight:900; font-size:18px;">Deep Scan</div>
-                    <div style="font-size:12px; color:var(--text-dim); margin-top:4px;">Analyse biometrischer Marker</div>
-                </div>
-                <div class="card" onclick="navigate('catalog')">
-                    <div style="font-weight:900; font-size:18px;">Protokoll-Katalog</div>
-                    <div style="font-size:12px; color:var(--text-dim); margin-top:4px;">Interventionen wählen</div>
-                </div>
-                <div style="font-size:10px; color:var(--text-dim); margin-top:20px;">© humaneed | v3.1.0 Optimized</div>
-            `;
-            break;
-            
-        case 'input':
-            html = `
-                <div class="title">Status Quo</div>
-                <div class="subtitle">Echtzeit-Abgleich deiner Parameter</div>
-                <div class="input-group"><label class="input-label">Schlafqualität <span id="label-sleep">${system.sleep}h</span></label><input type="range" min="3" max="10" step="0.5" value="${system.sleep}" oninput="updateVal('sleep', this.value)"></div>
-                <div class="input-group"><label class="input-label">Hydrierung (Gläser) <span id="label-water">${system.water}</span></label><input type="range" min="0" max="15" step="1" value="${system.water}" oninput="updateVal('water', this.value)"></div>
-                <div class="input-group"><label class="input-label">Energielevel <span id="label-energy">${system.energy}%</span></label><input type="range" min="0" max="100" step="5" value="${system.energy}" oninput="updateVal('energy', this.value)"></div>
-                <button class="btn" onclick="startScanAnimation()">Scan starten</button>
-                <button class="btn btn-secondary" onclick="navigate('home')">Home</button>
-            `;
-            break;
-
-        case 'scan':
-            html = `
-                <div class="scan-line"></div>
-                <div class="emoji-hero">🔍</div>
-                <div class="title">Diagnostic</div>
-                <div class="subtitle" id="scan-status">Initialisiere Analyse...</div>
-                <div style="width:100%; max-width:300px; font-family:monospace; font-size:12px; color:var(--accent); line-height:2;">
-                    > Checking Neural Patterns...<br>
-                    > Assessing Metabolic State...<br>
-                    > Analyzing Circadian Alignment...
-                </div>
-            `;
-            setTimeout(() => document.getElementById('scan-status').innerText = 'Berechne Empfehlung...', 1500);
-            setTimeout(() => runScan(), 3000);
-            break;
-
-        case 'result':
-            const r = params.res;
-            html = `
-                <div class="emoji-hero">${r.emoji}</div>
-                <div class="title">${r.state}</div>
-                <div class="subtitle">${r.desc}</div>
-                <div class="science-box">
-                    <span class="sci-tag">Optimierung</span>
-                    <div class="sci-text">Empfohlenes Protokoll: <b>${DATABASE.vitality.actions[r.action]?.title || 'Gezielte Ruhe'}</b></div>
-                </div>
-                <button class="btn" onclick="navigate('catalog')">Intervenieren</button>
-                <button class="btn btn-secondary" onclick="navigate('home')">Dashboard</button>
-            `;
-            break;
-
-        case 'catalog':
-            html = `
-                <div class="title">Interventionen</div>
-                <div style="width:100%; max-width:360px">
-                    ${Object.entries(DATABASE).map(([id, cat]) => `
-                        <div class="card highlight" onclick="navigate('actions', {cat:'${id}'})">
-                            <div style="display:flex; justify-content:space-between; align-items:center;">
-                                <span style="font-size:24px;">${cat.icon}</span>
-                                <div style="flex:1; margin-left:20px">
-                                    <div style="font-weight:900; font-size:18px;">${cat.name}</div>
-                                    <div style="font-size:10px; color:var(--text-dim); text-transform:uppercase;">Fortschritt: LVL ${Math.floor(system.xp[id]/100)}</div>
-                                </div>
-                                <div style="font-size:10px; font-weight:900; color:var(--accent)">XP ${system.xp[id]}</div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                <button class="btn btn-secondary" onclick="navigate('home')">Zurück</button>
-            `;
-            break;
-
-        case 'actions':
-            const c = DATABASE[params.cat];
-            html = `
-                <div class="title">${c.name}</div>
-                <div class="subtitle">Wähle ein Protokoll für sofortigen Impact</div>
-                <div style="width:100%; max-width:360px">
-                    ${Object.entries(c.actions).map(([aId, a]) => `
-                        <div class="card highlight accent-border" onclick="navigate('do', {cat:'${params.cat}', act:'${aId}'})">
-                            <div style="font-weight:900; font-size:18px;">${a.title}</div>
-                            <div style="font-size:11px; color:var(--accent); margin-top:4px;">Effekt: +${a.xp} XP Transformation</div>
-                        </div>`).join('')}
-                </div>
-                <button class="btn btn-secondary" onclick="navigate('catalog')">Zurück</button>
-            `;
-            break;
-
-        case 'do':
-            const action = DATABASE[params.cat].actions[params.act];
-            html = `
-                <div class="emoji-hero">📡</div>
-                <div class="title">${action.title}</div>
-                <div class="subtitle" style="color:#fff; font-size:20px; font-weight:700;">${action.prompt}</div>
-                
-                <div class="science-box">
-                    <span class="sci-tag">Biological mechanism</span>
-                    <div class="sci-detail">
-                        <span class="sci-label">Ursache</span>
-                        <div class="sci-text">${action.why}</div>
-                    </div>
-                    <div class="sci-detail">
-                        <span class="sci-label">Mechanismus</span>
-                        <div class="sci-text">${action.mechanism}</div>
-                    </div>
-                    <div class="sci-detail">
-                        <span class="sci-label">Nutzen</span>
-                        <div class="sci-text" style="color:var(--accent); font-weight:700;">${action.benefit}</div>
-                    </div>
-                </div>
-
-                <button class="btn" onclick="complete('${params.cat}', ${action.xp})">Protokoll abgeschlossen</button>
-                <button class="btn btn-secondary" onclick="navigate('catalog')">Abbrechen</button>
-            `;
-            break;
+    // Check Status
+    const val = anaTempAnswers[q.id];
+    const isSelected = Array.isArray(val) ? val.includes(opt.value) : val === opt.value;
+    
+    if (isSelected) {
+      btn.classList.add('ana-selected');
+      btn.innerHTML += `<span>✓</span>`;
     }
 
-    newScreen.innerHTML = html;
-    container.appendChild(newScreen);
-    if(oldScreen) {
-        oldScreen.style.opacity = '0';
-        oldScreen.style.transform = 'translateY(-20px)';
-        setTimeout(() => oldScreen.remove(), 600);
+    btn.onclick = () => selectAnaOption(q.id, opt.value, q.type, q.max);
+    container.appendChild(btn);
+  });
+}
+
+function selectAnaOption(qId, value, type, max) {
+  if (type === 'single') {
+    anaTempAnswers[qId] = value;
+    setTimeout(nextQuestion, 150);
+  } else {
+    if (!anaTempAnswers[qId]) anaTempAnswers[qId] = [];
+    const arr = anaTempAnswers[qId];
+    
+    if (arr.includes(value)) {
+      anaTempAnswers[qId] = arr.filter(v => v !== value);
+    } else {
+      if (max && arr.length >= max) return;
+      arr.push(value);
     }
-    setTimeout(() => newScreen.classList.add('active'), 50);
+    renderQuestion();
+  }
 }
 
-function updateVal(key, val) {
-    system[key] = parseFloat(val);
-    const label = document.getElementById(`label-${key}`);
-    if (label) label.innerText = (key === 'energy' ? val + '%' : key === 'sleep' ? val + 'h' : val);
+function nextQuestion() {
+  anaIndex++;
+  renderQuestion();
 }
 
-function startScanAnimation() {
-    navigate('scan');
+// ─────────────────────────────────────────────────────────────────────────────
+// 🛠️ SKILL EXECUTION
+// ─────────────────────────────────────────────────────────────────────────────
+
+function openTier(tierId) {
+  const tier = TIERS.find(t => t.id === tierId);
+  document.getElementById('skillTierTitle').textContent = `${tier.icon} ${tier.name}`;
+  
+  const list = document.getElementById('skillList');
+  list.innerHTML = '';
+  
+  const skills = SKILLS_DB.filter(s => s.tier === tierId);
+  skills.forEach(s => {
+    const el = document.createElement('div');
+    el.className = 'btn ana-option';
+    el.innerHTML = `<div><div style="font-weight:700">${s.name}</div><div style="font-size:0.8rem; opacity:0.7">${s.desc}</div></div><div>${s.xp} XP</div>`;
+    el.onclick = () => openSkill(s.id);
+    list.appendChild(el);
+  });
+  
+  navigate('viewSkills');
 }
 
-function runScan() {
-    system.hour = new Date().getHours();
-    let match = SCAN_RULES.find(r => r.cond(system));
-    if(!match) match = { res: { state: 'System Optimal', emoji: '💎', desc: 'Keine kritischen biologischen Abweichungen detektiert.', action: 'none' }};
-    navigate('result', { res: match.res });
+function openSkill(skillId, reason = null) {
+  const skill = SKILLS_DB.find(s => s.id === skillId);
+  state.currentSkill = skill;
+  
+  document.getElementById('sheetTitle').textContent = skill.name;
+  document.getElementById('sheetDesc').textContent = skill.desc;
+  document.getElementById('sheetTier').textContent = skill.tier.toUpperCase();
+  
+  // Grund anzeigen (Warum jetzt?)
+  const reasonEl = document.getElementById('sheetReason');
+  if (reason) {
+    reasonEl.textContent = `💡 ${reason}`;
+    reasonEl.style.color = "var(--c-green)";
+  } else {
+    reasonEl.textContent = "Eine gute Übung für zwischendurch.";
+    reasonEl.style.color = "#aaa";
+  }
+  
+  document.getElementById('skillOverlay').classList.add('active');
 }
 
-function complete(cat, xp) {
-    system.xp[cat] += xp;
-    system.streak++;
-    save();
-    navigate('home');
+function closeSheet(e, force = false) {
+  if (force || e.target.id === 'skillOverlay') {
+    document.getElementById('skillOverlay').classList.remove('active');
+  }
 }
 
-function save() { 
-    localStorage.setItem('hn_v3', JSON.stringify(system)); 
-    const streakEl = document.getElementById('global-streak');
-    if (streakEl) streakEl.innerText = `🔥 ${system.streak} STREAK`;
+function doSkill() {
+  closeSheet(null, true);
+  const skill = state.currentSkill;
+  
+  // SYNERGY BERECHNUNG
+  const result = calculateSynergyXP(skill.xp, skill.tier);
+  
+  state.xp += result.xp;
+  state.history.push({ id: skill.id, date: new Date().toISOString() });
+  
+  // Level Up Check
+  if (state.xp >= state.level * 500) {
+    state.level++;
+  }
+  
+  saveState();
+  
+  // Success View
+  document.getElementById('successPoints').textContent = `+${result.xp} XP`;
+  document.getElementById('synergyMsg').textContent = result.msg;
+  navigate('viewSuccess');
 }
 
-function dismissLegal() {
-    document.getElementById('legalBanner').classList.add('hidden');
-    sessionStorage.setItem('legalDismissed', 'true');
-}
+// Start
+init();
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (sessionStorage.getItem('legalDismissed')) dismissLegal();
-    save();
-    navigate('home');
-});
 </script>
 </body>
 </html>
