@@ -3,55 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>HUMANEED | Flow Foundation</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>HUMANEED | Interface</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 
 <style>
 /* ═══════════════════════════════════════════════════════════════════════════
-   FLOW DESIGN v7 - Minimalist Dark
+   HUMANEED DESIGN SYSTEM v2 (STENCIL & GLOW)
    ═══════════════════════════════════════════════════════════════════════════ */
 
 :root {
-  /* 🎨 Core */
-  --bg-void: #050505;
-  --glass: rgba(255,255,255,0.04);
-  --glass-hover: rgba(255,255,255,0.08);
-  --border: rgba(255,255,255,0.08);
+  /* 🌑 Deep Void Base */
+  --bg-void: #030303;
+  --bg-surface: #0e0e0e;
   
-  --text-main: #ededed;
-  --text-dim: #888;
-  --text-muted: #555;
+  /* 🔮 Glass & Borders */
+  --glass: rgba(255,255,255,0.03);
+  --glass-hover: rgba(255,255,255,0.07);
+  --border-dim: rgba(255,255,255,0.06);
+  --border-light: rgba(255,255,255,0.12);
   
-  /* 🌊 Tier Colors */
-  --c-tier0: #FF6B35; /* Bio */
-  --c-tier1: #FFB84D; /* Struktur */
-  --c-tier2: #4ECDC4; /* Sozial */
-  --c-tier3: #95E1D3; /* Identität */
-  --c-tier4: #A78BFA; /* Entwicklung */
-  --c-tier5: #F38BA0; /* Bedeutung */
+  /* 🖋 Typography */
+  --font-sans: 'Manrope', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
-  /* 💎 Status */
-  --c-green: #32D74B;
-  --c-yellow: #FFD60A;
-  --c-red: #FF453A;
+  --text-main: #f0f0f0;
+  --text-dim: #888888;
+  --text-muted: #444444;
   
-  /* ⚡ Animation */
-  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  /* 🎨 Semantic Colors (Neon/Pastel) */
+  --c-bio: #FF6B35;
+  --c-struk: #FFB84D;
+  --c-soz: #4ECDC4;
+  --c-id: #95E1D3;
+  --c-ent: #A78BFA;
+  --c-bed: #F38BA0;
+  
+  --c-accent: #32D74B; /* Success Green */
+  
+  /* ⚡ Motion */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   background: var(--bg-void);
   color: var(--text-main);
-  font-family: 'Manrope', -apple-system, sans-serif;
+  font-family: var(--font-sans);
   height: 100vh;
   height: 100dvh;
   overflow: hidden;
@@ -59,16 +59,15 @@ body {
   flex-direction: column;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   AMBIENCE & LAYOUT
-   ═══════════════════════════════════════════════════════════════════════════ */
-
+/* 🌀 Ambience (Background Lights) */
 .ambience {
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
-  background: radial-gradient(circle at 50% -20%, rgba(255,255,255,0.05), transparent 70%);
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 10% 20%, rgba(50, 215, 75, 0.03), transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(167, 139, 250, 0.03), transparent 40%);
 }
 
 .app-container {
@@ -77,247 +76,189 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  max-width: 480px;
+  max-width: 500px;
   margin: 0 auto;
   width: 100%;
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   ICONS (STENCILS)
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+svg.icon {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+svg.icon-lg { width: 32px; height: 32px; stroke-width: 1.2; }
+svg.icon-xl { width: 48px; height: 48px; stroke-width: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   COMPONENTS
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Header */
 .header {
   padding: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  backdrop-filter: blur(10px);
 }
 
 .brand {
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  font-size: 1rem;
-  opacity: 0.6;
-  cursor: pointer;
-  transition: opacity 0.3s;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-transform: uppercase;
 }
 
-.brand:hover {
-  opacity: 1;
-}
-
-.status-pill {
-  font-size: 0.75rem;
+.profile-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
   background: var(--glass);
-  padding: 4px 12px;
-  border-radius: 20px;
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-  cursor: pointer;
+  border: 1px solid var(--border-dim);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  transition: 0.3s;
 }
+.profile-pill:active { background: var(--glass-hover); }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   VIEW SYSTEM
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.viewport {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-}
-
-.view {
-  position: absolute;
-  inset: 0;
-  padding: 0 1.5rem 2rem;
-  overflow-y: auto;
-  overflow-x: hidden;
-  transition: transform 0.6s var(--ease), opacity 0.5s ease;
-  opacity: 0;
-  transform: scale(0.95);
-  pointer-events: none;
-}
-
-.view.active {
-  opacity: 1;
-  transform: scale(1);
-  pointer-events: auto;
-}
-
-.view::-webkit-scrollbar {
-  width: 0;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   TYPOGRAPHY
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-h1 {
-  font-size: 1.8rem;
-  font-weight: 300;
-  margin-bottom: 0.5rem;
-}
-
-.sub {
-  color: var(--text-dim);
-  margin-bottom: 2rem;
-  font-size: 0.9rem;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   BUTTONS & UI
-   ═══════════════════════════════════════════════════════════════════════════ */
-
+/* Buttons */
 .btn {
   background: var(--glass);
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-dim);
   color: var(--text-main);
   padding: 16px;
-  border-radius: 14px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s var(--ease);
-  text-align: center;
-  font-family: inherit;
-  display: block;
-  width: 100%;
-}
-
-.btn:active { transform: scale(0.98); }
-
-.btn-primary {
-  background: #fff;
-  color: #000;
-  border: none;
-  font-weight: 700;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   ANAMNESE STYLES (NEU)
-   ═══════════════════════════════════════════════════════════════════════════ */
-   
-.ana-progress-container {
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  margin-bottom: 2rem;
-  overflow: hidden;
-}
-
-.ana-progress-bar {
-  height: 100%;
-  width: 0%;
-  background: var(--c-green);
-  transition: width 0.4s var(--ease);
-}
-
-.ana-options {
+  transition: all 0.3s var(--ease-out);
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.ana-option {
-  text-align: left;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.ana-selected {
-  border-color: var(--c-green);
-  background: rgba(50,215,75,0.1);
-  color: #fff;
-}
-
-.ana-nav {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   HOME & RECOMMENDATIONS (NEU)
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.rec-scroll {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  margin: 0 -1.5rem 2rem; /* Bleed layout */
-  padding: 0 1.5rem 1rem;
-  scrollbar-width: none;
-}
-.rec-scroll::-webkit-scrollbar { display: none; }
-
-.rec-card {
-  min-width: 220px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.rec-reason {
-  font-size: 0.75rem;
-  color: var(--c-green);
-  margin-bottom: 6px;
-}
-
-.rec-title {
-  font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 12px;
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   SCORE RING
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.score-container { text-align: center; margin: 2rem 0; }
-.score-ring { position: relative; width: 180px; height: 180px; margin: 0 auto 1.5rem; }
-.score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.ring-bg { fill: none; stroke: var(--glass); stroke-width: 10; }
-.ring-progress { 
-  fill: none; stroke: var(--c-green); stroke-width: 10; stroke-linecap: round; 
-  stroke-dasharray: 565; stroke-dashoffset: 565; transition: stroke-dashoffset 1s var(--ease);
-}
-.score-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-.score-value { font-size: 2.5rem; font-weight: 300; line-height: 1; }
-.score-label { font-size: 0.7rem; text-transform: uppercase; color: var(--text-dim); margin-top: 5px; }
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   TIER GRID
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-.tier-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding-bottom: 4rem;}
-.tier-card {
-  aspect-ratio: 1.1;
-  background: var(--glass);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.3s;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
 }
-.tier-card:hover { background: var(--glass-hover); transform: translateY(-3px); }
-.tier-emoji { font-size: 2rem; margin-bottom: 0.5rem; }
-.tier-name { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; }
-.tier-score { font-size: 0.9rem; font-weight: 600; margin-top: 4px; }
+.btn::after {
+  content:''; position:absolute; inset:0; 
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+  transform: translateX(-100%); transition: 0.5s;
+}
+.btn:hover { border-color: var(--border-light); background: var(--glass-hover); }
+.btn-primary { background: var(--text-main); color: #000; border: none; font-weight: 600; }
+.btn-primary:hover { background: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.3); }
+
+/* Grid System */
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 0 1.5rem 4rem;
+}
+
+.bento-card {
+  background: linear-gradient(160deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid var(--border-dim);
+  border-radius: 20px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+  transition: all 0.4s var(--ease-out);
+  position: relative;
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-light);
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+}
+.bento-icon { margin-bottom: auto; opacity: 0.9; }
+.bento-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.bento-value { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-main); }
+
+/* Score Ring (Thin) */
+.score-container { text-align: center; margin: 1rem 0 2.5rem; position: relative; }
+.score-ring-wrapper { position: relative; width: 160px; height: 160px; margin: 0 auto; }
+.ring-bg, .ring-progress { fill: none; stroke-width: 4; } /* Thinner stroke */
+.ring-bg { stroke: var(--border-dim); }
+.ring-progress { stroke: var(--c-accent); stroke-linecap: round; transition: stroke-dashoffset 1.5s var(--ease-out); }
+.score-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; }
+.score-big { font-size: 3rem; font-weight: 300; line-height: 1; letter-spacing: -2px; }
+.score-sub { font-family: var(--font-mono); font-size: 0.7rem; color: var(--c-accent); margin-top: 5px; text-transform: uppercase; }
+
+/* Anamnese Elements */
+.option-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border: 1px solid var(--border-dim);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  transition: 0.2s;
+  background: rgba(0,0,0,0.2);
+}
+.option-row.selected {
+  border-color: var(--c-accent);
+  background: rgba(50, 215, 75, 0.05);
+}
+.checkbox-visual {
+  width: 18px; height: 18px; border: 1px solid var(--text-dim); border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+}
+.selected .checkbox-visual { background: var(--c-accent); border-color: var(--c-accent); color: #000; }
+
+/* Recommendations */
+.rec-scroll { display: flex; gap: 12px; overflow-x: auto; padding: 0 1.5rem 1.5rem; scrollbar-width: none; }
+.rec-card {
+  min-width: 240px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 1.25rem;
+  position: relative;
+}
+.rec-tag { 
+  display: inline-block; font-family: var(--font-mono); font-size: 0.65rem; 
+  color: var(--c-accent); border: 1px solid rgba(50,215,75,0.3); 
+  padding: 2px 6px; border-radius: 4px; margin-bottom: 8px;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   SHEET
+   VIEWS & TRANSITIONS
    ═══════════════════════════════════════════════════════════════════════════ */
-.overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); display: none; align-items: flex-end; opacity: 0; transition: opacity 0.3s; }
-.overlay.active { display: flex; opacity: 1; }
-.sheet { width: 100%; max-width: 480px; margin: 0 auto; background: #111; border-top: 1px solid #333; border-radius: 24px 24px 0 0; padding: 2rem; transform: translateY(100%); transition: transform 0.4s var(--ease); max-height: 90vh; overflow-y: auto; }
-.overlay.active .sheet { transform: translateY(0); }
+.view {
+  position: absolute; inset: 0; padding-top: 0;
+  overflow-y: auto; overflow-x: hidden;
+  opacity: 0; transform: scale(0.98) translateY(10px); pointer-events: none;
+  transition: 0.5s var(--ease-out);
+}
+.view.active { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+
+/* Overlay Sheet */
+.sheet-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); opacity: 0; pointer-events: none; transition: 0.4s; }
+.sheet-overlay.active { opacity: 1; pointer-events: auto; }
+.sheet-content {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #111; border-top: 1px solid var(--border-light);
+  border-radius: 30px 30px 0 0; padding: 2rem 1.5rem;
+  transform: translateY(100%); transition: 0.5s var(--ease-out);
+  max-width: 500px; margin: 0 auto;
+}
+.sheet-overlay.active .sheet-content { transform: translateY(0); }
 
 </style>
 </head>
@@ -327,78 +268,85 @@ h1 {
 
 <div class="app-container">
   <header class="header">
-    <div class="brand" onclick="navigate('viewHome')">HUMANEED</div>
-    <div class="status-pill" onclick="startAnamnesis()">👤 Profil</div>
+    <div class="brand" onclick="navigate('viewHome')">HUMANEED OS</div>
+    <div class="profile-pill" onclick="startAnamnesis()">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span style="font-size:0.75rem; font-weight:600;">STATUS</span>
+    </div>
   </header>
 
-  <div class="viewport">
-  
+  <div style="flex:1; position:relative;">
+    
     <div class="view active" id="viewHome">
       
-      <div id="recommendationsContainer">
-        </div>
+      <div id="recommendationsContainer"></div>
 
       <div class="score-container">
-        <div class="score-ring">
-          <svg viewBox="0 0 200 200">
-            <circle class="ring-bg" cx="100" cy="100" r="90" />
-            <circle class="ring-progress" cx="100" cy="100" r="90" id="scoreRing" />
+        <div class="score-ring-wrapper">
+          <svg viewBox="0 0 100 100" style="width:100%; height:100%; transform:rotate(-90deg);">
+            <circle class="ring-bg" cx="50" cy="50" r="45" />
+            <circle class="ring-progress" id="scoreRing" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="283" />
           </svg>
-          <div class="score-content">
-            <div class="score-value" id="scoreValue">0</div>
-            <div class="score-label">Flow Level</div>
+          <div class="score-center">
+            <div class="score-big" id="scoreValue">0</div>
+            <div class="score-sub">Level</div>
           </div>
         </div>
-        <p class="sub" id="scoreMsg">Sammle XP in den Dimensionen</p>
       </div>
       
-      <div class="tier-grid" id="tierGrid"></div>
+      <div class="bento-grid" id="tierGrid"></div>
     </div>
 
     <div class="view" id="viewAnamnesis">
-      <div class="ana-progress-container">
-        <div class="ana-progress-bar" id="anaProgress"></div>
-      </div>
-      
-      <h1 id="anaQuestion">Frage</h1>
-      <p class="sub" id="anaSub">Klicke alles an, was passt</p>
-      
-      <div class="ana-options" id="anaOptions">
+      <div style="padding: 0 1.5rem 4rem;">
+        <div style="height:2px; background:var(--border-dim); width:100%; margin-bottom:2rem; border-radius:2px; overflow:hidden;">
+          <div id="anaProgress" style="height:100%; width:20%; background:var(--c-accent); transition:0.3s;"></div>
         </div>
-      
-      <div class="ana-nav">
-        <button class="btn" style="width: auto; padding: 10px 20px; opacity: 0.6;" onclick="navigate('viewHome')">Später</button>
-        <button class="btn btn-primary" style="width: auto; padding: 10px 30px;" onclick="nextQuestion()">Weiter →</button>
+        
+        <div style="font-family:var(--font-mono); color:var(--c-accent); font-size:0.7rem; margin-bottom:0.5rem;">INPUT REQUIRED</div>
+        <h1 id="anaQuestion" style="font-size:1.6rem; font-weight:400; margin-bottom:0.5rem; line-height:1.3;">Frage</h1>
+        <p style="color:var(--text-dim); font-size:0.9rem; margin-bottom:2rem;">Bitte wähle die passenden Parameter.</p>
+        
+        <div id="anaOptions"></div>
+        
+        <div style="display:flex; justify-content:space-between; margin-top:3rem; align-items:center;">
+          <div onclick="navigate('viewHome')" style="font-size:0.8rem; color:var(--text-dim); cursor:pointer;">SKIP SEQUENCE</div>
+          <button class="btn btn-primary" onclick="nextQuestion()" style="padding:12px 24px;">Confirm</button>
+        </div>
       </div>
     </div>
 
     <div class="view" id="viewSkills">
-      <h1 id="skillTierTitle">Dimension</h1>
-      <div class="ana-options" id="skillList" style="margin-top: 1rem;"></div>
-      <button class="btn" style="margin-top: 2rem;" onclick="navigate('viewHome')">Zurück</button>
+      <div style="padding: 0 1.5rem;">
+        <div onclick="navigate('viewHome')" style="display:inline-flex; align-items:center; gap:8px; margin-bottom:1.5rem; color:var(--text-dim); font-size:0.8rem; cursor:pointer;">
+          <svg class="icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> BACK
+        </div>
+        <h1 id="skillTierTitle" style="font-size:1.8rem; font-weight:300; margin-bottom:1.5rem;">Dimension</h1>
+        <div id="skillList" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
     </div>
 
-    <div class="view" id="viewSuccess" style="text-align: center; padding-top: 4rem;">
-      <div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div>
-      <h1>Großartig!</h1>
-      <div style="font-size: 2rem; color: var(--c-green); margin-bottom: 2rem;" id="successPoints">+0 XP</div>
-      <p class="sub" id="synergyMsg" style="opacity: 0.7;">...</p>
-      <button class="btn btn-primary" onclick="navigate('viewHome')">Weiter</button>
+    <div class="view" id="viewSuccess" style="display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem;">
+      <svg class="icon-xl" viewBox="0 0 24 24" style="color:var(--c-accent); margin-bottom:1rem;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <h1 style="font-size:2rem; margin-bottom:0.5rem;">Complete</h1>
+      <div id="successPoints" style="font-family:var(--font-mono); font-size:1.5rem; color:var(--c-accent); margin-bottom:2rem;">+0 XP</div>
+      <p id="synergyMsg" style="color:var(--text-dim); max-width:80%; margin-bottom:3rem; line-height:1.6;">...</p>
+      <button class="btn" style="width:100%;" onclick="navigate('viewHome')">Continue</button>
     </div>
 
-  </div> <div class="overlay" id="skillOverlay" onclick="closeSheet(event)">
-    <div class="sheet">
-      <div style="font-size: 0.8rem; color: var(--c-green); text-transform: uppercase; margin-bottom: 10px;" id="sheetTier">DIMENSION</div>
-      <h1 id="sheetTitle" style="font-size: 1.8rem; margin-bottom: 1rem;">Titel</h1>
-      <p style="font-size: 1rem; line-height: 1.6; color: #ccc; margin-bottom: 2rem;" id="sheetDesc">Beschreibung</p>
+  </div> <div class="sheet-overlay" id="skillOverlay" onclick="closeSheet(event)">
+    <div class="sheet-content">
+      <div id="sheetTier" style="font-family:var(--font-mono); color:var(--c-accent); font-size:0.7rem; margin-bottom:1rem; letter-spacing:1px;">DIMENSION</div>
+      <h2 id="sheetTitle" style="font-size:1.8rem; margin-bottom:1rem; line-height:1.2;">Title</h2>
+      <p id="sheetDesc" style="color:#bbb; line-height:1.6; margin-bottom:2rem;">Description</p>
       
-      <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px; margin-bottom: 2rem;">
-        <div style="font-weight: 700; margin-bottom: 5px;">⚡ Warum jetzt?</div>
-        <div style="font-size: 0.9rem; color: #aaa;" id="sheetReason">Diese Übung passt zu deinem aktuellen Fokus.</div>
+      <div style="background:rgba(255,255,255,0.04); padding:1rem; border-radius:12px; margin-bottom:2rem; border-left: 2px solid var(--c-accent);">
+        <div style="font-size:0.75rem; color:var(--text-dim); margin-bottom:4px; text-transform:uppercase;">Context Analysis</div>
+        <div id="sheetReason" style="font-size:0.9rem; color:#fff;">Why this fits now.</div>
       </div>
       
-      <button class="btn btn-primary" onclick="doSkill()">Erledigt (+XP)</button>
-      <button class="btn" style="margin-top: 10px; border: none; background: transparent;" onclick="closeSheet(null, true)">Abbrechen</button>
+      <button class="btn btn-primary" style="width:100%; margin-bottom:10px;" onclick="doSkill()">Mark Complete</button>
+      <button class="btn" style="width:100%; border:none; color:var(--text-dim);" onclick="closeSheet(null, true)">Cancel</button>
     </div>
   </div>
 
@@ -406,103 +354,110 @@ h1 {
 
 <script>
 // ─────────────────────────────────────────────────────────────────────────────
-// 🧬 DATEN & KONFIGURATION
+// 🎨 STENCIL SYSTEM (Icons as SVG strings)
+// ─────────────────────────────────────────────────────────────────────────────
+const ICONS = {
+  bio: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-bio)"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`,
+  struk: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-struk)"><path d="M12 2l9 4.9V17L12 22l-9-4.9V7z"/></svg>`,
+  soz: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-soz)"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`,
+  id: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-id)"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`,
+  ent: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-ent)"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  bed: `<svg class="icon bento-icon" viewBox="0 0 24 24" style="color:var(--c-bed)"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 🧬 DATA (Unveränderter Inhalt)
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Die neuen, deskriptiven Anamnese-Fragen
 const ANAMNESIS_DATA = [
   {
     id: "phase",
-    question: "In welcher Lebensphase bist du?",
+    question: "Aktuelle Lebensphase?",
     type: "single",
     options: [
-      { value: "student", label: "🎓 Student/in, Ausbildung" },
-      { value: "berufsstart", label: "🚀 Berufsstart, unter 30" },
-      { value: "etabliert", label: "⚓ Etabliert, 30-45" },
-      { value: "mid_life", label: "⚖️ Mitte des Lebens, 45-60" },
-      { value: "senior", label: "🌳 Erfahren, 60+" }
+      { value: "student", label: "Ausbildung / Studium" },
+      { value: "berufsstart", label: "Berufsstart (<30)" },
+      { value: "etabliert", label: "Etabliert (30-45)" },
+      { value: "mid_life", label: "Mid-Life (45-60)" },
+      { value: "senior", label: "Erfahren (60+)" }
     ]
   },
   {
     id: "alltag",
-    question: "Wie sieht dein typischer Tag aus?",
+    question: "Typischer Tagesablauf?",
     type: "multi",
     options: [
-      { value: "viel_sitzen", label: "🪑 Viel Sitzen" },
-      { value: "viel_bewegung", label: "🏃 Viel in Bewegung" },
-      { value: "bildschirm", label: "💻 Viel Bildschirmzeit" },
-      { value: "menschen", label: "🗣️ Viel mit Menschen" },
-      { value: "allein", label: "🐺 Viel allein" },
-      { value: "strukturiert", label: "📅 Sehr strukturiert" },
-      { value: "flexibel", label: "🌊 Flexibel / Chaotisch" },
-      { value: "zeitdruck", label: "⏱️ Oft unter Zeitdruck" }
+      { value: "viel_sitzen", label: "Viel Sitzen (Sedentär)" },
+      { value: "viel_bewegung", label: "Hohe physische Aktivität" },
+      { value: "bildschirm", label: "Hohe Screen-Time" },
+      { value: "menschen", label: "Hohe soziale Interaktion" },
+      { value: "allein", label: "Isoliertes Arbeiten" },
+      { value: "zeitdruck", label: "Hoher Zeitdruck" }
     ]
   },
   {
     id: "zustand",
-    question: "Wie würdest du deinen aktuellen Zustand beschreiben?",
+    question: "Status Report (Zustand)?",
     type: "multi",
     options: [
-      { value: "erschoepft", label: "🔋 Oft erschöpft" },
-      { value: "energiegeladen", label: "⚡ Energiegeladen" },
-      { value: "schlaf_schlecht", label: "😴 Schlaf könnte besser sein" },
-      { value: "gestresst", label: "🤯 Oft gestresst" },
-      { value: "gruebelnd", label: "🤔 Viel Grübeln" },
-      { value: "einsam", label: "🌑 Manchmal einsam" },
-      { value: "suchend", label: "🧭 Suche Sinn / Richtung" }
+      { value: "erschoepft", label: "Low Energy / Erschöpft" },
+      { value: "energiegeladen", label: "High Energy" },
+      { value: "schlaf_schlecht", label: "Schlafdefizit" },
+      { value: "gestresst", label: "Stress-Level hoch" },
+      { value: "gruebelnd", label: "Mentale Loops / Grübeln" },
+      { value: "einsam", label: "Soziale Isolation" },
+      { value: "suchend", label: "Orientierungssuche" }
     ]
   },
   {
     id: "prioritaeten",
-    question: "Was ist dir gerade am wichtigsten? (Max 3)",
+    question: "Primäre Ziele?",
     type: "multi",
     max: 3,
     options: [
-      { value: "mehr_energie", label: "⚡ Mehr Energie" },
-      { value: "weniger_stress", label: "🧘 Weniger Stress" },
-      { value: "verbindung", label: "🤝 Verbindung / Nähe" },
-      { value: "klarheit", label: "👁️ Klarheit & Fokus" },
-      { value: "sinn", label: "🌟 Sinn finden" }
+      { value: "mehr_energie", label: "Energy Recovery" },
+      { value: "weniger_stress", label: "Stress Reduction" },
+      { value: "verbindung", label: "Social Connection" },
+      { value: "klarheit", label: "Mental Focus" },
+      { value: "sinn", label: "Purpose / Sinn" }
     ]
   }
 ];
 
-// Dimensionen (Tiers)
+// TIERS mit Icon Referenz
 const TIERS = [
-  { id: 'bio', name: 'Biologie', icon: '💪', color: 'var(--c-tier0)' },
-  { id: 'struktur', name: 'Struktur', icon: '🏠', color: 'var(--c-tier1)' },
-  { id: 'sozial', name: 'Soziales', icon: '❤️', color: 'var(--c-tier2)' },
-  { id: 'identitaet', name: 'Identität', icon: '⭐', color: 'var(--c-tier3)' },
-  { id: 'entwicklung', name: 'Entwicklung', icon: '🚀', color: 'var(--c-tier4)' },
-  { id: 'bedeutung', name: 'Bedeutung', icon: '🌟', color: 'var(--c-tier5)' }
+  { id: 'bio', name: 'Biologie', iconHtml: ICONS.bio, color: 'var(--c-bio)' },
+  { id: 'struktur', name: 'Struktur', iconHtml: ICONS.struk, color: 'var(--c-struk)' },
+  { id: 'sozial', name: 'Soziales', iconHtml: ICONS.soz, color: 'var(--c-soz)' },
+  { id: 'identitaet', name: 'Identität', iconHtml: ICONS.id, color: 'var(--c-id)' },
+  { id: 'entwicklung', name: 'Entwicklung', iconHtml: ICONS.ent, color: 'var(--c-ent)' },
+  { id: 'bedeutung', name: 'Bedeutung', iconHtml: ICONS.bed, color: 'var(--c-bed)' }
 ];
 
-// Beispiel-Skills (Basis-Datenbank)
 const SKILLS_DB = [
   { id: '478_breath', name: '4-7-8 Atmung', tier: 'bio', xp: 30, desc: '90 Sekunden Reset für das Nervensystem.', tags: ['stress', 'erschoepft'] },
-  { id: 'water', name: 'Glas Wasser', tier: 'bio', xp: 15, desc: 'Hydrierung für sofortige Klarheit.', tags: ['erschoepft'] },
-  { id: 'walk_10', name: '10 Min Spaziergang', tier: 'bio', xp: 50, desc: 'Bewegung baut Stresshormone ab.', tags: ['viel_sitzen', 'stress'] },
-  { id: 'dump_journal', name: 'Gedanken-Dump', tier: 'identitaet', xp: 40, desc: 'Alles aufschreiben, was im Kopf kreist.', tags: ['gruebelnd', 'gestresst'] },
-  { id: 'msg_friend', name: 'Nachricht senden', tier: 'sozial', xp: 30, desc: 'Eine kurze Verbindung herstellen.', tags: ['einsam', 'verbindung'] },
-  { id: '3_wins', name: '3 Tages-Wins', tier: 'struktur', xp: 25, desc: 'Fokus auf das Gelungene.', tags: ['suchend', 'negativ'] },
-  { id: 'values', name: 'Werte-Check', tier: 'bedeutung', xp: 60, desc: 'Lebe ich heute nach meinen Werten?', tags: ['sinn', 'suchend'] }
+  { id: 'water', name: 'Hydration', tier: 'bio', xp: 15, desc: 'Wasseraufnahme für kognitive Funktion.', tags: ['erschoepft'] },
+  { id: 'walk_10', name: '10 Min Walk', tier: 'bio', xp: 50, desc: 'Optischer Fluss reduziert Amygdala-Aktivität.', tags: ['viel_sitzen', 'stress'] },
+  { id: 'dump_journal', name: 'Neural Dump', tier: 'identitaet', xp: 40, desc: 'Arbeitsspeicher leeren durch Schreiben.', tags: ['gruebelnd', 'gestresst'] },
+  { id: 'msg_friend', name: 'Ping Connection', tier: 'sozial', xp: 30, desc: 'Kurze Nachricht um Isolation zu brechen.', tags: ['einsam', 'verbindung'] },
+  { id: '3_wins', name: 'Data Logging: Wins', tier: 'struktur', xp: 25, desc: 'Positive Pattern Recognition.', tags: ['suchend', 'negativ'] },
+  { id: 'values', name: 'Value Calibration', tier: 'bedeutung', xp: 60, desc: 'Ausrichtung prüfen.', tags: ['sinn', 'suchend'] }
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 🧠 STATE & LOGIC
+// 🧠 LOGIC ENGINE
 // ─────────────────────────────────────────────────────────────────────────────
 
 let state = {
   xp: 0,
   level: 1,
-  profile: {},      // Anamnese Daten
-  history: [],      // Erledigte Skills
-  recommendations: [], // Berechnete Empfehlungen
-  synergyContext: {}, // Versteckte Multiplikatoren
+  profile: {},
+  history: [],
+  recommendations: [],
+  synergyContext: {},
   currentSkill: null
 };
 
-// Analyse-Logik (Das Herzstück)
 function analyzeProfile() {
   const p = state.profile;
   const recs = [];
@@ -512,7 +467,6 @@ function analyzeProfile() {
     return;
   }
   
-  // 1. Muster erkennen
   const patterns = {
     exhausted: p.zustand?.includes('erschoepft') || p.zustand?.includes('schlaf_schlecht'),
     isolated: p.zustand?.includes('einsam') || p.alltag?.includes('allein'),
@@ -520,94 +474,62 @@ function analyzeProfile() {
     sedentary: p.alltag?.includes('viel_sitzen') || p.alltag?.includes('bildschirm')
   };
   
-  // 2. Synergy Context berechnen (Einflussfaktoren)
   state.synergyContext = {
     energy_low: patterns.exhausted,
     social_low: patterns.isolated,
     stress_high: patterns.stressed
   };
 
-  // 3. Empfehlungen generieren (Smart Recommendations)
-  
-  // Bei Erschöpfung/Stress -> Bio-Skills priorisieren
   if (patterns.exhausted || patterns.stressed) {
-    recs.push({
-      skillId: '478_breath',
-      reason: "Nervensystem beruhigen",
-      priority: 1
-    });
-    recs.push({
-      skillId: 'walk_10',
-      reason: "Stresshormone abbauen",
-      priority: 2
-    });
+    recs.push({ skillId: '478_breath', reason: "System Reset (Vagus Nerv)", priority: 1 });
+    recs.push({ skillId: 'walk_10', reason: "Cortisol Abbau", priority: 2 });
   }
-  
-  // Bei Grübeln -> Identität/Struktur
   if (p.zustand?.includes('gruebelnd')) {
-    recs.push({
-      skillId: 'dump_journal',
-      reason: "Kopf frei bekommen",
-      priority: 1
-    });
+    recs.push({ skillId: 'dump_journal', reason: "Reduce Cognitive Load", priority: 1 });
   }
-
-  // Bei Isolation -> Sozial
   if (patterns.isolated) {
-    recs.push({
-      skillId: 'msg_friend',
-      reason: "Verbindung stärken",
-      priority: 1
-    });
+    recs.push({ skillId: 'msg_friend', reason: "Social Bridge", priority: 1 });
   }
-
-  // Fallback
   if (recs.length === 0) {
-    recs.push({ skillId: 'water', reason: "Basis-Versorgung", priority: 3 });
+    recs.push({ skillId: 'water', reason: "Basic Maintenance", priority: 3 });
   }
 
   state.recommendations = recs.sort((a,b) => a.priority - b.priority);
   renderHome();
 }
 
-// Berechnet XP basierend auf Kontext (Synergie)
 function calculateSynergyXP(baseXP, tierId) {
   let multiplier = 1.0;
   const ctx = state.synergyContext;
-  let msg = "Gute Arbeit!";
+  let msg = "Protocol completed.";
 
-  // Logik: Wenn man erschöpft ist, geben Bio-Skills mehr Belohnung (Selbstfürsorge),
-  // aber komplexe Entwicklungs-Skills vielleicht weniger (weil weniger effektiv).
-  
   if (tierId === 'bio' && ctx.energy_low) {
-    multiplier = 1.5; // Bonus für Selbstfürsorge
-    msg = "Wichtige Selbstfürsorge! (+50% Bonus)";
+    multiplier = 1.5;
+    msg = "Critical Self-Care detected. Bonus XP allocated.";
   }
-  
   if (tierId === 'entwicklung' && ctx.stress_high) {
-    multiplier = 0.8; // Schwer zu lernen unter Stress
-    msg = "Trotz Stress erledigt (Resilienz)";
+    multiplier = 0.8;
+    msg = "High friction detected. Effort acknowledged.";
   }
 
   return { xp: Math.round(baseXP * multiplier), msg };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 📱 CONTROLLER & NAVIGATION
+// 🖥️ UI CONTROLLER
 // ─────────────────────────────────────────────────────────────────────────────
 
 function init() {
-  // Load State from LocalStorage
-  const saved = localStorage.getItem('humaneed_state_v2');
+  const saved = localStorage.getItem('humaneed_os_v1');
   if (saved) {
     state = JSON.parse(saved);
-    analyzeProfile(); // Re-Analyse beim Laden
+    analyzeProfile();
   }
   renderHome();
 }
 
 function saveState() {
-  localStorage.setItem('humaneed_state_v2', JSON.stringify(state));
+  localStorage.setItem('humaneed_os_v1', JSON.stringify(state));
 }
 
 function navigate(viewId) {
@@ -615,56 +537,43 @@ function navigate(viewId) {
   document.getElementById(viewId).classList.add('active');
 }
 
-// ─────────────────────────────────────────────────────────────────────────────
-// 🖥️ UI RENDERING
-// ─────────────────────────────────────────────────────────────────────────────
-
 function renderHome() {
   // 1. Score Ring
   const totalXP = state.xp;
   const maxXP = state.level * 500;
   const pct = Math.min((totalXP / maxXP) * 100, 100);
   const ring = document.getElementById('scoreRing');
-  const circumference = 2 * Math.PI * 90;
+  const circumference = 2 * Math.PI * 45; // r=45
   
-  ring.style.strokeDasharray = `${circumference} ${circumference}`;
   ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
-  
   document.getElementById('scoreValue').textContent = state.level;
   
-  // 2. Smart Recommendations Area
+  // 2. Recommendations
   const recContainer = document.getElementById('recommendationsContainer');
-  
-  // Zeige Anamnese-Einladung wenn Profil leer
   if (!state.profile || Object.keys(state.profile).length === 0) {
     recContainer.innerHTML = `
       <div style="margin: 0 1.5rem 2rem;">
-        <div class="btn" onclick="startAnamnesis()" style="display:flex; justify-content:space-between; align-items:center; text-align:left;">
+        <div class="bento-card" onclick="startAnamnesis()" style="height:auto; flex-direction:row; align-items:center; gap:1rem;">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
           <div>
-            <div style="font-weight:700;">Profil erstellen</div>
-            <div style="font-size:0.8rem; color:var(--text-dim);">Für smarte Empfehlungen</div>
+            <div style="font-weight:600; color:var(--text-main);">Initial Setup</div>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Kalibriere das System für dich.</div>
           </div>
-          <span style="font-size:1.5rem">👤</span>
         </div>
-      </div>
-    `;
-  } 
-  // Oder zeige Empfehlungen
-  else if (state.recommendations.length > 0) {
+      </div>`;
+  } else if (state.recommendations.length > 0) {
     let html = `
-      <div style="margin: 0 1.5rem 0.5rem; font-size: 0.7rem; text-transform:uppercase; color:var(--text-dim); letter-spacing:1px; font-weight:700;">💡 FÜR DICH EMPFOHLEN</div>
+      <div style="margin: 0 1.5rem 0.5rem; font-family:var(--font-mono); font-size: 0.65rem; color:var(--c-accent); letter-spacing:1px;">RECOMMENDED PROTOCOLS</div>
       <div class="rec-scroll">`;
-      
     state.recommendations.forEach(rec => {
       const skill = SKILLS_DB.find(s => s.id === rec.skillId);
       if (!skill) return;
       html += `
         <div class="rec-card" onclick="openSkill('${skill.id}', '${rec.reason}')">
-          <div class="rec-reason">${rec.reason}</div>
-          <div class="rec-title">${skill.name}</div>
-          <div class="btn-primary" style="padding:6px 12px; font-size:0.8rem; border-radius:8px; width:auto; display:inline-block;">Jetzt machen</div>
-        </div>
-      `;
+          <div class="rec-tag">PRIORITY</div>
+          <div style="color:var(--text-dim); font-size:0.75rem; margin-bottom:4px;">${rec.reason}</div>
+          <div style="font-weight:600; font-size:1rem;">${skill.name}</div>
+        </div>`;
     });
     html += `</div>`;
     recContainer.innerHTML = html;
@@ -672,18 +581,19 @@ function renderHome() {
     recContainer.innerHTML = '';
   }
 
-  // 3. Tier Grid
+  // 3. Bento Grid
   const grid = document.getElementById('tierGrid');
   grid.innerHTML = '';
   TIERS.forEach(tier => {
-    // Check if skills available
     const count = SKILLS_DB.filter(s => s.tier === tier.id).length;
     const card = document.createElement('div');
-    card.className = 'tier-card';
+    card.className = 'bento-card';
     card.innerHTML = `
-      <div class="tier-emoji">${tier.icon}</div>
-      <div class="tier-name">${tier.name}</div>
-      <div class="tier-score" style="color:${tier.color}">${count} Skills</div>
+      ${tier.iconHtml}
+      <div>
+        <div class="bento-label">${tier.name}</div>
+        <div class="bento-value">${count} MODULS</div>
+      </div>
     `;
     card.onclick = () => openTier(tier.id);
     grid.appendChild(card);
@@ -707,17 +617,14 @@ function startAnamnesis() {
 function renderQuestion() {
   const q = ANAMNESIS_DATA[anaIndex];
   if (!q) {
-    // Ende erreicht
     state.profile = { ...state.profile, ...anaTempAnswers };
-    analyzeProfile(); // Neu berechnen
+    analyzeProfile();
     saveState();
     navigate('viewHome');
     return;
   }
 
   document.getElementById('anaQuestion').textContent = q.question;
-  
-  // Progress Bar
   const pct = ((anaIndex) / ANAMNESIS_DATA.length) * 100;
   document.getElementById('anaProgress').style.width = `${pct}%`;
 
@@ -725,32 +632,31 @@ function renderQuestion() {
   container.innerHTML = '';
 
   q.options.forEach(opt => {
-    const btn = document.createElement('div');
-    btn.className = 'btn ana-option';
-    btn.innerHTML = `<span>${opt.label}</span>`;
+    const row = document.createElement('div');
+    row.className = 'option-row';
     
-    // Check Status
     const val = anaTempAnswers[q.id];
     const isSelected = Array.isArray(val) ? val.includes(opt.value) : val === opt.value;
     
-    if (isSelected) {
-      btn.classList.add('ana-selected');
-      btn.innerHTML += `<span>✓</span>`;
-    }
-
-    btn.onclick = () => selectAnaOption(q.id, opt.value, q.type, q.max);
-    container.appendChild(btn);
+    if (isSelected) row.classList.add('selected');
+    
+    row.innerHTML = `
+      <span style="font-size:0.95rem;">${opt.label}</span>
+      <div class="checkbox-visual">${isSelected ? '✓' : ''}</div>
+    `;
+    
+    row.onclick = () => selectAnaOption(q.id, opt.value, q.type, q.max);
+    container.appendChild(row);
   });
 }
 
 function selectAnaOption(qId, value, type, max) {
   if (type === 'single') {
     anaTempAnswers[qId] = value;
-    setTimeout(nextQuestion, 150);
+    setTimeout(nextQuestion, 100);
   } else {
     if (!anaTempAnswers[qId]) anaTempAnswers[qId] = [];
     const arr = anaTempAnswers[qId];
-    
     if (arr.includes(value)) {
       anaTempAnswers[qId] = arr.filter(v => v !== value);
     } else {
@@ -761,10 +667,7 @@ function selectAnaOption(qId, value, type, max) {
   }
 }
 
-function nextQuestion() {
-  anaIndex++;
-  renderQuestion();
-}
+function nextQuestion() { anaIndex++; renderQuestion(); }
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 🛠️ SKILL EXECUTION
@@ -772,7 +675,7 @@ function nextQuestion() {
 
 function openTier(tierId) {
   const tier = TIERS.find(t => t.id === tierId);
-  document.getElementById('skillTierTitle').textContent = `${tier.icon} ${tier.name}`;
+  document.getElementById('skillTierTitle').innerHTML = tier.name;
   
   const list = document.getElementById('skillList');
   list.innerHTML = '';
@@ -780,12 +683,25 @@ function openTier(tierId) {
   const skills = SKILLS_DB.filter(s => s.tier === tierId);
   skills.forEach(s => {
     const el = document.createElement('div');
-    el.className = 'btn ana-option';
-    el.innerHTML = `<div><div style="font-weight:700">${s.name}</div><div style="font-size:0.8rem; opacity:0.7">${s.desc}</div></div><div>${s.xp} XP</div>`;
+    el.style.background = 'var(--bg-surface)';
+    el.style.padding = '16px';
+    el.style.borderRadius = '12px';
+    el.style.border = '1px solid var(--border-dim)';
+    el.style.display = 'flex';
+    el.style.justifyContent = 'space-between';
+    el.style.alignItems = 'center';
+    el.style.cursor = 'pointer';
+    
+    el.innerHTML = `
+      <div>
+        <div style="font-weight:600; margin-bottom:4px;">${s.name}</div>
+        <div style="font-size:0.8rem; color:var(--text-dim);">${s.desc}</div>
+      </div>
+      <div style="font-family:var(--font-mono); color:var(--c-accent); font-size:0.8rem;">${s.xp} XP</div>
+    `;
     el.onclick = () => openSkill(s.id);
     list.appendChild(el);
   });
-  
   navigate('viewSkills');
 }
 
@@ -797,15 +713,8 @@ function openSkill(skillId, reason = null) {
   document.getElementById('sheetDesc').textContent = skill.desc;
   document.getElementById('sheetTier').textContent = skill.tier.toUpperCase();
   
-  // Grund anzeigen (Warum jetzt?)
   const reasonEl = document.getElementById('sheetReason');
-  if (reason) {
-    reasonEl.textContent = `💡 ${reason}`;
-    reasonEl.style.color = "var(--c-green)";
-  } else {
-    reasonEl.textContent = "Eine gute Übung für zwischendurch.";
-    reasonEl.style.color = "#aaa";
-  }
+  reasonEl.textContent = reason ? reason : "Standard Routine.";
   
   document.getElementById('skillOverlay').classList.add('active');
 }
@@ -819,27 +728,19 @@ function closeSheet(e, force = false) {
 function doSkill() {
   closeSheet(null, true);
   const skill = state.currentSkill;
-  
-  // SYNERGY BERECHNUNG
   const result = calculateSynergyXP(skill.xp, skill.tier);
   
   state.xp += result.xp;
   state.history.push({ id: skill.id, date: new Date().toISOString() });
   
-  // Level Up Check
-  if (state.xp >= state.level * 500) {
-    state.level++;
-  }
-  
+  if (state.xp >= state.level * 500) state.level++;
   saveState();
   
-  // Success View
   document.getElementById('successPoints').textContent = `+${result.xp} XP`;
   document.getElementById('synergyMsg').textContent = result.msg;
   navigate('viewSuccess');
 }
 
-// Start
 init();
 
 </script>
