@@ -3,62 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HUMANEED — Premium Prototype</title>
+<title>HUMANEED — Warm Premium Prototype</title>
 <style>
   :root {
-    /* Premium Light Mode: Refined Silver & Anthracite */
-    --bg: #e6e8eb;
-    --surface: #f3f4f7;
-    --ink: #1a1c23;
-    --ink-soft: #636873;
-    --line: rgba(0, 0, 0, 0.08);
+    /* Premium Warm Light Mode: Alabaster & Caramel */
+    --bg: #f8f7f4;
+    --surface: #ffffff;
+    --ink: #2b2a28;
+    --ink-soft: #7a7771;
+    --line: rgba(43, 42, 40, 0.08);
     
-    /* Anthracite Accents */
-    --accent: #242730; 
-    --accent-soft: rgba(36, 39, 48, 0.06);
+    /* Warm Gold/Caramel Accents */
+    --accent: #b4854b; 
+    --accent-soft: rgba(180, 133, 75, 0.08);
     --on-accent: #ffffff;
     
-    --warn: #9e3625;
-    --warn-soft: rgba(158, 54, 37, 0.08);
-    --warn-border: rgba(158, 54, 37, 0.2);
-    --btn-disabled-bg: #d9dbdf;
+    --warn: #b05c48;
+    --warn-soft: rgba(176, 92, 72, 0.08);
+    --warn-border: rgba(176, 92, 72, 0.2);
+    --btn-disabled-bg: #e6e4df;
     
-    --radius: 4px; /* Sharper, ultra-modern corners */
+    --radius: 10px; /* Friendly but structured */
 
-    /* Monochromatic slate/grey tier spectrum for light mode */
-    --tier0: #4a5568; 
-    --tier1: #526071; 
-    --tier2: #5a6b7c; 
-    --tier3: #637688; 
-    --tier4: #6c8194; 
-    --tier5: #768ca0; 
+    /* Warm, earthy tier spectrum */
+    --tier0: #788a63; /* Muted Sage */
+    --tier1: #c47b57; /* Soft Terracotta */
+    --tier2: #c49d47; /* Warm Sand */
+    --tier3: #5f7a8c; /* Warm Slate */
+    --tier4: #967086; /* Dusty Plum */
+    --tier5: #b4854b; /* Caramel */
 
-    /* Light Theme Shadows & UI Elements */
-    --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.04);
-    --shadow-glow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --card-bg-gradient: linear-gradient(145deg, #ffffff, #f8f9fa);
-    --header-gradient: radial-gradient(circle at top, rgba(0,0,0,0.03) 0%, transparent 80%);
+    /* Tactile Shadows */
+    --shadow-card: 0 10px 30px rgba(43, 42, 40, 0.05);
+    --shadow-glow: 0 4px 20px rgba(180, 133, 75, 0.15);
+    --card-bg-gradient: linear-gradient(145deg, #ffffff, #fcfbf9);
+    --header-gradient: radial-gradient(circle at top, rgba(180, 133, 75, 0.05) 0%, transparent 80%);
   }
 
-  /* Dark Mode Integration - Deep Psyche / Amber Glow */
+  /* Dark Mode Integration - Deep Matte Black & Liquid Gold */
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #090a0c;
-      --surface: #111216;
-      --ink: #e8e9ed;
-      --ink-soft: #858994;
-      --line: rgba(255, 255, 255, 0.06);
+      --bg: #0f0f0e;
+      --surface: #181816;
+      --ink: #f0eee9;
+      --ink-soft: #8f8c86;
+      --line: rgba(240, 238, 233, 0.06);
       
-      --accent: #e8a658; /* Glowing amber from reference image */
-      --accent-soft: rgba(232, 166, 88, 0.08);
-      --on-accent: #050505;
+      --accent: #dca75a; /* Liquid gold / Warm amber */
+      --accent-soft: rgba(220, 167, 90, 0.1);
+      --on-accent: #0f0f0e;
       
-      --warn: #c95c3a;
-      --warn-soft: rgba(201, 92, 58, 0.1);
-      --warn-border: rgba(201, 92, 58, 0.25);
-      --btn-disabled-bg: #1a1c22;
+      --warn: #cf6651;
+      --warn-soft: rgba(207, 102, 81, 0.1);
+      --warn-border: rgba(207, 102, 81, 0.25);
+      --btn-disabled-bg: #21201e;
 
-      /* Warm, ember-like spectrum for dark mode tiers */
+      /* Warm, glowing ember spectrum for dark mode */
       --tier0: #f4cf73; 
       --tier1: #e0b457; 
       --tier2: #c7923a; 
@@ -66,10 +66,10 @@
       --tier4: #9c5c16; 
       --tier5: #e8a658; 
 
-      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.8);
-      --shadow-glow: 0 0 24px rgba(232, 166, 88, 0.15);
-      --card-bg-gradient: linear-gradient(145deg, #13141a, #0e0f13);
-      --header-gradient: radial-gradient(circle at top, rgba(232, 166, 88, 0.06) 0%, transparent 80%);
+      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.6);
+      --shadow-glow: 0 0 24px rgba(220, 167, 90, 0.15);
+      --card-bg-gradient: linear-gradient(145deg, #1c1c1a, #141412);
+      --header-gradient: radial-gradient(circle at top, rgba(220, 167, 90, 0.08) 0%, transparent 80%);
     }
   }
 
@@ -78,10 +78,10 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
     padding: 0 0 60px 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -115,7 +115,7 @@
   }
 
   a:focus-visible, button:focus-visible, input:focus-visible, details > summary:focus-visible {
-    outline: 1px solid var(--accent);
+    outline: 2px solid var(--accent);
     outline-offset: 4px;
   }
   .screen:focus-visible, #checkin-list .card:focus-visible { outline: none; }
@@ -136,15 +136,15 @@
     position: absolute;
     top: 32px;
     right: 24px;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%; /* Perfect circle for widget */
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
     border: 1px dashed var(--ink-soft);
     background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
     cursor: pointer;
     color: var(--ink-soft);
     padding: 0;
@@ -153,6 +153,7 @@
   .mood-widget-btn.is-set {
     border: 1px solid var(--accent);
     box-shadow: var(--shadow-glow);
+    background: var(--surface);
   }
   .mood-widget-btn:hover {
     border-color: var(--ink);
@@ -164,7 +165,7 @@
     top: 80px;
     right: 24px;
     z-index: 20;
-    width: 260px;
+    width: 280px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -177,9 +178,9 @@
   .mood-popover[hidden] { display: none; }
   .mood-popover-hint {
     margin: 0 0 16px 0;
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--ink-soft);
     line-height: 1.5;
   }
@@ -194,11 +195,11 @@
     align-items: center;
     gap: 8px;
     padding: 14px 4px;
-    border-radius: var(--radius);
+    border-radius: 8px;
     border: 1px solid var(--line);
-    background: transparent;
+    background: var(--bg);
     cursor: pointer;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--ink);
     transition: all 0.2s ease;
   }
@@ -208,10 +209,11 @@
     box-shadow: inset 0 0 15px rgba(0,0,0,0.02);
   }
   .mood-popover-options button .mood-popover-label {
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: var(--ink-soft);
+    font-weight: 500;
   }
   
   .mood-popover-clear {
@@ -222,22 +224,24 @@
     border: 1px solid var(--line);
     background: transparent;
     color: var(--ink-soft);
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     cursor: pointer;
-    border-radius: var(--radius);
+    border-radius: 8px;
     transition: all 0.2s;
+    font-weight: 500;
   }
   .mood-popover-clear:hover {
     border-color: var(--ink);
     color: var(--ink);
+    background: var(--bg);
   }
 
   header h1 {
     margin: 0;
-    font-size: 20px;
-    letter-spacing: 0.3em;
+    font-size: 22px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     font-weight: 300;
     color: var(--ink);
@@ -245,13 +249,13 @@
   header p {
     margin: 8px 0 0 0;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
   }
   .context-greeting {
     color: var(--accent) !important;
-    font-weight: 400;
+    font-weight: 500;
   }
 
   main {
@@ -267,9 +271,9 @@
   .screen { display: none; }
   .screen.active {
     display: block;
-    animation: fade-slide-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fade-slide-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .checkin-step-enter { animation: fade-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+  .checkin-step-enter { animation: fade-slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
   .card {
     background: var(--card-bg-gradient);
@@ -282,18 +286,19 @@
     overflow: hidden;
   }
   
-  /* Extremely subtle top highlight mimicking edge lighting */
+  /* Soft ambient top light on cards */
   .card::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0.3;
   }
 
   .tier-label {
-    font-size: 10px;
+    font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     color: var(--accent);
     margin-bottom: 16px;
     font-weight: 500;
@@ -310,7 +315,7 @@
     font-weight: 300;
     letter-spacing: 0.02em;
     margin: 0 0 24px 0;
-    line-height: 1.3;
+    line-height: 1.4;
     color: var(--ink);
   }
   .carry-hint {
@@ -326,13 +331,13 @@
     line-height: 1.7;
     color: var(--ink);
     margin: 0 0 16px 0;
-    font-weight: 300;
+    font-weight: 400;
   }
   
   .options {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
   }
   .opt-btn {
     display: flex;
@@ -341,26 +346,27 @@
     width: 100%;
     text-align: left;
     padding: 16px 20px;
-    border-radius: var(--radius);
+    border-radius: 8px;
     border: 1px solid var(--line);
-    background: transparent;
+    background: var(--bg);
     color: var(--ink);
-    font-size: 14px;
-    font-weight: 400;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
     transition: all 0.25s ease;
   }
   .opt-btn .opt-icon {
     flex: 0 0 auto;
-    font-size: 18px;
-    opacity: 0.5;
+    font-size: 20px;
+    opacity: 0.6;
     filter: grayscale(100%);
     transition: all 0.3s ease;
   }
   .opt-btn .opt-label { flex: 1; letter-spacing: 0.02em; }
   .opt-btn:hover {
     border-color: var(--ink-soft);
-    background: rgba(0,0,0,0.01);
+    background: var(--surface);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
   }
   .opt-btn.selected {
     border-color: var(--accent);
@@ -370,19 +376,20 @@
   .opt-btn.selected .opt-icon {
     opacity: 1;
     filter: grayscale(0%);
+    transform: scale(1.1);
   }
 
   .primary-btn {
     display: block;
     width: 100%;
     padding: 18px;
-    border-radius: var(--radius);
+    border-radius: 8px;
     border: 1px solid var(--accent);
     background: var(--accent);
     color: var(--on-accent);
-    font-size: 12px;
+    font-size: 13px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     cursor: pointer;
     margin-top: 12px;
     transition: all 0.3s ease;
@@ -390,7 +397,7 @@
   }
   .primary-btn:hover:not(:disabled) {
     box-shadow: var(--shadow-glow);
-    filter: brightness(1.1);
+    filter: brightness(1.05);
   }
   .primary-btn:disabled {
     border-color: var(--line);
@@ -405,13 +412,13 @@
     display: block;
     width: 100%;
     padding: 16px;
-    border-radius: var(--radius);
+    border-radius: 8px;
     border: 1px solid var(--line);
     background: transparent;
     color: var(--ink-soft);
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     cursor: pointer;
     margin-top: 12px;
     transition: all 0.2s ease;
@@ -420,6 +427,7 @@
   .secondary-btn:hover:not(:disabled) {
     border-color: var(--ink);
     color: var(--ink);
+    background: var(--bg);
   }
   .secondary-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
@@ -437,25 +445,25 @@
 
   .checkin-progress { margin-bottom: 24px; }
   .checkin-progress-text {
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     color: var(--ink-soft);
     margin-bottom: 12px;
     font-weight: 500;
   }
-  .checkin-progress-dots { display: flex; gap: 6px; }
+  .checkin-progress-dots { display: flex; gap: 8px; }
   .progress-dot {
     width: 100%;
-    height: 2px;
+    height: 4px;
     background: var(--line);
     transition: background 0.3s ease;
-    border-radius: 1px;
+    border-radius: 2px;
   }
-  .progress-dot.done { background: var(--accent); opacity: 0.4; }
+  .progress-dot.done { background: var(--accent); opacity: 0.3; }
   .progress-dot.current {
     background: var(--accent);
-    box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    box-shadow: 0 0 10px rgba(180, 133, 75, 0.4);
   }
   
   .checkin-nav { display: flex; gap: 12px; margin-top: 28px; }
@@ -463,36 +471,36 @@
 
   .gatekeeper {
     background: var(--warn-soft);
-    border-left: 2px solid var(--warn);
+    border-left: 3px solid var(--warn);
     color: var(--warn);
     padding: 16px 20px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
-    border-radius: 0 var(--radius) var(--radius) 0;
+    border-radius: 0 8px 8px 0;
   }
 
   .disruption-note {
     background: var(--accent-soft);
-    border-left: 2px solid var(--accent);
+    border-left: 3px solid var(--accent);
     color: var(--accent);
     padding: 16px 20px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 24px;
-    border-radius: 0 var(--radius) var(--radius) 0;
+    border-radius: 0 8px 8px 0;
   }
 
   .intervention-title {
     font-size: 24px;
     font-weight: 300;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
     margin: 4px 0 12px 0;
     color: var(--ink);
   }
   .intervention-action {
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.7;
     margin-bottom: 20px;
     color: var(--ink);
@@ -500,25 +508,26 @@
   
   .tag {
     display: inline-block;
-    font-size: 8px;
+    font-size: 9px;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.1em;
     background: var(--accent-soft);
     color: var(--accent);
     padding: 4px 8px;
-    border-radius: 2px;
+    border-radius: 4px;
     margin-left: 12px;
     vertical-align: middle;
     border: 1px solid var(--line);
+    font-weight: 500;
   }
   
   details {
     margin-top: 16px;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--ink-soft);
-    background: transparent;
+    background: var(--bg);
     padding: 16px;
-    border-radius: var(--radius);
+    border-radius: 8px;
     border: 1px solid var(--line);
   }
   summary {
@@ -526,32 +535,32 @@
     color: var(--accent);
     font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    font-size: 10px;
+    letter-spacing: 0.1em;
+    font-size: 11px;
   }
-  details p { margin: 12px 0 0 0; line-height: 1.6; font-weight: 300; }
-  details ol { margin: 12px 0 0 0; padding-left: 20px; font-weight: 300; }
+  details p { margin: 12px 0 0 0; line-height: 1.6; font-weight: 400; }
+  details ol { margin: 12px 0 0 0; padding-left: 20px; font-weight: 400; }
   details ol li { margin-bottom: 8px; padding-left: 4px; }
   
   .variation-note { font-style: italic; margin-top: 16px !important; color: var(--ink-soft); }
   .mood-framing { 
     font-style: italic; 
     color: var(--ink-soft); 
-    font-size: 13px; 
+    font-size: 14px; 
     margin: 0 0 20px 0; 
-    border-left: 1px solid var(--line); 
+    border-left: 2px solid var(--line); 
     padding-left: 16px; 
   }
 
   .row { display: flex; gap: 12px; }
   .row .opt-btn { flex: 1; text-align: center; justify-content: center; padding: 20px 10px; }
 
-  .dayclose-question { font-size: 15px; font-weight: 300; color: var(--ink); margin-bottom: 20px; text-align: center; }
-  .dayclose-done { font-size: 13px; color: var(--accent); text-align: center; font-weight: 400; }
+  .dayclose-question { font-size: 16px; font-weight: 400; color: var(--ink); margin-bottom: 20px; text-align: center; }
+  .dayclose-done { font-size: 14px; color: var(--accent); text-align: center; font-weight: 500; }
   .dayclose-done .change-link {
     color: var(--ink-soft); text-decoration: none; cursor: pointer; margin-left: 12px;
-    background: transparent; border: 1px solid var(--line); padding: 4px 8px; border-radius: var(--radius); 
-    font-size: 9px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.1em;
+    background: var(--bg); border: 1px solid var(--line); padding: 4px 10px; border-radius: 6px; 
+    font-size: 10px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.1em;
   }
   .dayclose-done .change-link:hover { border-color: var(--ink); color: var(--ink); }
 
@@ -562,11 +571,11 @@
     padding: 24px 0 0 0;
     border-radius: 0;
   }
-  .advanced-section summary { font-size: 10px; color: var(--ink-soft); letter-spacing: 0.1em; }
+  .advanced-section summary { font-size: 11px; color: var(--ink-soft); letter-spacing: 0.1em; }
   .advanced-group { margin-top: 32px; padding-top: 0; border-top: none; }
   .advanced-label {
-    font-size: 9px;
-    letter-spacing: 0.2em;
+    font-size: 10px;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--ink-soft);
     margin-bottom: 16px;
@@ -574,9 +583,9 @@
     padding-bottom: 8px;
     font-weight: 500;
   }
-  .advanced-section table { width: 100%; border-collapse: collapse; font-size: 12px; color: var(--ink-soft); font-weight: 300; }
+  .advanced-section table { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--ink-soft); font-weight: 400; }
   .advanced-section td, .advanced-section th { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
-  .advanced-section th { font-weight: 500; text-transform: uppercase; font-size: 9px; letter-spacing: 0.1em; }
+  .advanced-section th { font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; }
 
   .history-entry {
     display: flex;
@@ -585,48 +594,48 @@
     gap: 20px;
     padding: 20px 0;
     border-bottom: 1px solid var(--line);
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
   }
   .history-entry:last-child { border-bottom: none; }
-  .history-entry .h-num { color: var(--ink-soft); font-size: 10px; min-width: 48px; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.05em; }
+  .history-entry .h-num { color: var(--ink-soft); font-size: 11px; min-width: 48px; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
   .history-entry .h-main { flex: 1; color: var(--ink); line-height: 1.5; }
   .h-tier-dot {
     display: inline-block;
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     margin-right: 12px;
     vertical-align: middle;
   }
-  .history-entry .h-qualia { font-size: 9px; text-transform: uppercase; letter-spacing: 0.15em; padding: 4px 8px; border-radius: 2px; background: transparent; font-weight: 500; }
+  .history-entry .h-qualia { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; background: var(--bg); font-weight: 500; }
   .h-qualia.better { color: var(--accent); border: 1px solid var(--accent-soft); }
   .h-qualia.worse { color: var(--warn); border: 1px solid var(--warn-border); }
   .h-qualia.same { color: var(--ink-soft); border: 1px solid var(--line); }
-  .history-empty { color: var(--ink-soft); font-size: 13px; font-weight: 300; text-align: center; padding: 24px 0; }
+  .history-empty { color: var(--ink-soft); font-size: 14px; font-weight: 400; text-align: center; padding: 24px 0; }
 
   .progress-row {
     display: flex;
     align-items: baseline;
     gap: 16px;
     padding: 10px 0;
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--ink);
     line-height: 1.5;
   }
-  .progress-row .p-value { font-weight: 400; color: var(--accent); min-width: 32px; font-size: 16px; text-align: right; }
+  .progress-row .p-value { font-weight: 500; color: var(--accent); min-width: 32px; font-size: 18px; text-align: right; }
 
-  #progress-card { border-top: 2px solid var(--accent); }
-  #dayclose-card { border-top: 2px solid var(--tier5); }
-  #history-card { border-top: 2px solid var(--ink-soft); }
+  #progress-card { border-top: 3px solid var(--accent); }
+  #dayclose-card { border-top: 3px solid var(--tier5); }
+  #history-card { border-top: 3px solid var(--ink-soft); }
 
   footer {
     text-align: center;
     color: var(--ink-soft);
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
+    letter-spacing: 0.15em;
     margin-top: 50px;
   }
 </style>
@@ -715,7 +724,7 @@
   <section id="screen-summary" class="screen" tabindex="-1" aria-label="Progress and History">
     <div class="card">
       <div class="question">Structure Calibrated.</div>
-      <p id="summary-text" style="color:var(--ink-soft);font-size:14px;font-weight:300;"></p>
+      <p id="summary-text" style="color:var(--ink-soft);font-size:15px;font-weight:400;"></p>
     </div>
     <div class="card" id="progress-card">
       <div class="tier-label">System Progress</div>
@@ -727,12 +736,12 @@
     </div>
     <div class="card" id="outcome-card">
       <div class="tier-label">Macro Efficacy</div>
-      <p style="color:var(--ink-soft);font-size:12px;margin-top:-8px;font-weight:300; line-height: 1.5;">Longitudinal measurement detached from daily metrics.</p>
+      <p style="color:var(--ink-soft);font-size:13px;margin-top:-8px;font-weight:400; line-height: 1.6;">Longitudinal measurement detached from daily metrics.</p>
       <div id="outcome-content"></div>
     </div>
     <div class="card" id="history-card">
       <div class="tier-label">Diagnostic History</div>
-      <p style="color:var(--ink-soft);font-size:12px;margin-top:-8px;font-weight:300; line-height: 1.5;">Encrypted locally in browser state.</p>
+      <p style="color:var(--ink-soft);font-size:13px;margin-top:-8px;font-weight:400; line-height: 1.6;">Encrypted locally in browser state.</p>
       <div id="history-list"></div>
     </div>
     <button class="primary-btn" id="btn-restart">Initiate New Cycle</button>
@@ -746,7 +755,7 @@
           <button class="secondary-btn" id="btn-import-data">Import System Data</button>
           <input type="file" id="import-file-input" accept="application/json" style="display:none;">
         </div>
-        <div id="import-status" style="font-size:12px;margin-top:16px;" aria-live="polite"></div>
+        <div id="import-status" style="font-size:13px;margin-top:16px;" aria-live="polite"></div>
       </div>
       <div class="advanced-group">
         <div class="advanced-label">Internal Node Weights</div>
@@ -759,13 +768,13 @@
       <div class="advanced-group">
         <div class="advanced-label">System Override</div>
         <button class="secondary-btn" id="btn-reset-all" style="border-color: var(--warn); color: var(--warn);">Purge All Diagnostics</button>
-        <div id="reset-status" style="font-size:12px;margin-top:16px;" aria-live="polite"></div>
+        <div id="reset-status" style="font-size:13px;margin-top:16px;" aria-live="polite"></div>
       </div>
     </details>
   </section>
 </main>
 
-<footer>HUMANEED · Core Protocol · v0.40 · Advanced Dual Theme</footer>
+<footer>HUMANEED · Core Protocol · v0.41 · Warm Premium Dual Theme</footer>
 
 <script>
 const TIERS = [
@@ -1021,7 +1030,7 @@ const INTERVENTIONS = [
     deepen:{ action:"Diesmal zusätzlich die Intensität einschätzen und merken, wo im Körper sich die Emotion zeigt.",
       steps:["Die Emotion wie gewohnt benennen.", "Die Intensität auf einer Skala von 1 bis 10 einschätzen.", "Kurz spüren, wo im Körper sich das Gefühl bemerkbar macht."] } },
   { id:"35", tier:1, title:"Der Kontakt zur Natur", action:"10 Minuten an einen grünen, natürlichen Ort gehen und bewusst mit allen Sinnen wahrnehmen.", proposal:false, bestTime:"any",
-    steps:["Einen Ort mit Bäumen, Grün oder Wasser in der Nähe aufsuchen.", "Langsam gehen und bewusst hinschauen, hören, riechen.", "Wenn möglich etwas Natürliches kurz berühren — Rinde, Gras, Wasser."],
+    steps:["Einen Ort mit Bäumen, Grün oder Wasser in class Nähe aufsuchen.", "Langsam gehen und bewusst hinschauen, hören, riechen.", "Wenn möglich etwas Natürliches kurz berühren — Rinde, Gras, Wasser."],
     variation:"Kein Grün in der Nähe? Auch ein paar Zimmerpflanzen oder ein bewusster Blick auf den Himmel wirken schon in klein.",
     deepen:{ action:"Diesmal 20 statt 10 Minuten, ohne Zeitdruck.",
       steps:["Wie gewohnt einen grünen Ort aufsuchen.", "Diesmal 20 statt 10 Minuten dort bleiben.", "Bewusst langsamer werden, je länger du dort bist."] } },
@@ -1151,14 +1160,13 @@ function loadWeights(){
     });
     return defaults;
   } catch (e) {
-    console.warn("Konnte gespeicherte Gewichtungen nicht lesen, starte mit Standardwerten.", e);
     return defaults;
   }
 }
 
 function saveWeights(){
   try { localStorage.setItem(STORAGE_KEYS.weights, JSON.stringify(weights)); }
-  catch (e) { console.warn("Konnte Gewichtungen nicht speichern.", e); }
+  catch (e) { }
 }
 
 function loadHistory(){
@@ -1166,7 +1174,6 @@ function loadHistory(){
     const raw = localStorage.getItem(STORAGE_KEYS.history);
     return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    console.warn("Konnte gespeicherten Verlauf nicht lesen, starte leer.", e);
     return [];
   }
 }
@@ -1175,7 +1182,7 @@ function saveHistory(){
   try {
     const trimmed = sessionLog.slice(0, HISTORY_LIMIT);
     localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(trimmed));
-  } catch (e) { console.warn("Konnte Verlauf nicht speichern.", e); }
+  } catch (e) { }
 }
 
 function loadReflections(){
@@ -1183,14 +1190,13 @@ function loadReflections(){
     const raw = localStorage.getItem(STORAGE_KEYS.reflections);
     return raw ? JSON.parse(raw) : {};
   } catch (e) {
-    console.warn("Konnte gespeicherte Tagesreflexionen nicht lesen, starte leer.", e);
     return {};
   }
 }
 
 function saveReflections(){
   try { localStorage.setItem(STORAGE_KEYS.reflections, JSON.stringify(dailyReflections)); }
-  catch (e) { console.warn("Konnte Tagesreflexion nicht speichern.", e); }
+  catch (e) { }
 }
 
 function setTodaysReflection(choice){
@@ -1263,14 +1269,13 @@ function loadOutcomes(){
     const raw = localStorage.getItem(STORAGE_KEYS.outcomes);
     return raw ? JSON.parse(raw) : {};
   } catch (e) {
-    console.warn("Konnte gespeicherte Wochenwerte nicht lesen, starte leer.", e);
     return {};
   }
 }
 
 function saveOutcomes(){
   try { localStorage.setItem(STORAGE_KEYS.outcomes, JSON.stringify(weeklyOutcomes)); }
-  catch (e) { console.warn("Konnte Wochenwert nicht speichern.", e); }
+  catch (e) { }
 }
 
 const OUTCOME_LABELS = { 10:"Sehr schlecht", 30:"Eher schlecht", 50:"Durchschnittlich", 70:"Eher gut", 90:"Sehr gut" };
@@ -1321,7 +1326,7 @@ function renderOutcome(){
     const compareLabel = trend.isConsecutive
       ? "Verglichen mit der Vorwoche"
       : "Verglichen mit deinem letzten Eintrag (dazwischen wurden Wochen ausgelassen)";
-    html += `<div class="progress-row" style="margin-top:12px;">${compareLabel}: ${trend.direction} · Verlauf: ${trend.sequence}</div>`;
+    html += `<div class="progress-row" style="margin-top:16px;">${compareLabel}: ${trend.direction} · Verlauf: ${trend.sequence}</div>`;
   }
   content.innerHTML = html;
   if (existing === undefined){
@@ -1347,7 +1352,7 @@ function resetAllData(){
     localStorage.removeItem(STORAGE_KEYS.history);
     localStorage.removeItem(STORAGE_KEYS.reflections);
     localStorage.removeItem(STORAGE_KEYS.outcomes);
-  } catch (e) { /* ignore */ }
+  } catch (e) { }
   INTERVENTIONS.forEach(iv => weights[iv.id] = 1.0);
   sessionLog = [];
   dailyReflections = {};
@@ -1455,7 +1460,7 @@ function renderCheckinStep(index, opts = {}){
 
   if (showCarryCard){
     card.innerHTML = `
-      <div class="tier-label tier-accent-${tier.id}">Ebene ${tier.id} · ${tier.name}</div>
+      <div class="tier-label tier-accent-${tier.id}">Tier ${tier.id} // ${tier.name}</div>
       <div class="question" id="checkin-question-${tier.id}">${tier.question}</div>
       <p class="carry-hint">In den letzten Tagen ähnlich eingeschätzt — passt das noch?</p>
       <button class="primary-btn" id="btn-carry-confirm" type="button">Passt noch</button>
@@ -1580,7 +1585,7 @@ function computeChronicDisruption(){
   const BASELINE_N = 10;
   let suddenDrop = false;
   if (withAnswers.length >= MIN_ENTRIES_DROP){
-    const overallAvg = entry => TIERS.reduce((sum, t) => sum + overallAvg(e), 0) / TIERS.length;
+    const overallAvg = entry => TIERS.reduce((sum, t) => sum + entry.answers[t.id], 0) / TIERS.length;
     const recent = withAnswers.slice(0, RECENT_N);
     const baseline = withAnswers.slice(RECENT_N, RECENT_N + BASELINE_N);
     
@@ -1719,7 +1724,7 @@ function saveMood(){
   try {
     if (entryMood) { localStorage.setItem(MOOD_KEY, entryMood.key); }
     else { localStorage.removeItem(MOOD_KEY); }
-  } catch (e) { /* ignore */ }
+  } catch (e) { }
 }
 function loadMood(){
   try {
@@ -1810,7 +1815,7 @@ const GATEKEEPER_MESSAGES = {
   tier1: "Dein Nervensystem wirkt gerade überreizt (Kampf/Flucht oder Erstarrung). Kompetenz oder Bedeutung können warten — zuerst geht es um Beruhigung (Ebene 1 · Emotion).",
   tier1_chronic: "Dein Nervensystem wirkt heute nicht extrem überreizt — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Das macht dich empfindlicher für Stress, als der heutige Wert allein zeigt — deshalb heute vorsichtshalber zuerst ein Schritt bei Emotion.",
   tier2: "Du fühlst dich gerade isoliert. Ohne Verbindung gelingt Integration von Sinn (Ebene 5) schwerer — deshalb zuerst ein Schritt bei Sozial.",
-  tier2_chronic: "Du fühlst dich heute nicht völlig isoliert — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Ohne ausreichend soziale Verbindung gelingt Integration von Sinn schwerer, auch bei nur mäßiger Distanz — deshalb heute vorsichtshalber zuerst ein Schritt bei Sozial."
+  tier2_chronic: "Dufühlst dich heute nicht völlig isoliert — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Ohne ausreichend soziale Verbindung gelingt Integration von Sinn schwerer, auch bei nur mäßiger Distanz — deshalb heute vorsichtshalber zuerst ein Schritt bei Sozial."
 };
 
 function renderResult(){
@@ -2127,7 +2132,7 @@ document.getElementById("import-file-input").addEventListener("change", (e) => {
     const dateLabel = data.exportedAt ? new Date(data.exportedAt).toLocaleDateString("de-DE") : "Unknown Date";
     statusEl.innerHTML = `
       <div style="color:var(--ink);">Archive detected (${entryCount} cycles, generated ${dateLabel}). Current local state will be overwritten.</div>
-      <button class="secondary-btn" id="btn-confirm-import" style="margin-top:12px;">Confirm Override</button>
+      <button class="secondary-btn" id="btn-confirm-import" style="margin-top:16px;">Confirm Override</button>
     `;
     document.getElementById("btn-confirm-import").addEventListener("click", () => {
       applyImport(pendingImport);
@@ -2204,7 +2209,7 @@ document.getElementById("btn-reset-all").addEventListener("click", () => {
 });
 
 document.getElementById("btn-welcome-start").addEventListener("click", () => {
-  try { localStorage.setItem(WELCOME_SEEN_KEY, "1"); } catch (e) { /* ignore */ }
+  try { localStorage.setItem(WELCOME_SEEN_KEY, "1"); } catch (e) { }
   showScreen("screen-checkin");
 });
 
@@ -2225,2172 +2230,7 @@ try {
     document.getElementById("screen-welcome").classList.remove("active");
     document.getElementById("screen-checkin").classList.add("active");
   }
-} catch (e) { /* ignore */ }
-</script>
-</body>
-</html>    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.06);
-    --shadow-glow: 0 0 15px rgba(60, 64, 67, 0.1);
-    --btn-surface: #ffffff;
-    --btn-surface-hover: #f8f9fa;
-    --header-gradient: radial-gradient(circle at top, rgba(60, 64, 67, 0.04) 0%, transparent 70%);
-  }
-
-  /* Dark Mode Integration */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0a0b0e;
-      --surface: #14151a;
-      --ink: #f0f0f0;
-      --ink-soft: #8a8d96;
-      --line: #2a2b32;
-      
-      --accent: #d4a350; 
-      --accent-soft: rgba(212, 163, 80, 0.12);
-      --on-accent: #050505;
-      
-      --warn: #c95c3a;
-      --warn-soft: rgba(201, 92, 58, 0.15);
-      --warn-border: #4a271d;
-      --btn-disabled-bg: #23242a;
-
-      --tier0: #f4cf73; 
-      --tier1: #e0b457; 
-      --tier2: #c7923a; 
-      --tier3: #b07521; 
-      --tier4: #9c5c16; 
-      --tier5: #e8a658; 
-
-      --shadow-card: 0 8px 30px rgba(0, 0, 0, 0.5);
-      --shadow-glow: 0 0 15px rgba(212, 163, 80, 0.1);
-      --btn-surface: #0d0d10;
-      --btn-surface-hover: rgba(212, 163, 80, 0.02);
-      --header-gradient: radial-gradient(circle at top, rgba(212, 163, 80, 0.05) 0%, transparent 70%);
-    }
-  }
-
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.6;
-    font-size: 16px;
-    padding: 0 0 60px 0;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-
-  a.skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    z-index: 1000;
-  }
-  a.skip-link:focus {
-    position: fixed;
-    left: 12px;
-    top: 12px;
-    width: auto;
-    height: auto;
-    padding: 12px 18px;
-    background: var(--accent);
-    color: var(--on-accent);
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a:focus-visible, button:focus-visible, input:focus-visible, details > summary:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
-  }
-  .screen:focus-visible, #checkin-list .card:focus-visible { outline: none; }
-
-  @media (prefers-reduced-motion: reduce){
-    * { transition: none !important; animation: none !important; }
-  }
-
-  header {
-    padding: 32px 20px 20px 20px;
-    text-align: center;
-    position: relative;
-    border-bottom: 1px solid var(--line);
-    background: var(--header-gradient);
-  }
-
-  .mood-widget-btn {
-    position: absolute;
-    top: 24px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius);
-    border: 1px dashed var(--ink-soft);
-    background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    color: var(--ink-soft);
-    padding: 0;
-    transition: all 0.3s ease;
-  }
-  .mood-widget-btn.is-set {
-    border: 1px solid var(--accent);
-    box-shadow: var(--shadow-glow);
-  }
-  
-  .mood-popover {
-    position: absolute;
-    top: 72px;
-    right: 20px;
-    z-index: 20;
-    width: 240px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
-    padding: 16px;
-    text-align: left;
-  }
-  .mood-popover[hidden] { display: none; }
-  .mood-popover-hint {
-    margin: 0 0 14px 0;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-    line-height: 1.5;
-  }
-  .mood-popover-options {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .mood-popover-options button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 4px;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: var(--btn-surface);
-    cursor: pointer;
-    font-size: 20px;
-    color: var(--ink);
-    transition: border 0.2s, background 0.2s;
-  }
-  .mood-popover-options button.selected {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-  }
-  .mood-popover-options button .mood-popover-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
-  }
-  
-  .mood-popover-clear {
-    display: block;
-    width: 100%;
-    margin-top: 14px;
-    padding: 8px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink-soft);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    border-radius: var(--radius);
-  }
-
-  header h1 {
-    margin: 0;
-    font-size: 24px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    font-weight: 300;
-    color: var(--ink);
-  }
-  header p {
-    margin: 8px 0 0 0;
-    color: var(--ink-soft);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .context-greeting {
-    color: var(--accent) !important;
-    font-weight: 500;
-  }
-
-  main {
-    max-width: 600px;
-    margin: 30px auto 0;
-    padding: 0 20px;
-  }
-
-  @keyframes fade-slide-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .screen { display: none; }
-  .screen.active {
-    display: block;
-    animation: fade-slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .checkin-step-enter { animation: fade-slide-in 0.3s ease; }
-
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow-card);
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.6;
-  }
-
-  .tier-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-  .tier-accent-0 { color: var(--tier0); }
-  .tier-accent-1 { color: var(--tier1); }
-  .tier-accent-2 { color: var(--tier2); }
-  .tier-accent-3 { color: var(--tier3); }
-  .tier-accent-4 { color: var(--tier4); }
-  .tier-accent-5 { color: var(--tier5); }
-  
-  .question {
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 0.03em;
-    margin: 0 0 20px 0;
-    line-height: 1.4;
-  }
-  .carry-hint {
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin: 0 0 16px 0;
-    font-style: italic;
-  }
-  #btn-carry-override { margin-top: 12px; }
-
-  .welcome-text {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--ink);
-    margin: 0 0 16px 0;
-    font-weight: 300;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .opt-btn {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: 100%;
-    text-align: left;
-    padding: 16px 20px;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: var(--btn-surface);
-    color: var(--ink);
-    font-size: 15px;
-    font-weight: 400;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  .opt-btn .opt-icon {
-    flex: 0 0 auto;
-    font-size: 20px;
-    opacity: 0.7;
-    filter: grayscale(100%);
-    transition: all 0.3s ease;
-  }
-  .opt-btn .opt-label { flex: 1; letter-spacing: 0.02em; }
-  .opt-btn:hover {
-    border-color: var(--accent);
-    background: var(--btn-surface-hover);
-  }
-  .opt-btn.selected {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    box-shadow: var(--shadow-glow);
-    font-weight: 500;
-  }
-  .opt-btn.selected .opt-icon {
-    opacity: 1;
-    filter: grayscale(0%);
-  }
-
-  .primary-btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    border-radius: var(--radius);
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: var(--on-accent);
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-  }
-  .primary-btn:hover:not(:disabled) {
-    box-shadow: var(--shadow-glow);
-    opacity: 0.9;
-  }
-  .primary-btn:disabled {
-    border-color: var(--line);
-    background: var(--btn-disabled-bg);
-    color: var(--ink-soft);
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-  
-  .secondary-btn {
-    display: block;
-    width: 100%;
-    padding: 14px;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink-soft);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    margin-top: 12px;
-    transition: border 0.2s, color 0.2s;
-    font-weight: 500;
-  }
-  .secondary-btn:hover:not(:disabled) {
-    border-color: var(--ink);
-    color: var(--ink);
-  }
-  .secondary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-  #btn-done { position: relative; overflow: hidden; }
-  #btn-done .btn-done-label { display: block; transition: opacity .15s ease; }
-  #btn-done .btn-done-check {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0; transform: scale(.5);
-    transition: opacity .2s ease, transform .2s ease;
-  }
-  #btn-done.is-completing .btn-done-label { opacity: 0; }
-  #btn-done.is-completing .btn-done-check { opacity: 1; transform: scale(1); }
-  #btn-done.is-completing { cursor: default; }
-
-  .checkin-progress { margin-bottom: 20px; }
-  .checkin-progress-text {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--ink-soft);
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-  .checkin-progress-dots { display: flex; gap: 8px; }
-  .progress-dot {
-    width: 30px;
-    height: 3px;
-    background: var(--line);
-    transition: background 0.3s ease;
-    border-radius: 2px;
-  }
-  .progress-dot.done { background: var(--accent); opacity: 0.5; }
-  .progress-dot.current {
-    background: var(--accent);
-    box-shadow: 0 0 8px rgba(0,0,0,0.1);
-  }
-  
-  .checkin-nav { display: flex; gap: 12px; }
-  .checkin-nav .secondary-btn, .checkin-nav .primary-btn { width: auto; flex: 1; margin-top: 0; }
-
-  .gatekeeper {
-    background: var(--warn-soft);
-    border-left: 3px solid var(--warn);
-    color: var(--warn);
-    padding: 16px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-
-  .disruption-note {
-    background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
-    color: var(--accent);
-    padding: 16px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 20px;
-  }
-
-  .intervention-title {
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    margin: 4px 0 12px 0;
-    color: var(--ink);
-  }
-  .intervention-action {
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 16px;
-    color: var(--ink);
-  }
-  
-  .tag {
-    display: inline-block;
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    background: var(--accent-soft);
-    color: var(--accent);
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-left: 10px;
-    vertical-align: middle;
-    border: 1px solid var(--line);
-  }
-  
-  details {
-    margin-top: 16px;
-    font-size: 14px;
-    color: var(--ink-soft);
-    background: var(--bg);
-    padding: 12px 16px;
-    border-radius: var(--radius);
-    border: 1px solid var(--line);
-  }
-  summary {
-    cursor: pointer;
-    color: var(--accent);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 11px;
-  }
-  details p { margin: 12px 0 0 0; line-height: 1.6; font-weight: 400; }
-  details ol { margin: 12px 0 0 0; padding-left: 20px; font-weight: 400; }
-  details ol li { margin-bottom: 8px; }
-  
-  .variation-note { font-style: italic; margin-top: 12px !important; }
-  .mood-framing { font-style: italic; color: var(--ink-soft); font-size: 14px; margin: 0 0 16px 0; border-left: 1px solid var(--line); padding-left: 12px; }
-
-  .row { display: flex; gap: 12px; }
-  .row .opt-btn { flex: 1; text-align: center; justify-content: center; padding: 20px 10px; }
-
-  .dayclose-question { font-size: 15px; font-weight: 400; color: var(--ink); margin-bottom: 16px; text-align: center; }
-  .dayclose-done { font-size: 14px; color: var(--accent); text-align: center; font-weight: 500; }
-  .dayclose-done .change-link {
-    color: var(--ink-soft); text-decoration: none; cursor: pointer; margin-left: 12px;
-    background: none; border: 1px solid var(--line); padding: 4px 8px; border-radius: 4px; font-size: 10px; text-transform: uppercase; font-weight: 500;
-  }
-
-  .advanced-section {
-    margin-top: 40px;
-    background: transparent;
-    border-top: 1px solid var(--line);
-    padding: 20px 0 0 0;
-    border-radius: 0;
-  }
-  .advanced-section summary { font-size: 12px; color: var(--ink-soft); }
-  .advanced-group { margin-top: 24px; padding-top: 0; border-top: none; }
-  .advanced-label {
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 12px;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 6px;
-    font-weight: 500;
-  }
-  .advanced-section table { width: 100%; border-collapse: collapse; font-size: 12px; color: var(--ink-soft); font-weight: 400; }
-  .advanced-section td, .advanced-section th { padding: 8px 6px; border-bottom: 1px solid var(--line); text-align: left; }
-
-  .history-entry {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
-    font-weight: 400;
-  }
-  .history-entry:last-child { border-bottom: none; }
-  .history-entry .h-num { color: var(--ink-soft); font-size: 11px; min-width: 44px; line-height: 1.4; text-transform: uppercase; }
-  .history-entry .h-main { flex: 1; color: var(--ink); }
-  .h-tier-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    margin-right: 10px;
-    vertical-align: middle;
-  }
-  .history-entry .h-qualia { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 8px; border-radius: 4px; background: var(--bg); font-weight: 500; }
-  .h-qualia.better { color: var(--accent); border: 1px solid var(--accent-soft); }
-  .h-qualia.worse { color: var(--warn); border: 1px solid var(--warn-border); }
-  .h-qualia.same { color: var(--ink-soft); border: 1px solid var(--line); }
-  .history-empty { color: var(--ink-soft); font-size: 14px; font-weight: 400; text-align: center; padding: 20px 0; }
-
-  .progress-row {
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    padding: 8px 0;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--ink);
-  }
-  .progress-row .p-value { font-weight: 500; color: var(--accent); min-width: 36px; font-size: 16px; }
-
-  #progress-card { border-top: 3px solid var(--accent); }
-  #dayclose-card { border-top: 3px solid var(--tier5); }
-  #history-card { border-top: 3px solid var(--ink-soft); }
-
-  footer {
-    text-align: center;
-    color: var(--ink-soft);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 40px;
-  }
-</style>
-</head>
-<body>
-
-<a href="#main-content" class="skip-link">Skip to main content</a>
-
-<header>
-  <h1>HUMANEED</h1>
-  <p id="context-greeting" class="context-greeting" aria-live="polite"></p>
-  <button id="mood-widget-btn" class="mood-widget-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select mood">
-    <span id="mood-widget-emoji" aria-hidden="true">+</span>
-  </button>
-  <div id="mood-popover" class="mood-popover" hidden role="menu" aria-label="Select mood">
-    <p class="mood-popover-hint">Adjust the invisible cause. Alters phrasing, not outcome.</p>
-    <div id="mood-popover-options" class="mood-popover-options"></div>
-    <button class="mood-popover-clear" id="btn-mood-clear" type="button">Reset</button>
-  </div>
-</header>
-
-<main id="main-content" tabindex="-1">
-  <!-- SCREEN 0: WILLKOMMEN -->
-  <section id="screen-welcome" class="screen active" tabindex="-1" aria-label="Willkommen">
-    <div class="card">
-      <div class="tier-label">DECODE THE URGE.</div>
-      <div class="question">HUMANEED in one sentence</div>
-      <p class="welcome-text">Every day, HUMANEED decodes the one area demanding your deepest psychological attention — biology, emotion, social connection, cognition, competence, or meaning — prescribing a single actionable step.</p>
-      <p class="welcome-text">No points, no false signals, no pressure: just a brief diagnostic, an intervention, and analyzing the outcome.</p>
-      <p class="carry-hint">Takes under a minute.</p>
-      <button class="primary-btn" id="btn-welcome-start" type="button">Initiate</button>
-    </div>
-  </section>
-
-  <!-- SCREEN 1: CHECK-IN -->
-  <section id="screen-checkin" class="screen" tabindex="-1" aria-label="Check-in">
-    <div class="checkin-progress" id="checkin-progress" aria-live="polite"></div>
-    <div id="checkin-list"></div>
-    <div class="checkin-nav">
-      <button class="secondary-btn" id="btn-checkin-back" type="button">Back</button>
-      <button class="primary-btn" id="btn-checkin-next" type="button" disabled>Next</button>
-    </div>
-  </section>
-
-  <!-- SCREEN 2: RESULT / INTERVENTION -->
-  <section id="screen-result" class="screen" tabindex="-1" aria-label="Empfehlung">
-    <div id="gatekeeper-note" aria-live="polite"></div>
-    <div id="disruption-note" aria-live="polite"></div>
-    <div class="card">
-      <div class="tier-label" id="result-tier-label"></div>
-      <p id="result-mood-framing" class="mood-framing" style="display:none;"></p>
-      <div class="intervention-title" id="result-title"></div>
-      <div class="intervention-action" id="result-action"></div>
-      <details>
-        <summary>True Causation Steps</summary>
-        <ol id="result-steps"></ol>
-        <p id="result-variation" class="variation-note"></p>
-      </details>
-      <details>
-        <summary>System Rationale</summary>
-        <p id="result-why"></p>
-      </details>
-    </div>
-    <button class="primary-btn" id="btn-done">
-      <span class="btn-done-label">Complete</span>
-      <span class="btn-done-check" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>
-      </span>
-    </button>
-    <button class="secondary-btn" id="btn-skip">Skip Cycle</button>
-  </section>
-
-  <!-- SCREEN 3: QUALIA FEEDBACK -->
-  <section id="screen-feedback" class="screen" tabindex="-1" aria-label="Rückmeldung">
-    <div class="card">
-      <div class="question" id="feedback-question">Analyze the outcome. How does the system respond?</div>
-      <div class="row" role="radiogroup" aria-labelledby="feedback-question">
-        <button class="opt-btn" data-qualia="-1" role="radio" aria-checked="false">Worse</button>
-        <button class="opt-btn" data-qualia="0" role="radio" aria-checked="false">Static</button>
-        <button class="opt-btn" data-qualia="1" role="radio" aria-checked="false">Better</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- SCREEN 4: SUMMARY -->
-  <section id="screen-summary" class="screen" tabindex="-1" aria-label="Fortschritt und Verlauf">
-    <div class="card">
-      <div class="question">Structure Calibrated.</div>
-      <p id="summary-text" style="color:var(--ink-soft);font-size:14px;font-weight:400;"></p>
-    </div>
-    <div class="card" id="progress-card">
-      <div class="tier-label">System Progress</div>
-      <div id="progress-list"></div>
-    </div>
-    <div class="card" id="dayclose-card">
-      <div class="tier-label">End of Cycle Analysis</div>
-      <div id="dayclose-content"></div>
-    </div>
-    <div class="card" id="outcome-card">
-      <div class="tier-label">Macro Efficacy</div>
-      <p style="color:var(--ink-soft);font-size:12px;margin-top:-6px;font-weight:400;">Longitudinal measurement detached from daily metrics.</p>
-      <div id="outcome-content"></div>
-    </div>
-    <div class="card" id="history-card">
-      <div class="tier-label">Diagnostic History</div>
-      <p style="color:var(--ink-soft);font-size:12px;margin-top:-6px;font-weight:400;">Encrypted locally in browser state.</p>
-      <div id="history-list"></div>
-    </div>
-    <button class="primary-btn" id="btn-restart">Initiate New Cycle</button>
-    
-    <details class="advanced-section">
-      <summary>Advanced Diagnostics</summary>
-      <div class="advanced-group">
-        <div class="advanced-label">Data Architecture</div>
-        <div id="backup-controls" style="display:flex;gap:10px;flex-wrap:wrap;">
-          <button class="secondary-btn" id="btn-export-data">Export System Data</button>
-          <button class="secondary-btn" id="btn-import-data">Import System Data</button>
-          <input type="file" id="import-file-input" accept="application/json" style="display:none;">
-        </div>
-        <div id="import-status" style="font-size:12px;margin-top:12px;" aria-live="polite"></div>
-      </div>
-      <div class="advanced-group">
-        <div class="advanced-label">Internal Node Weights</div>
-        <table id="weights-table"></table>
-      </div>
-      <div class="advanced-group">
-        <div class="advanced-label">Gatekeeper Sensitivity</div>
-        <table id="sensitivity-table"></table>
-      </div>
-      <div class="advanced-group">
-        <div class="advanced-label">System Override</div>
-        <button class="secondary-btn" id="btn-reset-all" style="border-color: var(--warn); color: var(--warn);">Purge All Diagnostics</button>
-        <div id="reset-status" style="font-size:12px;margin-top:12px;" aria-live="polite"></div>
-      </div>
-    </details>
-  </section>
-</main>
-
-<footer>HUMANEED · Core Protocol · v0.39 · Premium Dual Theme</footer>
-
-<script>
-/* =========================================================
-   HUMANEED — Core Loop Prototyp
-   Bottom-up: Check-in -> Gatekeeper -> 1 Intervention -> Qualia -> Anpassung
-   ========================================================= */
-
-const TIERS = [
-  { id:0, name:"Biologie",  question:"Wie fit bist du gerade (Schlaf & Energie)?",
-    options:[
-      {label:"Erschöpft", value:10},
-      {label:"Eher müde", value:30},
-      {label:"Geht so", value:50},
-      {label:"Ziemlich fit", value:70},
-      {label:"Topfit & energiegeladen", value:90}
-    ]},
-  { id:1, name:"Emotion",   question:"Wie ruhig und sicher fühlst du dich gerade?",
-    options:[
-      {label:"Sehr angespannt / gestresst", value:10},
-      {label:"Eher unruhig", value:30},
-      {label:"Neutral", value:50},
-      {label:"Eher ruhig", value:70},
-      {label:"Ruhig & sicher", value:90}
-    ]},
-  { id:2, name:"Sozial",    question:"Wie verbunden fühlst du dich gerade mit anderen?",
-    options:[
-      {label:"Isoliert", value:10},
-      {label:"Eher distanziert", value:30},
-      {label:"Neutral", value:50},
-      {label:"Eher verbunden", value:70},
-      {label:"Verbunden & gesehen", value:90}
-    ]},
-  { id:3, name:"Kognition", question:"Wie ist dein Fokus gerade?",
-    options:[
-      {label:"Sehr schwer zu fokussieren", value:10},
-      {label:"Eher zerstreut", value:30},
-      {label:"Normal", value:50},
-      {label:"Eher klar", value:70},
-      {label:"Voll da & klar", value:90}
-    ]},
-  { id:4, name:"Kompetenz", question:"Traust du dir gerade zu, Dinge anzugehen?",
-    options:[
-      {label:"Blockiert / überfordert", value:10},
-      {label:"Eher unsicher", value:30},
-      {label:"Normal", value:50},
-      {label:"Eher zuversichtlich", value:70},
-      {label:"Im Flow / zuversichtlich", value:90}
-    ]},
-  { id:5, name:"Bedeutung", question:"Spürst du gerade Sinn in dem, was du tust?",
-    options:[
-      {label:"Losgelöst / leer", value:10},
-      {label:"Eher fraglich", value:30},
-      {label:"Neutral", value:50},
-      {label:"Eher stimmig", value:70},
-      {label:"Klar verbunden mit meinem Warum", value:90}
-    ]}
-];
-
-const SCALE_EMOJI = { 10: "😞", 30: "🙁", 50: "😐", 70: "🙂", 90: "😄" };
-function scaleIcon(value){
-  return `<span class="opt-icon" aria-hidden="true">${SCALE_EMOJI[value]}</span>`;
-}
-const FACE_ICONS = { 10: scaleIcon(10), 30: scaleIcon(30), 50: scaleIcon(50), 70: scaleIcon(70), 90: scaleIcon(90) };
-
-const MOOD_OPTIONS = [
-  { key:"down",   emoji:"🙁", label:"Niedergeschlagen",
-    framing:"Muss heute nicht viel sein. Hier ist ein kleiner, machbarer Schritt für dich:" },
-  { key:"calm",   emoji:"😌", label:"Ausgeglichen",
-    framing:"Du wirkst heute ruhig und gesammelt — dann lass uns das nutzen:" },
-  { key:"upbeat", emoji:"😆", label:"Gut aufgelegt",
-    framing:"Du klingst heute aufgelegt — pack die Energie in diesen Schritt:" },
-  { key:"warm",   emoji:"🥰", label:"Warmherzig",
-    framing:"Schön, dass du dir heute Zeit für dich nimmst. Hier ein kleiner Schritt:" },
-  { key:"angry",  emoji:"😡", label:"Frustriert",
-    framing:"Erstmal durchatmen. Hier ist ein kleiner, machbarer Schritt:" },
-  { key:"kind",   emoji:"😇", label:"Gutmütig",
-    framing:"Du fühlst dich heute großzügig gestimmt — hier ein kleiner Schritt für dich:" }
-];
-
-const TIER_WHY = {
-  0: "Der Körper ist nicht Objekt, sondern Träger des Bewusstseins (Merleau-Ponty). Diese Handlung pflegt das primäre Medium, nicht nur eine Maschine.",
-  1: "Dein Nervensystem trifft ständig Vorhersagen über Sicherheit (Predictive Processing, Friston). Diese Handlung ist ein kleiner Beweis: Du bist jetzt sicher.",
-  2: "Soziale Co-Regulation aktiviert das Oxytocin-System und senkt die Amygdala-Reaktivität — dein Nervensystem synchronisiert sich mit einem anderen.",
-  3: "Die App erzwingt nichts, sie entfernt Reibung (Wu Wei). Weniger Reize, mehr synaptische Kapazität für das, was zählt.",
-  4: "Bewusste Wiederholung stabilisiert dein dynamisches Ordnungszentrum — Kompetenz entsteht durch Handeln, nicht durch Zureden.",
-  5: "Unstrukturierte Zeit ist neurobiologisch notwendig für das Default Mode Network (Scholé) — Sinn entsteht nicht im Tun, sondern im Innehalten."
-};
-
-const INTERVENTIONS = [
-  { id:"01", tier:1, title:"Der Schwellen-Puffer", action:"5 Minuten vor der Haustür innehalten, ausatmen, die Arbeit gedanklich schließen.", proposal:false, bestTime:"evening",
-    steps:["Vor der Tür stehen bleiben, bevor du reingehst.", "Drei Mal bewusst tief ausatmen.", "Dir kurz sagen: 'Das war die Arbeit, jetzt kommt der Rest.'"],
-    variation:"Keine eigene Haustür gerade? Geht auch im Auto oder auf der letzten Treppenstufe.",
-    deepen:{ action:"Diesmal zusätzlich einmal um den Block gehen, bevor du reingehst — als längerer Übergang.",
-      steps:["Wie gewohnt vor der Tür stehen bleiben.", "Einmal ums Haus oder den Block gehen, bevor du reingehst.", "Erst danach wirklich 'ankommen' und reingehen."] } },
-  { id:"02", tier:1, title:"Die ersten 30 Minuten", action:"Keine Bildschirme in den ersten 30 Minuten des Tages.", proposal:false, bestTime:"morning",
-    steps:["Handy bewusst außer Reichweite lassen beim Aufwachen.", "Erst anziehen, trinken oder rausschauen, bevor der erste Blick aufs Display kommt.", "Nach 30 Minuten ganz normal weitermachen."],
-    variation:"Muss der Wecker aufs Handy? Auch 'nur checken, dann sofort weglegen' ist schon ein Kompromiss.",
-    deepen:{ action:"Diesmal 60 statt 30 Minuten ganz ohne Bildschirm.",
-      steps:["Handy wie gewohnt außer Reichweite lassen.", "Die ersten 60 statt 30 Minuten ganz ohne Display verbringen.", "Danach bewusst und nicht hastig einsteigen."] } },
-  { id:"03", tier:3, title:"Der Gedanken-Parkplatz", action:"Schreib offene To-Dos kurz auf, um dein Arbeitsgedächtnis zu entlasten.", proposal:false, bestTime:"evening",
-    steps:["Zettel oder Notiz-App aufmachen.", "Alles aufschreiben, was gerade im Kopf 'herumschwirrt' — ungefiltert.", "Liste einfach liegen lassen, nicht sofort abarbeiten."],
-    variation:"Kein Stift zur Hand? Auch eine Sprachnotiz an dich selbst funktioniert.",
-    deepen:{ action:"Diesmal bei jedem Punkt zusätzlich kurz notieren, wann du dich darum kümmerst — nicht ausführen, nur einplanen.",
-      steps:["Wie gewohnt alles aufschreiben, was im Kopf herumschwirrt.", "Bei jedem Punkt kurz einen groben Zeitpunkt notieren (heute, diese Woche, später).", "Die Liste danach wieder liegen lassen — nichts sofort abarbeiten."] } },
-  { id:"04", tier:3, title:"Die 1-Tab-Regel", action:"Nur einen Tab für die nächsten 45 Minuten geöffnet lassen.", proposal:false, bestTime:"any",
-    steps:["Alle Tabs bis auf einen schließen.", "Timer auf 45 Minuten stellen.", "Neue Tabs erst nach Ablauf des Timers öffnen."],
-    variation:"Brauchst du wirklich zwei Tabs für die Aufgabe? Dann die Ausnahme bewusst erlauben, aber alles andere zu.",
-    deepen:{ action:"Diesmal die 1-Tab-Regel für den ganzen restlichen Vormittag statt nur 45 Minuten.",
-      steps:["Alle Tabs bis auf einen schließen — wie gewohnt.", "Diesmal bis zur Mittagspause dabei bleiben.", "Neue Tabs bewusst erst danach öffnen."] } },
-  { id:"05", tier:5, title:"Das leise Wochenende", action:"Plane einen halben Tag bewusst frei — nichts vornehmen.", proposal:false, bestTime:"weekend",
-    steps:["Einen halben Tag im Kalender bewusst leer lassen.", "Keine Verabredungen, keine Aufgabenliste für diese Zeit.", "Wenn Langeweile kommt: sie zulassen statt sie sofort zu füllen."],
-    variation:"Ein ganzer halber Tag ist zu viel? Auch 2 Stunden bewusst frei sind ein Anfang.",
-    deepen:{ action:"Diesmal ein ganzer Tag bewusst frei statt nur ein halber.",
-      steps:["Einen ganzen Tag im Kalender bewusst leer lassen.", "Auch spontane Anfragen für diesen Tag freundlich absagen.", "Den Tag ohne festen Plan auf dich zukommen lassen."] } },
-  { id:"06", tier:0, title:"Reduzierte Reibung", action:"Kleidung für morgen bereitlegen, Frühstück standardisieren.", proposal:false, bestTime:"evening",
-    steps:["Kleidung für morgen schon heute Abend bereitlegen.", "Ein Frühstück überlegen, das du diese Woche einfach wiederholen kannst.", "Kaffee-/Teemaschine startklar für morgen machen."],
-    variation:"Wenig Zeit? Reicht auch nur ein Teil, z. B. nur die Kleidung.",
-    deepen:{ action:"Diesmal für die ganze Woche statt nur für morgen vorbereiten.",
-      steps:["Kleidung für mehrere Tage im Voraus bereitlegen.", "Ein Frühstück wählen, das die ganze Woche funktioniert.", "Einmal einkaufen, was für die Woche fehlt."] } },
-  { id:"07", tier:1, title:"Der physiologische Reset", action:"Kaltes Wasser über die Handgelenke laufen lassen, langsam ausatmen.", proposal:false, bestTime:"any",
-    steps:["Kaltes Wasser aufdrehen.", "Handgelenke 20–30 Sekunden darunterhalten.", "Dabei langsam und bewusst ausatmen."],
-    variation:"Kein Wasserhahn in der Nähe? Ein kaltes Getränk oder offenes Fenster tut es notfalls auch.",
-    deepen:{ action:"Diesmal das kalte Wasser über die Unterarme bis zum Ellbogen laufen lassen, für eine Minute.",
-      steps:["Kaltes Wasser aufdrehen.", "Unterarme bis zum Ellbogen 60 Sekunden darunterhalten.", "Dabei bewusst langsamer aus- als einatmen."] } },
-  { id:"08", tier:3, title:"Der Graustufen-Modus", action:"Smartphone-Display für die nächste Zeit auf Graustufen stellen.", proposal:false, bestTime:"any",
-    steps:["Bildschirmzeit-Einstellungen öffnen.", "Graustufen-Filter aktivieren.", "Für den Rest des Zyklus so lassen."],
-    variation:"Keine Lust auf dauerhaft? Auch nur für die nächste Stunde reicht als Experiment.",
-    deepen:{ action:"Diesmal den Graustufen-Modus für den ganzen Tag anlassen statt nur für diesen Zyklus.",
-      steps:["Graustufen-Filter wie gewohnt aktivieren.", "Diesmal bewusst bis zum Abend so lassen.", "Am Abend kurz merken, ob sich etwas verändert hat."] } },
-  { id:"09", tier:0, title:"Low-Light-Abend", action:"90 Minuten vor dem Schlafen helles Licht dimmen.", proposal:false, bestTime:"evening",
-    steps:["Deckenlicht aus, stattdessen eine kleine Lampe.", "Bildschirm-Helligkeit runterdrehen oder Night-Modus an.", "Falls möglich: die letzte Stunde ganz ohne Screen."],
-    variation:"Kein Dimmer da? Auch eine einzelne warme Lampe statt Deckenlicht reicht.",
-    deepen:{ action:"Diesmal schon 2 Stunden vorher dimmen, mit einer bildschirmfreien Aktivität zum Ausklang.",
-      steps:["Schon 2 Stunden vor dem Schlafen das helle Licht dimmen.", "Eine bildschirmfreie Aktivität für die letzte Stunde wählen (Lesen, Dehnen, Gespräch).", "Das Ritual bewusst bis zum Schlafengehen durchhalten."] } },
-  { id:"10", tier:0, title:"Die +1-Regel", action:"Beim Verlassen eines Raums einen Gegenstand mitnehmen, der dort nicht hingehört.", proposal:false, bestTime:"any",
-    steps:["Kurz umschauen, bevor du den Raum verlässt.", "Genau einen Gegenstand mitnehmen, der eigentlich woanders hingehört.", "Ihn direkt an seinen Platz bringen."],
-    variation:"Kein Raumwechsel gerade? Nimm dir einen Gegenstand auf deinem Schreibtisch vor.",
-    deepen:{ action:"Diesmal drei Gegenstände statt nur einen mitnehmen.",
-      steps:["Kurz umschauen, bevor du den Raum verlässt.", "Diesmal bis zu drei Gegenstände mitnehmen, die woanders hingehören.", "Alle direkt an ihren Platz bringen."] } },
-  { id:"11", tier:1, title:"Der weite Blick", action:"2 Minuten in die Ferne schauen, den Blick weit werden lassen.", proposal:false, bestTime:"any",
-    steps:["Ans Fenster stellen oder nach draußen gehen.", "Auf den am weitesten entfernten Punkt schauen, den du siehst.", "2 Minuten lang, Blick weich und unfokussiert."],
-    variation:"Kein Fenster mit Weitblick? Auch der höchste sichtbare Punkt im Raum hilft.",
-    deepen:{ action:"Diesmal 5 statt 2 Minuten, wenn möglich draußen statt am Fenster.",
-      steps:["Wenn möglich nach draußen gehen statt nur ans Fenster.", "Auf einen weit entfernten Punkt schauen, Blick weich lassen.", "5 statt 2 Minuten dabei bleiben."] } },
-  { id:"12", tier:1, title:"Der physische Anker", action:"Aufrecht sitzen, Füße spüren, dreimal bewusst in den Bauch atmen.", proposal:false, bestTime:"any",
-    steps:["Beide Füße flach auf den Boden stellen.", "Rücken aufrichten, Schultern lockern.", "Dreimal bewusst in den Bauch statt in die Brust atmen."],
-    variation:"Kein Sitzplatz gerade? Geht auch im Stehen, Füße bewusst spüren reicht als Anker.",
-    deepen:{ action:"Die gleiche Übung, diesmal für 2 Minuten mit einem kurzen Körper-Scan von den Füßen bis zum Kopf.",
-      steps:["Beide Füße flach auf den Boden stellen, Rücken aufrichten.", "Langsam mit der Aufmerksamkeit von den Füßen bis zum Kopf wandern.", "Bei jeder Körperregion kurz bewusst entspannen."] } },
-  { id:"13", tier:4, title:"Die 24-Stunden-Regel", action:"Auf eine Anfrage antworten: „Ich prüfe das und melde mich morgen.“", proposal:false, bestTime:"any",
-    steps:["Anfrage erhalten — nicht sofort zusagen oder absagen.", "Die Standard-Antwort nutzen: 'Ich prüfe das und melde mich morgen.'", "Am nächsten Tag in Ruhe entscheiden."],
-    variation:"Muss es schneller gehen? Auch 'Ich melde mich in ein paar Stunden' ist schon ein Gewinn gegenüber sofort zusagen.",
-    deepen:{ action:"Diesmal die Regel bei einer Anfrage anwenden, die dir eigentlich schwerfällt zu verschieben — nicht nur bei einer einfachen.",
-      steps:["Bewusst eine Anfrage wählen, bei der Verschieben dir schwerfällt.", "Trotzdem die Standard-Antwort nutzen: 'Ich prüfe das und melde mich morgen.'", "Die 24 Stunden wirklich abwarten, bevor du entscheidest."] } },
-  { id:"14", tier:4, title:"Der erste Sieg", action:"Erledige die wichtigste Aufgabe als Erstes.", proposal:false, bestTime:"morning",
-    steps:["Kurz überlegen: was ist heute die eine wichtigste Sache?", "Genau die zuerst angehen, vor E-Mails oder Nebensächlichem.", "Erst danach zum Rest übergehen."],
-    variation:"Die wichtigste Aufgabe ist zu groß für 'als Erstes'? Dann nur den ersten konkreten Schritt davon zuerst machen.",
-    deepen:{ action:"Diesmal einen festen, ungestörten Zeitblock dafür reservieren, bis die Aufgabe wirklich fertig ist.",
-      steps:["Die wichtigste Aufgabe wie gewohnt zuerst wählen.", "Einen festen Zeitblock dafür reservieren, ohne Unterbrechung.", "Erst zum Rest übergehen, wenn die Aufgabe wirklich abgeschlossen ist."] } },
-  { id:"15", tier:1, title:"Der klare Cut", action:"Laptop zuklappen und aus dem Blickfeld räumen — als bewusste Trennlinie.", proposal:false, bestTime:"evening",
-    steps:["Laufende Aufgabe kurz notieren, damit sie nicht 'offen' im Kopf bleibt.", "Laptop zuklappen.", "Ihn tatsächlich aus dem Sichtfeld räumen, nicht nur zuklappen."],
-    variation:"Laptop muss erreichbar bleiben? Dann wenigstens den Bildschirm abdecken oder umdrehen.",
-    deepen:{ action:"Diesmal den Laptop in einen anderen Raum bringen statt nur aus dem Blickfeld.",
-      steps:["Laufende Aufgabe kurz notieren.", "Laptop zuklappen.", "Ihn diesmal in einen anderen Raum bringen, nicht nur aus dem Blickfeld."] } },
-  { id:"16", tier:2, title:"Der bewusste Check-in", action:"Schreib einer nahestehenden Person eine unaufgeforderte, konkrete Nachricht — kein Small Talk.", proposal:false, bestTime:"any",
-    steps:["Eine Person auswählen, an die du gerade denkst.", "Etwas Konkretes schreiben, das du an ihr schätzt oder das dir aufgefallen ist.", "Abschicken, ohne lange zu überarbeiten."],
-    variation:"Schreiben fällt schwer? Eine Sprachnachricht wirkt oft noch persönlicher.",
-    deepen:{ action:"Diesmal statt einer Nachricht direkt anrufen und wirklich fragen, wie es der Person geht.",
-      steps:["Die Person anrufen statt zu schreiben.", "Ehrlich fragen, wie es ihr gerade wirklich geht.", "Zuhören, ohne das Gespräch schnell zu beenden."] } },
-  { id:"17", tier:2, title:"Gemeinsame Ko-Regulation", action:"Verbring 5 Minuten mit einer vertrauten Person im selben Raum, ohne Bildschirm.", proposal:false, bestTime:"evening",
-    steps:["Person fragen, ob 5 Minuten Zeit ohne Handy drin sind.", "Beide Handys weglegen.", "Einfach da sein — reden oder auch schweigen ist beides okay."],
-    variation:"Niemand gerade greifbar? Ein kurzer Videoanruf statt Textnachricht kommt nah dran.",
-    deepen:{ action:"Diesmal eine ganze gemeinsame Mahlzeit ohne Bildschirme statt nur 5 Minuten.",
-      steps:["Eine gemeinsame Mahlzeit verabreden.", "Beide Handys für die ganze Zeit weglegen.", "Bewusst im gleichen Tempo essen und reden."] } },
-  { id:"18", tier:4, title:"Die Ein-Wiederholung", action:"Wiederhole heute bewusst eine kleine Handlung, die du schon einmal gut hinbekommen hast — exakt so wie beim ersten Mal.", proposal:false, bestTime:"any",
-    steps:["Kurz überlegen: was hat neulich gut geklappt?", "Genau diese Handlung heute noch einmal so ausführen.", "Bewusst wahrnehmen, dass es (wieder) funktioniert."],
-    variation:"Erinnerst du dich nicht genau? Reicht auch eine ähnliche, kleinere Version davon.",
-    deepen:{ action:"Diesmal einen größeren Erfolg wiederholen, nicht nur eine kleine Handlung.",
-      steps:["Überlegen: was hat kürzlich wirklich gut geklappt, auch wenn es größer war?", "Die zentralen Schritte davon heute bewusst wiederholen.", "Wahrnehmen, welcher Teil diesmal leichter fiel als beim ersten Mal."] } },
-  { id:"19", tier:5, title:"Der Sinn-Satz", action:"Schreib in einem Satz auf, warum das, was du heute tust, für dich zählt — ohne es zu bewerten.", proposal:false, bestTime:"any",
-    steps:["Kurz innehalten und an das denken, was heute ansteht oder anstand.", "Einen einzigen Satz aufschreiben, warum es zählt — kein Urteil.", "Den Satz einfach stehen lassen."],
-    variation:"Fällt dir kein Grund ein? Auch 'ich weiß es gerade nicht, und das ist okay' ist ein ehrlicher Satz.",
-    deepen:{ action:"Diesmal statt einem Satz einen kurzen Absatz — mit einem konkreten Beispiel.",
-      steps:["Wie gewohnt überlegen, was heute zählt.", "Diesmal einen kurzen Absatz statt nur einen Satz schreiben.", "Ein konkretes Beispiel aus dem Tag mit einbauen."] } },
-  { id:"20", tier:2, title:"Aktiv zuhören", action:"Stell einer Person heute eine echte Nachfrage und hör zu, ohne gleich zu antworten oder zu bewerten.", proposal:false, bestTime:"any",
-    steps:["Eine Frage stellen, die mehr als eine Ja/Nein-Antwort erlaubt.", "Zuhören, ohne schon die eigene Antwort vorzubereiten.", "Erst nachfragen, bevor du selbst etwas dazu sagst."],
-    variation:"Face-to-face gerade nicht möglich? Auch am Telefon funktioniert echtes Zuhören.",
-    deepen:{ action:"Diesmal das Gehörte am Ende in eigenen Worten zurückspiegeln.",
-      steps:["Wie gewohnt eine echte Frage stellen und zuhören.", "Am Ende in eigenen Worten zusammenfassen, was du gehört hast.", "Nachfragen, ob du es richtig verstanden hast."] } },
-  { id:"21", tier:0, title:"Morgenlicht", action:"Geh für 5–10 Minuten nach draußen, am besten kurz nach dem Aufstehen.", proposal:false, bestTime:"morning",
-    steps:["Direkt nach dem Aufstehen raus, auch nur auf den Balkon oder vor die Tür.", "Sonnenbrille wenn möglich weglassen.", "Kein Handy dabei — nur das Licht."],
-    variation:"Regen oder kalt? Auch ans offene Fenster stellen hilft schon etwas.",
-    deepen:{ action:"Verlängere die Zeit draußen auf 15–20 Minuten und verbinde sie mit einem kurzen Spaziergang.",
-      steps:["Wie gewohnt direkt nach dem Aufstehen raus.", "Diesmal ein kleines Stück gehen statt nur stehen zu bleiben.", "15–20 Minuten insgesamt draußen bleiben, auch bei bewölktem Himmel."] } },
-  { id:"22", tier:0, title:"4-7-8-Atmung", action:"4 Sekunden einatmen, 7 Sekunden halten, 8 Sekunden ausatmen — vier Runden.", proposal:false, bestTime:"any",
-    steps:["Durch die Nase 4 Sekunden einatmen.", "7 Sekunden die Luft halten.", "8 Sekunden langsam durch den Mund ausatmen — vier Runden wiederholen."],
-    variation:"Zählen fällt schwer? Die einfachere Box-Atmung (4 Sekunden ein, 4 halten, 4 aus, 4 halten) ist eine gute Alternative.",
-    deepen:{ action:"Die gleiche 4-7-8-Atmung, diesmal über 8–10 Runden statt 4.",
-      steps:["Durch die Nase 4 Sekunden einatmen.", "7 Sekunden die Luft halten.", "8 Sekunden langsam ausatmen — diesmal 8–10 Runden statt 4."] } },
-  { id:"23", tier:2, title:"Um Hilfe bitten", action:"Bitte heute bewusst eine Person um eine kleine Hilfe — auch wenn du es allein könntest.", proposal:false, bestTime:"any",
-    steps:["Etwas Kleines finden, wofür du Hilfe gebrauchen könntest.", "Konkret fragen statt anzudeuten.", "Die Hilfe annehmen, ohne sie sofort zu relativieren."],
-    variation:"Fällt schwer, jemanden persönlich zu fragen? Ein kurzer Anruf oder eine Nachricht reicht auch.",
-    deepen:{ action:"Diesmal um etwas bitten, das dir wirklich schwerfällt zu erbitten — nicht nur eine Kleinigkeit.",
-      steps:["Etwas finden, bei dem Hilfe zu erbitten dir eigentlich unangenehm ist.", "Trotzdem konkret danach fragen.", "Die Hilfe annehmen, ohne sie kleinzureden."] } },
-  { id:"24", tier:2, title:"Gefühle teilen", action:"Erzähl einer Person ehrlich, wie es dir gerade wirklich geht — ohne es kleinzureden.", proposal:false, bestTime:"any",
-    steps:["Eine Person wählen, der du vertraust.", "Eine Aussage machen statt einer Standard-Floskel.", "Bei der Aussage bleiben, auch wenn der Impuls kommt, sie abzuschwächen."],
-    variation:"Face-to-face zu viel? Auch schriftlich ehrlich sein wirkt.",
-    deepen:{ action:"Diesmal etwas teilen, das dir wirklich schwerfällt auszusprechen.",
-      steps:["Eine Person wählen, der du vertraust.", "Etwas teilen, das tiefer geht als beim letzten Mal.", "Bei der Aussage bleiben, auch wenn es unangenehm wird."] } },
-  { id:"25", tier:3, title:"Der Gedanken-Spaziergang", action:"10 Minuten ohne Handy spazieren gehen und die Gedanken einfach laufen lassen.", proposal:false, bestTime:"any",
-    steps:["Handy zuhause oder in der Tasche lassen — wirklich außer Reichweite.", "Ohne festes Ziel losgehen.", "Gedanken kommen und gehen lassen, nichts festhalten müssen."],
-    variation:"Kein Rausgehen möglich? Auch ein paar Minuten am Fenster stehen und bewusst nichts tun hilft.",
-    deepen:{ action:"Diesmal 20 statt 10 Minuten.",
-      steps:["Handy wie gewohnt zuhause lassen.", "Diesmal 20 statt 10 Minuten unterwegs bleiben.", "Ohne Ziel gehen, Gedanken einfach laufen lassen."] } },
-  { id:"26", tier:3, title:"Freewriting", action:"5 Minuten ohne abzusetzen aufschreiben, was gerade im Kopf ist — ohne Filter, ohne Korrektur.", proposal:false, bestTime:"any",
-    steps:["Timer auf 5 Minuten stellen.", "Stift oder Tastatur nicht absetzen, egal was rauskommt.", "Nichts durchstreichen oder korrigieren, bis der Timer klingelt."],
-    variation:"Schreiben blockiert? Auch lautes Vor-sich-hin-Reden funktioniert ähnlich.",
-    deepen:{ action:"Diesmal 15 statt 5 Minuten am Stück schreiben.",
-      steps:["Timer auf 15 statt 5 Minuten stellen.", "Ohne abzusetzen weiterschreiben, auch wenn nichts Neues kommt.", "Erst am Ende kurz durchlesen, ohne zu korrigieren."] } },
-  { id:"27", tier:4, title:"Gezieltes Üben", action:"Übe 10 Minuten gezielt genau den Teil einer Fähigkeit, der dir am schwersten fällt.", proposal:false, bestTime:"any",
-    steps:["Einen Teilbereich identifizieren, der aktuell am meisten hakt.", "10 Minuten Timer stellen, nur diesen Teil üben.", "Nach dem Timer kurz merken, was schon besser ging."],
-    variation:"Kein Timer zur Hand? Auch 'so lange, bis es einmal besser klappt' funktioniert.",
-    deepen:{ action:"Diesmal 25 Minuten statt 10, mit einer kurzen Selbst-Rückmeldung danach.",
-      steps:["Den schwierigsten Teilbereich wie gewohnt identifizieren.", "25 Minuten Timer stellen, nur diesen Teil üben.", "Danach kurz aufschreiben, was konkret besser wurde."] } },
-  { id:"28", tier:4, title:"Feedback einholen", action:"Frag eine Person konkret nach Rückmeldung zu einer Sache, die du gerade tust.", proposal:false, bestTime:"any",
-    steps:["Eine Person wählen, die die Sache kennt oder beurteilen kann.", "Eine konkrete Frage stellen statt 'wie findest du das allgemein'.", "Die Antwort annehmen, ohne sie sofort zu verteidigen."],
-    variation:"Niemand direkt greifbar? Auch schriftlich um kurzes Feedback bitten funktioniert.",
-    deepen:{ action:"Diesmal zusätzlich EINEN Punkt aus dem Feedback direkt umsetzen.",
-      steps:["Wie gewohnt konkret nach Rückmeldung fragen.", "Die Antwort annehmen, ohne sie zu verteidigen.", "Einen konkreten Punkt daraus noch heute umsetzen."] } },
-  { id:"29", tier:5, title:"Achtsamkeits-Minute", action:"60 Sekunden bewusst nur atmen und wahrnehmen, ohne etwas zu verändern.", proposal:false, bestTime:"any",
-    steps:["Timer auf 60 Sekunden stellen.", "Augen schließen oder einen festen Punkt fixieren.", "Nur wahrnehmen, was ist — ohne etwas zu bewerten oder zu ändern."],
-    variation:"60 Sekunden zu lang? Auch 20 bewusste Sekunden sind schon ein Unterschied.",
-    deepen:{ action:"Diesmal 5 bis 10 Minuten in Stille sitzen statt nur 60 Sekunden.",
-      steps:["Einen ruhigen Sitzplatz suchen, Timer auf 5–10 Minuten stellen.", "Aufmerksamkeit immer wieder sanft zum Atem zurückbringen.", "Am Ende einen Moment bewusst nachspüren, bevor du weitermachst."] } },
-  { id:"30", tier:5, title:"Anderen helfen", action:"Tu heute bewusst etwas Kleines, das nur einer anderen Person nützt, nicht dir.", proposal:false, bestTime:"any",
-    steps:["Eine kleine Gelegenheit suchen, die sich heute ohnehin ergibt.", "Sie ohne Gegenleistung zu erwarten wahrnehmen.", "Bewusst nichts davon erzählen oder posten."],
-    variation:"Fällt dir nichts Konkretes ein? Auch eine Tür aufhalten oder jemandem den Vortritt lassen zählt.",
-    deepen:{ action:"Diesmal etwas Größeres oder Wiederkehrendes anbieten statt nur eine Kleinigkeit.",
-      steps:["Eine Gelegenheit suchen, die etwas mehr Zeit oder Einsatz braucht als sonst.", "Sie ohne Gegenleistung anbieten.", "Falls es gut passt: anbieten, es öfter zu tun."] } },
-  { id:"31", tier:0, title:"Der Wasser-Check", action:"Kurz die eigene Trinkmenge checken und bei Bedarf ein großes Glas Wasser trinken.", proposal:false, bestTime:"any",
-    steps:["Kurz überlegen, wie viel du heute bisher getrunken hast.", "Ein großes Glas Wasser in Ruhe trinken.", "Das Glas danach sichtbar stehen lassen, als Erinnerung fürs nächste Mal."],
-    variation:"Kein Wasser griffbereit? Auch ein anderes ungesüßtes Getränk zählt für den Moment.",
-    deepen:{ action:"Diesmal den ganzen Tag über deine Trinkmenge im Blick behalten, nicht nur jetzt ein Glas.",
-      steps:["Wie gewohnt jetzt ein großes Glas Wasser trinken.", "Dir für den restlichen Tag 2–3 weitere feste Trinkmomente vornehmen.", "Am Abend kurz merken, ob es mehr war als sonst."] } },
-  { id:"32", tier:0, title:"Die kalte Dusche", action:"Die Dusche ganz am Ende für 30–60 Sekunden auf kalt stellen.", proposal:false, bestTime:"morning",
-    steps:["Normal warm duschen wie sonst auch.", "Am Ende das Wasser schrittweise kälter drehen.", "30–60 Sekunden bewusst kalt bleiben, dabei ruhig weiteratmen."],
-    variation:"Ganz kalt ist zu viel? Auch nur Arme oder Nacken kurz kalt abduschen wirkt schon. Erkältet oder fiebrig? Dann lieber ganz warm bleiben.",
-    deepen:{ action:"Diesmal 90 Sekunden statt 30–60 — sofern es sich gut anfühlt.",
-      steps:["Normal warm duschen wie sonst.", "Am Ende schrittweise auf kalt drehen.", "Diesmal bis zu 90 Sekunden kalt bleiben, wenn es sich stimmig anfühlt — sonst einfach bei 60 aufhören."] } },
-  { id:"33", tier:0, title:"Der Kurzschlaf", action:"Einen Wecker auf 20 Minuten stellen und dich hinlegen, auch ohne einzuschlafen.", proposal:false, bestTime:"midday",
-    steps:["Wecker exakt auf 20 Minuten stellen.", "An einem ruhigen, eher dunklen Ort hinlegen.", "Augen schließen und entspannen — es muss kein echter Schlaf sein."],
-    variation:"Kein Ort zum Hinlegen da? Auch 20 Minuten mit geschlossenen Augen im Sitzen helfen schon.",
-    deepen:{ action:"Diesmal 30 statt 20 Minuten — für eine tiefere Erholungsphase.",
-      steps:["Wecker auf 30 Minuten stellen.", "An einem ruhigen, dunklen Ort hinlegen.", "Falls echter Schlaf kommt: das ist okay, der Wecker holt dich zurück."] } },
-  { id:"34", tier:1, title:"Die Gefühls-Benennung", action:"Innehalten und die aktuelle Emotion in einem Wort benennen — laut oder für dich.", proposal:false, bestTime:"any",
-    steps:["Kurz stoppen und in dich hineinspüren.", "Die Emotion so genau wie möglich benennen, z. B. 'Ich fühle Anspannung'.", "Merken, was sich durch das Benennen allein schon verändert."],
-    variation:"Fällt dir kein genaues Wort ein? Auch eine grobe Richtung wie 'eher unangenehm' oder 'eher gut' reicht als Anfang.",
-    deepen:{ action:"Diesmal zusätzlich die Intensität einschätzen und merken, wo im Körper sich die Emotion zeigt.",
-      steps:["Die Emotion wie gewohnt benennen.", "Die Intensität auf einer Skala von 1 bis 10 einschätzen.", "Kurz spüren, wo im Körper sich das Gefühl bemerkbar macht."] } },
-  { id:"35", tier:1, title:"Der Kontakt zur Natur", action:"10 Minuten an einen grünen, natürlichen Ort gehen und bewusst mit allen Sinnen wahrnehmen.", proposal:false, bestTime:"any",
-    steps:["Einen Ort mit Bäumen, Grün oder Wasser in der Nähe aufsuchen.", "Langsam gehen und bewusst hinschauen, hören, riechen.", "Wenn möglich etwas Natürliches kurz berühren — Rinde, Gras, Wasser."],
-    variation:"Kein Grün in der Nähe? Auch ein paar Zimmerpflanzen oder ein bewusster Blick auf den Himmel wirken schon in klein.",
-    deepen:{ action:"Diesmal 20 statt 10 Minuten, ohne Zeitdruck.",
-      steps:["Wie gewohnt einen grünen Ort aufsuchen.", "Diesmal 20 statt 10 Minuten dort bleiben.", "Bewusst langsamer werden, je länger du dort bist."] } },
-  { id:"36", tier:2, title:"Ein echtes Kompliment", action:"Einer Person heute etwas Konkretes und Ehrliches sagen, das du an ihr schätzt.", proposal:false, bestTime:"any",
-    steps:["Kurz überlegen, was dir an jemandem wirklich aufgefallen ist.", "Es konkret aussprechen, nicht nur allgemein 'gut gemacht'.", "Die Reaktion der Person einfach wahrnehmen, ohne mehr zu erwarten."],
-    variation:"Persönlich zu unangenehm? Auch schriftlich, z. B. per Nachricht, wirkt ein konkretes Kompliment.",
-    deepen:{ action:"Diesmal nicht nur eine Handlung loben, sondern eine Charaktereigenschaft, die du an der Person schätzt.",
-      steps:["Überlegen, welche Eigenschaft (nicht nur Handlung) du an der Person wirklich schätzt.", "Es ihr in eigenen Worten erklären, warum das für dich zählt.", "Den Moment wirken lassen, ohne ihn abzukürzen."] } },
-  { id:"37", tier:5, title:"Der Werte-Check", action:"Aufschreiben, was dir gerade wirklich wichtig ist, und kurz prüfen, ob dein Alltag dazu passt.", proposal:false, bestTime:"any",
-    steps:["3–5 Dinge aufschreiben, die dir aktuell wirklich wichtig sind.", "Bei jedem kurz notieren, warum es zählt.", "Ehrlich schauen, wo dein Alltag gerade davon abweicht — ohne es sofort zu bewerten."],
-    variation:"Zu viel auf einmal? Reicht auch, sich nur auf einen einzigen Wert zu konzentrieren.",
-    deepen:{ action:"Diesmal zusätzlich EINE konkrete Handlung festlegen, die diese Woche einem der Werte mehr Raum gibt.",
-      steps:["Die Werte-Liste wie gewohnt erstellen.", "Den Wert wählen, der aktuell am meisten zu kurz kommt.", "Eine konkrete, kleine Handlung dafür für diese Woche festlegen."] } },
-  { id:"38", tier:5, title:"Die große Frage", action:"Dir bewusst Zeit für eine große, unbeantwortete Frage nehmen — ohne sie lösen zu müssen.", proposal:false, bestTime:"any",
-    steps:["Eine Frage wählen, die dich wirklich beschäftigt, ohne einfache Antwort.", "Ein paar Minuten einfach damit sitzen, statt sie schnell zu beantworten.", "Falls du magst: aufschreiben, was dabei auftaucht — ohne Anspruch auf eine fertige Antwort."],
-    variation:"Fällt dir keine eigene Frage ein? Auch 'Was würde sich ändern, wenn ich heute wirklich ehrlich zu mir wäre?' funktioniert als Einstieg.",
-    deepen:{ action:"Diesmal die Frage schriftlich weiterverfolgen statt nur damit zu sitzen.",
-      steps:["Wie gewohnt eine große Frage wählen.", "Ein paar Minuten still damit sitzen.", "Danach schriftlich festhalten, was aufgetaucht ist — auch wenn es unfertig bleibt."] } },
-  { id:"39", tier:3, title:"Die Benachrichtigungs-Pause", action:"Für die nächste Stunde alle Benachrichtigungen auf deinem Handy stummschalten.", proposal:false, bestTime:"any",
-    steps:["Handy in den Nicht-stören-Modus oder Flugmodus versetzen.", "Bewusst eine Stunde als Zeitraum festlegen.", "Nach Ablauf ganz normal wieder erreichbar sein."],
-    variation:"Ganz stumm ist zu viel? Auch nur die lautesten Apps (Social Media, News) für die Stunde stummschalten reicht schon.",
-    deepen:{ action:"Diesmal einen halben Tag statt nur eine Stunde.",
-      steps:["Handy wie gewohnt in den Nicht-stören-Modus versetzen.", "Diesmal einen halben Tag statt nur eine Stunde festlegen.", "Wichtige Kontakte vorher kurz informieren, falls nötig."] } },
-  { id:"40", tier:3, title:"Das Info-Fasten", action:"Für die nächste Stunde bewusst keine Nachrichten, News oder Social Media checken.", proposal:false, bestTime:"any",
-    steps:["Für dich festlegen: die nächste Stunde ohne News- oder Social-Media-Apps.", "Bei Drang, kurz zu checken, stattdessen einmal tief durchatmen.", "Nach der Stunde ganz normal weiterschauen, wenn du magst."],
-    variation:"Eine ganze Stunde ist zu viel? Auch 20 bewusste Minuten sind schon ein Info-Fasten.",
-    deepen:{ action:"Diesmal einen halben Tag statt einer Stunde ohne News oder Social Media.",
-      steps:["Für dich einen halben Tag ohne News-/Social-Media-Apps festlegen.", "Apps notfalls für den Zeitraum vom Homescreen verbannen.", "Danach bewusst nur kurz reinschauen statt alles nachzuholen."] } },
-  { id:"41", tier:3, title:"Die einfache Wahl", action:"Bei der nächsten kleinen Entscheidung bewusst die einfachste Option wählen, statt lange abzuwägen.", proposal:false, bestTime:"any",
-    steps:["Auf die nächste kleine, nicht folgenreiche Entscheidung warten.", "Die erste naheliegende Option nehmen, ohne weiter zu vergleichen.", "Bewusst wahrnehmen, wie viel Energie das spart."],
-    variation:"Fällt dir schwer loszulassen? Setz dir eine Frist von 10 Sekunden für die Entscheidung.",
-    deepen:{ action:"Diesmal bei drei kleinen Entscheidungen hintereinander die einfachste Option wählen, nicht nur bei einer.",
-      steps:["Den restlichen Tag bewusst im Blick behalten.", "Bei drei kleinen Entscheidungen jeweils die einfachste Option wählen.", "Am Ende merken, wie viel Entscheidungsenergie das gespart hat."] } },
-  { id:"42", tier:4, title:"Der Timer-Sprint", action:"25 Minuten am Stück und ohne Unterbrechung an einer Sache arbeiten, die dich fordert.", proposal:false, bestTime:"any",
-    steps:["Timer auf 25 Minuten stellen.", "Alles andere für diese Zeit beiseitelegen — nur die eine Aufgabe.", "Nach dem Timer bewusst kurz pausieren, bevor es weitergeht."],
-    variation:"25 Minuten zu lang? Auch 10 Minuten ungestörter Fokus sind schon ein Sprint.",
-    deepen:{ action:"Diesmal 50 Minuten am Stück statt 25, mit einer kurzen Pause nach der Hälfte.",
-      steps:["Timer auf 50 Minuten stellen.", "Nach 25 Minuten eine kurze bewusste Pause von 2–3 Minuten.", "Danach die zweite Hälfte in gleicher Konzentration fortsetzen."] } },
-  { id:"43", tier:4, title:"Das Nein", action:"Sag heute bewusst 'Nein' zu einer Sache, die dir eigentlich nicht guttut.", proposal:false, bestTime:"any",
-    steps:["Eine Anfrage oder Gewohnheit identifizieren, bei der du eigentlich zögerst.", "Klar und freundlich absagen, ohne dich lang zu rechtfertigen.", "Beim Nein bleiben, auch wenn der Impuls kommt, es zurückzunehmen."],
-    variation:"Ein klares Nein fällt schwer? Auch 'Ich melde mich dazu noch mal' ist schon ein kleiner Schritt Richtung Grenze.",
-    deepen:{ action:"Diesmal eine wiederkehrende Sache ablehnen, nicht nur eine einmalige.",
-      steps:["Eine wiederkehrende Anfrage oder Gewohnheit identifizieren, die dir nicht guttut.", "Klar sagen, dass das ab jetzt nicht mehr geht — nicht nur dieses eine Mal.", "Beim Nein bleiben, auch wenn Nachfragen kommen."] } },
-  { id:"44", tier:4, title:"Die kleine Lehre", action:"Erklär heute jemandem kurz etwas, das du selbst gut kannst.", proposal:false, bestTime:"any",
-    steps:["Etwas auswählen, das du wirklich beherrschst — egal wie klein.", "Es einer Person in einfachen Worten erklären oder zeigen.", "Bemerken, wie das eigene Verständnis dabei noch klarer wird."],
-    variation:"Niemand gerade da zum Erklären? Auch das Aufschreiben, als würdest du es jemandem erklären, wirkt ähnlich.",
-    deepen:{ action:"Diesmal nicht nur kurz erklären, sondern die Person es unter deiner Anleitung selbst einmal ausprobieren lassen.",
-      steps:["Etwas auswählen, das du wirklich beherrschst.", "Es kurz erklären oder zeigen — wie gewohnt.", "Die Person es danach unter deiner Anleitung selbst einmal machen lassen."] } },
-  { id:"45", tier:0, title:"10 Minuten Gehen", action:"10 Minuten in moderatem Tempo gehen, egal wohin.", proposal:false, bestTime:"any",
-    steps:["Raus, ohne langes Überlegen wohin genau.", "Ein gleichmäßiges, angenehmes Tempo halten.", "Bewusst durch die Nase ein- und durch den Mund ausatmen."],
-    variation:"Keine 10 Minuten am Stück möglich? Auch zwei Mal 5 Minuten über den Tag verteilt zählen.",
-    deepen:{ action:"Diesmal 20 Minuten in zügigerem Tempo statt 10 Minuten gemütlich.",
-      steps:["Wie gewohnt losgehen, diesmal etwas schneller als sonst.", "20 statt 10 Minuten durchhalten.", "Am Ende kurz merken, wie sich Kopf und Körper jetzt anfühlen."] } },
-  { id:"46", tier:1, title:"Lachen", action:"Dir bewusst etwas suchen, das dich wirklich zum Lachen bringt — ein Video, eine Erinnerung, ein Mensch.", proposal:false, bestTime:"any",
-    steps:["Etwas suchen, von dem du weißt, dass es dich zum Lachen bringt.", "Dir die paar Minuten dafür wirklich nehmen.", "Das Lachen zulassen, ohne es zu bewerten."],
-    variation:"Fällt dir nichts ein? Auch an eine wirklich lustige Erinnerung zurückdenken funktioniert.",
-    deepen:{ action:"Diesmal das Lachen mit jemandem teilen statt allein zu bleiben.",
-      steps:["Das Lustige einer Person zeigen oder erzählen.", "Gemeinsam lachen, nicht nur zusehen wie die Person lacht.", "Den Moment kurz wirken lassen, bevor es weitergeht."] } },
-  { id:"47", tier:2, title:"Eine Umarmung", action:"Eine Person heute bewusst um eine Umarmung bitten oder eine anbieten — mindestens 6 Sekunden halten.", proposal:false, bestTime:"any",
-    steps:["Kurz fragen oder anbieten, ob eine Umarmung okay ist.", "Wirklich ganz umarmen, nicht nur kurz antippen.", "Mindestens 6 Sekunden halten, bevor du loslässt."],
-    variation:"Niemand gerade da? Auch eine Hand auf den eigenen Arm oder Brustkorb legen wirkt beruhigend.",
-    deepen:{ action:"Diesmal bewusst länger halten — 10 Sekunden statt 6.",
-      steps:["Wie gewohnt um eine Umarmung bitten oder anbieten.", "Diesmal bewusst bis 10 zählen, bevor du loslässt.", "Die Wärme und den Kontakt dabei bewusst wahrnehmen."] } },
-  { id:"48", tier:4, title:"Der Wochenplan", action:"10 Minuten die kommende Woche grob planen — was zählt wirklich, was kann warten.", proposal:false, bestTime:"any",
-    steps:["Kurz auf die kommende Woche schauen.", "Die 2–3 wirklich wichtigen Dinge markieren.", "Alles andere bewusst als 'kann warten' einordnen."],
-    variation:"Zu viel für eine ganze Woche? Auch nur der nächste Tag reicht als Einstieg.",
-    deepen:{ action:"Diesmal 20 Minuten, inklusive eines kurzen Rückblicks auf die letzte Woche.",
-      steps:["Kurz reflektieren, was in der letzten Woche gut lief und was nicht.", "Die kommende Woche wie gewohnt grob planen.", "Eine konkrete Lehre aus der letzten Woche in den neuen Plan einbauen."] } },
-  { id:"49", tier:5, title:"Stille Meditation", action:"10 Minuten in Stille sitzen und die Aufmerksamkeit immer wieder sanft zum Atem zurückbringen.", proposal:false, bestTime:"any",
-    steps:["Bequem und aufrecht hinsetzen, Timer auf 10 Minuten.", "Aufmerksamkeit auf den Atem richten.", "Wenn der Geist abschweift, sanft und ohne Urteil zurückkommen."],
-    variation:"10 Minuten zu lang für den Anfang? Auch 5 Minuten sind schon eine vollständige Übung.",
-    deepen:{ action:"Diesmal 20 statt 10 Minuten in Stille sitzen.",
-      steps:["Wie gewohnt bequem hinsetzen, diesmal Timer auf 20 Minuten.", "Aufmerksamkeit auf den Atem richten.", "Abschweifen so oft wie nötig sanft wieder loslassen — ohne Frustration."] } },
-  { id:"50", tier:0, title:"Laufen", action:"15–20 Minuten in gemütlichem Tempo laufen — ohne Distanz- oder Zeitdruck.", proposal:false, bestTime:"any",
-    steps:["Passende Kleidung und Schuhe anziehen.", "In einem Tempo starten, bei dem du dich noch unterhalten könntest.", "15–20 Minuten durchhalten, auch wenn es nur eine kleine Runde ist."],
-    variation:"Laufen belastet die Gelenke gerade zu sehr? Ein zügiger Spaziergang bringt einen Teil des gleichen Effekts.",
-    deepen:{ action:"Diesmal ein kurzes Intervall einbauen: 3–4 Mal 1 Minute schneller laufen, dazwischen locker traben.",
-      steps:["Wie gewohnt locker einlaufen.", "3–4 Mal 1 Minute spürbar schneller laufen, dazwischen wieder lockeres Tempo.", "Die letzten Minuten ruhig auslaufen."] } },
-  { id:"51", tier:0, title:"Kurzes Krafttraining", action:"20 Minuten gezielt Muskeln aufbauen — im Studio oder mit dem eigenen Körpergewicht.", proposal:false, bestTime:"any",
-    steps:["3–4 einfache Übungen wählen (z. B. Kniebeugen, Liegestütze, Unterarmstütz, Ausfallschritte).", "Jede Übung in 2–3 Sätzen ausführen.", "Auf saubere Ausführung statt auf Tempo achten."],
-    variation:"Kein Fitnessstudio in der Nähe oder gerade keine Zeit dafür? Die gleichen Übungen funktionieren auch 20 Minuten zuhause ganz ohne Geräte.",
-    deepen:{ action:"Diesmal eine Übung mehr oder einen zusätzlichen Satz ergänzen, um die Belastung langsam zu steigern.",
-      steps:["Die gewohnten Übungen wie gewohnt ausführen.", "Eine zusätzliche Übung oder einen vierten Satz ergänzen.", "Danach kurz merken, wo sich die höhere Belastung bemerkbar macht."] } },
-  { id:"52", tier:0, title:"Eine echte Mahlzeit kochen", action:"Statt etwas schnell zu essen, eine vollständige Mahlzeit frisch zubereiten.", proposal:false, bestTime:"evening",
-    steps:["Ein einfaches Gericht mit frischen Zutaten wählen.", "Dir bewusst die Zeit dafür nehmen, ohne nebenbei etwas anderes zu tun.", "Die Mahlzeit anschließend in Ruhe essen, nicht im Stehen oder vor dem Bildschirm."],
-    variation:"Wenig Zeit oder Kochkünste? Auch ein einfacher, frisch zusammengestellter Salat oder ein belegtes Brot zählt schon.",
-    deepen:{ action:"Diesmal für mehr als eine Portion kochen und den Rest für morgen aufheben — ein kleiner Vorrat entlastet den nächsten Tag.",
-      steps:["Ein Gericht wählen, das sich gut in größerer Menge zubereiten lässt.", "Bewusst für 2–3 Portionen kochen statt nur für jetzt.", "Den Rest sichtbar für morgen bereitstellen."] } },
-  { id:"53", tier:2, title:"Essen mit Freunden", action:"Eine Mahlzeit mit einer oder mehreren nahestehenden Personen verabreden und gemeinsam essen.", proposal:false, bestTime:"evening",
-    steps:["Mindestens eine Person fragen, ob sie Zeit für ein gemeinsames Essen hat.", "Einen konkreten Termin ausmachen, statt es vage zu lassen.", "Beim Essen bewusst beieinander bleiben, ohne Ablenkung durch Handy oder Bildschirm."],
-    variation:"Kein Termin kurzfristig möglich? Auch ein spontaner Kaffee oder ein gemeinsamer Spaziergang wirkt ähnlich verbindend.",
-    deepen:{ action:"Diesmal mehr als eine Person einladen — ein kleines gemeinsames Essen statt nur zu zweit.",
-      steps:["Zwei oder mehr Personen fragen statt nur eine.", "Einen gemeinsamen Termin finden, der für alle passt.", "Das Essen bewusst als Gruppe genießen, ohne Ablenkung durch Handy oder Bildschirm."] } },
-  { id:"54", tier:2, title:"Einer Gruppe anschließen", action:"An einem Gruppentermin teilnehmen — Sportgruppe, Kurs, Verein oder Ähnliches.", proposal:false, bestTime:"evening",
-    steps:["Eine bestehende oder neue Gruppe finden, die zu einem Interesse passt.", "Konkret hingehen oder daran teilnehmen, nicht nur vormerken.", "Bewusst mit mindestens einer Person dort ins Gespräch kommen."],
-    variation:"Keine passende Gruppe bekannt? Auch eine Online-Community mit echtem Austausch (nicht nur Mitlesen) ist ein Anfang.",
-    deepen:{ action:"Diesmal aktiv etwas beitragen oder mitorganisieren, statt nur teilzunehmen.",
-      steps:["Wie gewohnt an der Gruppe teilnehmen.", "Eine Aufgabe, Idee oder Hilfe aktiv anbieten.", "Wahrnehmen, wie sich aktive Teilhabe von reiner Teilnahme unterscheidet."] } },
-  { id:"55", tier:4, title:"Zeit für ein Hobby", action:"20–30 Minuten bewusst einer Fähigkeit widmen, die du aus Freude lernst oder ausübst — nicht aus Pflicht.", proposal:false, bestTime:"any",
-    steps:["Ein Hobby oder eine Fertigkeit wählen, die dich interessiert (Instrument, Handwerk, Sprache, Kunst o. Ä.).", "Einen festen Zeitblock dafür reservieren.", "Dranbleiben, auch wenn es noch nicht perfekt klappt — der Prozess zählt."],
-    variation:"Kein aktuelles Hobby? Auch das Ausprobieren von etwas komplett Neuem für diese 20 Minuten zählt als Anfang.",
-    deepen:{ action:"Diesmal 45–60 Minuten statt 20–30, für mehr Tiefe in einer Sitzung.",
-      steps:["Wie gewohnt ein Hobby oder eine Fertigkeit wählen.", "Diesmal 45–60 statt 20–30 Minuten dafür reservieren.", "Am Ende kurz merken, was sich durch die längere Zeit verändert hat."] } },
-  { id:"56", tier:5, title:"Dankbarkeits-Notiz", action:"Drei Dinge aufschreiben, für die du gerade dankbar bist — so konkret wie möglich.", proposal:false, bestTime:"any",
-    steps:["Kurz innehalten.", "Drei konkrete Dinge aufschreiben, nicht nur allgemeine Kategorien.", "Bei jedem kurz spüren, warum es zählt, statt nur eine Liste abzuhaken."],
-    variation:"Fällt dir nichts ein? Auch etwas ganz Kleines (eine warme Tasse Kaffee, ein Sonnenstrahl) zählt.",
-    deepen:{ action:"Diesmal bei einem der drei Punkte einer Person, die daran beteiligt war, direkt danken — mündlich oder schriftlich.",
-      steps:["Die drei Dinge wie gewohnt aufschreiben.", "Einen Punkt auswählen, an dem eine Person beteiligt war.", "Dieser Person direkt und konkret danken."] } }
-];
-
-const STORAGE_KEYS = { weights: "humaneed_weights_v1", history: "humaneed_history_v1", reflections: "humaneed_reflections_v1", outcomes: "humaneed_outcomes_v1" };
-const HISTORY_LIMIT = 300;
-const WELCOME_SEEN_KEY = "humaneed_welcome_seen_v1";
-const MOOD_KEY = "humaneed_entry_mood_v1"; 
-
-function todayIso(){ return new Date().toISOString().slice(0, 10); }
-
-function loadWeights(){
-  const defaults = {};
-  INTERVENTIONS.forEach(iv => defaults[iv.id] = 1.0);
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.weights);
-    if (!raw) return defaults;
-    const stored = JSON.parse(raw);
-    Object.keys(defaults).forEach(id => {
-      if (typeof stored[id] === "number") defaults[id] = stored[id];
-    });
-    return defaults;
-  } catch (e) {
-    console.warn("Konnte gespeicherte Gewichtungen nicht lesen, starte mit Standardwerten.", e);
-    return defaults;
-  }
-}
-
-function saveWeights(){
-  try { localStorage.setItem(STORAGE_KEYS.weights, JSON.stringify(weights)); }
-  catch (e) { console.warn("Konnte Gewichtungen nicht speichern.", e); }
-}
-
-function loadHistory(){
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.history);
-    return raw ? JSON.parse(raw) : [];
-  } catch (e) {
-    console.warn("Konnte gespeicherten Verlauf nicht lesen, starte leer.", e);
-    return [];
-  }
-}
-
-function saveHistory(){
-  try {
-    const trimmed = sessionLog.slice(0, HISTORY_LIMIT);
-    localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(trimmed));
-  } catch (e) { console.warn("Konnte Verlauf nicht speichern.", e); }
-}
-
-function loadReflections(){
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.reflections);
-    return raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    console.warn("Konnte gespeicherte Tagesreflexionen nicht lesen, starte leer.", e);
-    return {};
-  }
-}
-
-function saveReflections(){
-  try { localStorage.setItem(STORAGE_KEYS.reflections, JSON.stringify(dailyReflections)); }
-  catch (e) { console.warn("Konnte Tagesreflexion nicht speichern.", e); }
-}
-
-function setTodaysReflection(choice){
-  dailyReflections[todayIso()] = choice;
-  saveReflections();
-  renderDayClose();
-}
-
-function renderDayClose(){
-  const content = document.getElementById("dayclose-content");
-  const today = todayIso();
-  const existing = dailyReflections[today];
-  if (!existing){
-    content.innerHTML = `
-      <div class="dayclose-question">Bist du dir heute treu geblieben, oder hast du dich verbogen?</div>
-      <div class="row">
-        <button class="opt-btn" id="btn-dayclose-held">Treu geblieben</button>
-        <button class="opt-btn" id="btn-dayclose-bent">Verbogen</button>
-      </div>
-    `;
-    document.getElementById("btn-dayclose-held").addEventListener("click", () => setTodaysReflection("held"));
-    document.getElementById("btn-dayclose-bent").addEventListener("click", () => setTodaysReflection("bent"));
-  } else {
-    const label = existing === "held" ? "Dir treu geblieben." : "Heute verbogen — kein Problem, morgen ist ein neuer Tag.";
-    content.innerHTML = `<div class="dayclose-done">Heute schon beantwortet: ${label}<button type="button" class="change-link" id="btn-dayclose-change">ändern</button></div>`;
-    document.getElementById("btn-dayclose-change").addEventListener("click", renderDayCloseUnanswered);
-  }
-}
-
-function renderDayCloseUnanswered(){
-  delete dailyReflections[todayIso()];
-  renderDayClose();
-}
-
-function getISOWeekLabel(date){
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = (d.getUTCDay() + 6) % 7; 
-  d.setUTCDate(d.getUTCDate() - dayNum + 3); 
-  const isoYear = d.getUTCFullYear();
-  const jan4 = new Date(Date.UTC(isoYear, 0, 4)); 
-  const jan4DayNum = (jan4.getUTCDay() + 6) % 7;
-  const week1Monday = new Date(jan4);
-  week1Monday.setUTCDate(jan4.getUTCDate() - jan4DayNum);
-  const weekNum = Math.round((d - week1Monday) / (7 * 24 * 3600 * 1000)) + 1;
-  return `${isoYear}-W${String(weekNum).padStart(2, "0")}`;
-}
-
-function getPreviousISOWeekLabel(date){
-  const prev = new Date(date);
-  prev.setDate(prev.getDate() - 7);
-  return getISOWeekLabel(prev);
-}
-
-function isoWeekLabelToMonday(label){
-  const m = /^(\d{4})-W(\d{2})$/.exec(label);
-  if (!m) return null;
-  const isoYear = parseInt(m[1], 10);
-  const week = parseInt(m[2], 10);
-  const jan4 = new Date(Date.UTC(isoYear, 0, 4));
-  const jan4DayNum = (jan4.getUTCDay() + 6) % 7;
-  const week1Monday = new Date(jan4);
-  week1Monday.setUTCDate(jan4.getUTCDate() - jan4DayNum);
-  const monday = new Date(week1Monday);
-  monday.setUTCDate(week1Monday.getUTCDate() + (week - 1) * 7);
-  return monday;
-}
-
-function loadOutcomes(){
-  try {
-    const raw = localStorage.getItem(STORAGE_KEYS.outcomes);
-    return raw ? JSON.parse(raw) : {};
-  } catch (e) {
-    console.warn("Konnte gespeicherte Wochenwerte nicht lesen, starte leer.", e);
-    return {};
-  }
-}
-
-function saveOutcomes(){
-  try { localStorage.setItem(STORAGE_KEYS.outcomes, JSON.stringify(weeklyOutcomes)); }
-  catch (e) { console.warn("Konnte Wochenwert nicht speichern.", e); }
-}
-
-const OUTCOME_LABELS = { 10:"Sehr schlecht", 30:"Eher schlecht", 50:"Durchschnittlich", 70:"Eher gut", 90:"Sehr gut" };
-
-function setWeekOutcome(weekLabel, value){
-  weeklyOutcomes[weekLabel] = value;
-  saveOutcomes();
-  renderOutcome();
-}
-
-function computeOutcomeTrend(){
-  const weeks = Object.keys(weeklyOutcomes).sort(); 
-  if (weeks.length < 2) return null; 
-  const values = weeks.map(w => weeklyOutcomes[w]);
-  const last = values[values.length - 1];
-  const prev = values[values.length - 2];
-  const delta = last - prev;
-  const direction = delta > 10 ? "spürbar besser" : delta < -10 ? "spürbar schlechter" : "etwa gleich";
-  const sequence = values.slice(-6).join(" · "); 
-  const lastMonday = isoWeekLabelToMonday(weeks[weeks.length - 1]);
-  const prevMonday = isoWeekLabelToMonday(weeks[weeks.length - 2]);
-  const isConsecutive = !!(lastMonday && prevMonday &&
-    Math.round((lastMonday - prevMonday) / (7 * 24 * 3600 * 1000)) === 1);
-  return { direction, sequence, weekCount: weeks.length, isConsecutive };
-}
-
-function renderOutcome(){
-  const card = document.getElementById("outcome-card");
-  const content = document.getElementById("outcome-content");
-  if (sessionLog.length === 0){
-    card.style.display = "none";
-    return;
-  }
-  card.style.display = "";
-  const targetWeek = getPreviousISOWeekLabel(new Date());
-  const existing = weeklyOutcomes[targetWeek];
-  let html = "";
-  if (existing === undefined){
-    html += `
-      <div class="dayclose-question">Wie ging es dir in der letzten Woche insgesamt?</div>
-      <div id="outcome-options"></div>
-    `;
-  } else {
-    html += `<div class="dayclose-done">Für die letzte Woche eingetragen: ${OUTCOME_LABELS[existing]}<button type="button" class="change-link" id="btn-outcome-change">ändern</button></div>`;
-  }
-  const trend = computeOutcomeTrend();
-  if (trend){
-    const compareLabel = trend.isConsecutive
-      ? "Verglichen mit der Vorwoche"
-      : "Verglichen mit deinem letzten Eintrag (dazwischen wurden Wochen ausgelassen)";
-    html += `<div class="progress-row" style="margin-top:8px;">${compareLabel}: ${trend.direction} · Verlauf: ${trend.sequence}</div>`;
-  }
-  content.innerHTML = html;
-  if (existing === undefined){
-    const optWrap = document.getElementById("outcome-options");
-    optWrap.innerHTML = Object.entries(OUTCOME_LABELS).map(([val, label]) =>
-      `<button class="opt-btn" type="button" data-outcome-value="${val}">${FACE_ICONS[val]}<span class="opt-label">${label}</span></button>`
-    ).join("");
-    optWrap.querySelectorAll("[data-outcome-value]").forEach(btn => {
-      btn.addEventListener("click", () => setWeekOutcome(targetWeek, parseInt(btn.dataset.outcomeValue, 10)));
-    });
-  } else {
-    document.getElementById("btn-outcome-change").addEventListener("click", () => {
-      delete weeklyOutcomes[targetWeek];
-      saveOutcomes();
-      renderOutcome();
-    });
-  }
-}
-
-function resetAllData(){
-  try {
-    localStorage.removeItem(STORAGE_KEYS.weights);
-    localStorage.removeItem(STORAGE_KEYS.history);
-    localStorage.removeItem(STORAGE_KEYS.reflections);
-    localStorage.removeItem(STORAGE_KEYS.outcomes);
-  } catch (e) { /* ignore */ }
-  INTERVENTIONS.forEach(iv => weights[iv.id] = 1.0);
-  sessionLog = [];
-  dailyReflections = {};
-  weeklyOutcomes = {};
-  renderHistory();
-  renderProgress();
-  renderDayClose();
-  renderOutcome();
-}
-
-const weights = loadWeights();
-let dailyReflections = loadReflections(); 
-let weeklyOutcomes = loadOutcomes(); 
-
-let answers = {};          
-let currentTierId = null;  
-let currentIntervention = null;
-let currentDepth = null;   
-let gatekeeperReason = null; 
-let disruptionActive = false; 
-let entryMood = null; 
-let sessionLog = loadHistory();
-
-const checkinList = document.getElementById("checkin-list");
-let checkinStep = 0; 
-let autoAdvanceTimer = null;
-
-let checkinPlan = {};             
-let carriedTierIds = [];          
-let forcedAskOverride = new Set(); 
-
-const CARRY_MIN_HISTORY = 5;       
-const CARRY_STABILITY_SAMPLES = 3; 
-const CARRY_STABILITY_RANGE = 20;  
-const CARRY_MAX_STREAK = { 0:1, 1:1, 2:2, 3:3, 4:3, 5:3 };
-
-function computeCheckinPlan(){
-  const withAnswers = sessionLog.filter(e => e.answers && typeof e.answers === "object");
-  const plan = {};
-  TIERS.forEach(tier => {
-    if (withAnswers.length < CARRY_MIN_HISTORY){
-      plan[tier.id] = { carry:false };
-      return;
-    }
-    const recent = [];
-    for (const entry of withAnswers){
-      if (typeof entry.answers[tier.id] === "number") recent.push(entry.answers[tier.id]);
-      if (recent.length >= CARRY_STABILITY_SAMPLES) break; 
-    }
-    if (recent.length < CARRY_STABILITY_SAMPLES){
-      plan[tier.id] = { carry:false };
-      return;
-    }
-    const range = Math.max(...recent) - Math.min(...recent);
-    if (range > CARRY_STABILITY_RANGE){
-      plan[tier.id] = { carry:false };
-      return;
-    }
-    let streak = 0;
-    for (const entry of sessionLog){
-      const carriedHere = Array.isArray(entry.carriedTierIds) && entry.carriedTierIds.includes(tier.id);
-      if (carriedHere) streak++; else break;
-    }
-    if (streak >= CARRY_MAX_STREAK[tier.id]){
-      plan[tier.id] = { carry:false };
-      return;
-    }
-    plan[tier.id] = { carry:true, value: recent[0] };
-  });
-  return plan;
-}
-
-function renderCheckinProgress(){
-  const dots = TIERS.map((t, idx) => {
-    const state = idx < checkinStep ? "done" : idx === checkinStep ? "current" : "todo";
-    const style = state !== "todo" ? ` style="background-color:var(--tier${t.id});"` : "";
-    return `<span class="progress-dot ${state}"${style}></span>`;
-  }).join("");
-  document.getElementById("checkin-progress").innerHTML = `
-    <div class="checkin-progress-text">Ebene ${checkinStep + 1} von ${TIERS.length}</div>
-    <div class="checkin-progress-dots" aria-hidden="true">${dots}</div>
-  `;
-}
-
-function updateCheckinNav(){
-  const backBtn = document.getElementById("btn-checkin-back");
-  const nextBtn = document.getElementById("btn-checkin-next");
-  backBtn.disabled = checkinStep === 0;
-  const answered = answers[TIERS[checkinStep].id] !== undefined;
-  nextBtn.disabled = !answered;
-  nextBtn.textContent = checkinStep === TIERS.length - 1 ? "Status erfassen" : "Weiter";
-}
-
-function renderCheckinStep(index, opts = {}){
-  const { focus = true } = opts;
-  checkinStep = index;
-  const tier = TIERS[checkinStep];
-  checkinList.innerHTML = "";
-  const card = document.createElement("div");
-  card.className = "card checkin-step-enter";
-  card.setAttribute("tabindex", "-1");
-
-  const plan = checkinPlan[tier.id];
-  const showCarryCard = !!(plan && plan.carry && !forcedAskOverride.has(tier.id));
-
-  if (showCarryCard){
-    card.innerHTML = `
-      <div class="tier-label tier-accent-${tier.id}">Ebene ${tier.id} · ${tier.name}</div>
-      <div class="question" id="checkin-question-${tier.id}">${tier.question}</div>
-      <p class="carry-hint">In den letzten Tagen ähnlich eingeschätzt — passt das noch?</p>
-      <button class="primary-btn" id="btn-carry-confirm" type="button">Passt noch</button>
-      <button class="secondary-btn" id="btn-carry-override" type="button">Heute anders</button>
-    `;
-    checkinList.appendChild(card);
-    document.getElementById("btn-carry-confirm").addEventListener("click", () => {
-      answers[tier.id] = plan.value;
-      if (!carriedTierIds.includes(tier.id)) carriedTierIds.push(tier.id);
-      updateCheckinNav();
-      scheduleAutoAdvance();
-    });
-    document.getElementById("btn-carry-override").addEventListener("click", () => {
-      forcedAskOverride.add(tier.id);
-      renderCheckinStep(checkinStep); 
-    });
-  } else {
-    card.innerHTML = `
-      <div class="tier-label tier-accent-${tier.id}">Ebene ${tier.id} · ${tier.name}</div>
-      <div class="question" id="checkin-question-${tier.id}">${tier.question}</div>
-      <div class="options" data-tier="${tier.id}" role="radiogroup" aria-labelledby="checkin-question-${tier.id}"></div>
-    `;
-    const optsWrap = card.querySelector(".options");
-    tier.options.forEach(opt => {
-      const btn = document.createElement("button");
-      btn.className = "opt-btn";
-      btn.innerHTML = `${FACE_ICONS[opt.value]}<span class="opt-label">${opt.label}</span>`;
-      btn.setAttribute("role", "radio");
-      const alreadySelected = answers[tier.id] === opt.value;
-      btn.setAttribute("aria-checked", alreadySelected ? "true" : "false");
-      if (alreadySelected) btn.classList.add("selected");
-      btn.addEventListener("click", () => {
-        answers[tier.id] = opt.value;
-        optsWrap.querySelectorAll(".opt-btn").forEach(b => {
-          b.classList.remove("selected");
-          b.setAttribute("aria-checked", "false");
-        });
-        btn.classList.add("selected");
-        btn.setAttribute("aria-checked", "true");
-        updateCheckinNav();
-        scheduleAutoAdvance();
-      });
-      optsWrap.appendChild(btn);
-    });
-    checkinList.appendChild(card);
-  }
-  renderCheckinProgress();
-  updateCheckinNav();
-  if (focus) card.focus();
-}
-
-function scheduleAutoAdvance(){
-  if (autoAdvanceTimer) clearTimeout(autoAdvanceTimer);
-  if (checkinStep >= TIERS.length - 1) return;
-  const stepAtSchedule = checkinStep;
-  autoAdvanceTimer = setTimeout(() => {
-    autoAdvanceTimer = null;
-    if (checkinStep === stepAtSchedule) advanceCheckin();
-  }, 450);
-}
-
-function advanceCheckin(){
-  if (answers[TIERS[checkinStep].id] === undefined) return; 
-  if (checkinStep < TIERS.length - 1){
-    renderCheckinStep(checkinStep + 1);
-  } else {
-    const raw = findBottleneckTier();
-    currentTierId = applyGatekeepers(raw);
-    currentIntervention = pickIntervention(currentTierId);
-    currentDepth = resolveDepth(currentIntervention);
-    renderResult();
-    showScreen("screen-result");
-  }
-}
-
-document.getElementById("btn-checkin-next").addEventListener("click", () => {
-  if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
-  advanceCheckin();
-});
-document.getElementById("btn-checkin-back").addEventListener("click", () => {
-  if (autoAdvanceTimer) { clearTimeout(autoAdvanceTimer); autoAdvanceTimer = null; }
-  if (checkinStep > 0) renderCheckinStep(checkinStep - 1);
-});
-
-function findBottleneckTier(){
-  let minTier = 0, minVal = Infinity;
-  TIERS.forEach(t => {
-    if (answers[t.id] <= minVal){
-      minVal = answers[t.id];
-      minTier = t.id;
-    }
-  });
-  return minTier;
-}
-
-function computeChronicMeaningDeficit(){
-  const MIN_ENTRIES = 10;
-  const withAnswers = sessionLog.filter(e => e.answers && typeof e.answers[5] === "number");
-  if (withAnswers.length < MIN_ENTRIES) return null; 
-  const window = withAnswers.slice(0, 20); 
-  const avg = window.reduce((sum, e) => sum + e.answers[5], 0) / window.length;
-  return { avg, windowSize: window.length, isDeficit: avg < 30 };
-}
-
-function computeChronicDisruption(){
-  const withAnswers = sessionLog.filter(e => e.answers && typeof e.answers === "object" &&
-    TIERS.every(t => typeof e.answers[t.id] === "number"));
-
-  const MIN_ENTRIES_WIDE = 10;
-  let wideInstability = false;
-  if (withAnswers.length >= MIN_ENTRIES_WIDE){
-    const window = withAnswers.slice(0, 20); 
-    const lowTierCount = TIERS.filter(t => {
-      const avg = window.reduce((sum, e) => sum + e.answers[t.id], 0) / window.length;
-      return avg < 30;
-    }).length;
-    wideInstability = lowTierCount >= 3; 
-  }
-
-  const MIN_ENTRIES_DROP = 15;
-  const RECENT_N = 5;
-  const BASELINE_N = 10;
-  let suddenDrop = false;
-  if (withAnswers.length >= MIN_ENTRIES_DROP){
-    const overallAvg = entry => TIERS.reduce((sum, t) => sum + entry.answers[t.id], 0) / TIERS.length;
-    const recent = withAnswers.slice(0, RECENT_N);
-    const baseline = withAnswers.slice(RECENT_N, RECENT_N + BASELINE_N);
-    const recentAvg = recent.reduce((sum, e) => sum + overallAvg(e), 0) / recent.length;
-    const baselineAvg = baseline.reduce((sum, e) => sum + overallAvg(e), 0) / baseline.length;
-    suddenDrop = (baselineAvg - recentAvg) > 20;
-  }
-
-  return { isDisrupted: wideInstability || suddenDrop, wideInstability, suddenDrop };
-}
-
-function computeGatekeeperSensitivity(ruleKey, minSensitivity = 0.7){
-  return computeGatekeeperSensitivityDetail(ruleKey, minSensitivity).value;
-}
-
-function computeGatekeeperSensitivityDetail(ruleKey, minSensitivity = 0.7){
-  const MIN_SAMPLES = 5;
-  const WINDOW = 20;
-  const matching = sessionLog.filter(e =>
-    (e.gatekeeper === ruleKey || e.gatekeeper === ruleKey + "_chronic") &&
-    (e.qualiaClass === "better" || e.qualiaClass === "worse" || e.qualiaClass === "same")
-  );
-  if (matching.length < MIN_SAMPLES){
-    return { value: 1.0, sampleCount: matching.length, minSamples: MIN_SAMPLES, isNeutral: true };
-  }
-  const window = matching.slice(0, WINDOW); 
-  const score = e => e.qualiaClass === "better" ? 1 : e.qualiaClass === "worse" ? -1 : 0;
-  const avgScore = window.reduce((sum, e) => sum + score(e), 0) / window.length;
-  const raw = 1 + avgScore * 0.3;
-  const value = Math.max(minSensitivity, Math.min(1.3, raw));
-  return { value, sampleCount: matching.length, minSamples: MIN_SAMPLES, isNeutral: false };
-}
-
-function applyGatekeepers(bottleneckTier){
-  let tier = bottleneckTier;
-  gatekeeperReason = null; 
-
-  const chronic = computeChronicMeaningDeficit();
-  const isChronic = !!(chronic && chronic.isDeficit);
-
-  const bio0Threshold = (isChronic ? 40 : 30) * computeGatekeeperSensitivity("tier0");
-  if (answers[0] < bio0Threshold && tier === 3){
-    gatekeeperReason = (isChronic && answers[0] >= 30) ? "tier0_chronic" : "tier0";
-    tier = 0;
-  }
-
-  const tier1Threshold = (isChronic ? 30 : 10) * computeGatekeeperSensitivity("tier1", 1.0);
-  if (answers[1] <= tier1Threshold && (tier === 4 || tier === 5)){
-    gatekeeperReason = (isChronic && answers[1] > 10) ? "tier1_chronic" : "tier1";
-    tier = 1;
-  }
-
-  const tier2Threshold = (isChronic ? 30 : 10) * computeGatekeeperSensitivity("tier2", 1.0);
-  if (answers[2] <= tier2Threshold && tier === 5){
-    gatekeeperReason = (isChronic && answers[2] > 10) ? "tier2_chronic" : "tier2";
-    tier = 2;
-  }
-
-  const disruption = computeChronicDisruption();
-  disruptionActive = disruption.isDisrupted;
-  if (disruptionActive && tier > 2){
-    let foundationTier = 0;
-    let foundationValue = answers[0];
-    for (const id of [1, 2]){
-      if (answers[id] < foundationValue){ foundationValue = answers[id]; foundationTier = id; }
-    }
-    tier = foundationTier;
-  }
-
-  return tier;
-}
-
-function getTimeContext(){
-  const now = new Date();
-  const h = now.getHours();
-  const day = now.getDay(); 
-  let bucket, greeting;
-  if (h >= 5 && h < 11){ bucket = "morning"; greeting = "Guten Morgen"; }
-  else if (h >= 11 && h < 14){ bucket = "midday"; greeting = "Schönen Mittag"; }
-  else if (h >= 14 && h < 18){ bucket = "afternoon"; greeting = "Schönen Nachmittag"; }
-  else if (h >= 18 && h < 22){ bucket = "evening"; greeting = "Guten Abend"; }
-  else { bucket = "night"; greeting = "Noch wach?"; }
-  const weekdayNames = ["Sonntag","Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag"];
-  return {
-    bucket,
-    greeting,
-    isWeekend: (day === 0 || day === 6),
-    weekdayLabel: weekdayNames[day]
-  };
-}
-
-function renderGreeting(){
-  const ctx = getTimeContext();
-  document.getElementById("context-greeting").textContent = `${ctx.greeting} · ${ctx.weekdayLabel}`;
-}
-
-function pickIntervention(tierId){
-  const pool = INTERVENTIONS.filter(iv => iv.tier === tierId);
-  const ctx = getTimeContext();
-  const TIME_BONUS = 1.5;
-
-  function effectiveWeight(iv){
-    let w = Math.sqrt(weights[iv.id]);
-    if (iv.bestTime === "any") return w;
-    if (iv.bestTime === "weekend") return ctx.isWeekend ? w * TIME_BONUS : w;
-    const matchesMorning = iv.bestTime === "morning" && (ctx.bucket === "morning");
-    const matchesEvening = iv.bestTime === "evening" && (ctx.bucket === "evening" || ctx.bucket === "night");
-    const matchesMidday = iv.bestTime === "midday" && (ctx.bucket === "midday" || ctx.bucket === "afternoon");
-    return (matchesMorning || matchesEvening || matchesMidday) ? w * TIME_BONUS : w;
-  }
-
-  const totalWeight = pool.reduce((sum, iv) => sum + effectiveWeight(iv), 0);
-  let r = Math.random() * totalWeight;
-  for (const iv of pool){
-    r -= effectiveWeight(iv);
-    if (r <= 0) return iv;
-  }
-  return pool[pool.length - 1];
-}
-
-const DEEPEN_THRESHOLD = 2.0; 
-
-function resolveDepth(iv){
-  const eligible = iv.deepen && weights[iv.id] >= DEEPEN_THRESHOLD;
-  if (eligible){
-    return { title: iv.title, action: iv.deepen.action, steps: iv.deepen.steps, variation: iv.variation, deepened: true };
-  }
-  return { title: iv.title, action: iv.action, steps: iv.steps, variation: iv.variation, deepened: false };
-}
-
-function saveMood(){
-  try {
-    if (entryMood) { localStorage.setItem(MOOD_KEY, entryMood.key); }
-    else { localStorage.removeItem(MOOD_KEY); }
-  } catch (e) { /* ignore */ }
-}
-function loadMood(){
-  try {
-    const key = localStorage.getItem(MOOD_KEY);
-    return key ? (MOOD_OPTIONS.find(m => m.key === key) || null) : null;
-  } catch (e) { return null; }
-}
-function updateMoodWidgetButton(){
-  const btn = document.getElementById("mood-widget-btn");
-  const emojiEl = document.getElementById("mood-widget-emoji");
-  if (entryMood){
-    emojiEl.textContent = entryMood.emoji;
-    btn.classList.add("is-set");
-    btn.setAttribute("aria-label", `Stimmung: ${entryMood.label}. Zum Ändern tippen.`);
-  } else {
-    emojiEl.textContent = "+";
-    btn.classList.remove("is-set");
-    btn.setAttribute("aria-label", "Stimmung wählen");
-  }
-}
-function markMoodPopoverSelection(){
-  document.querySelectorAll("#mood-popover-options button").forEach(b => {
-    const isSelected = !!(entryMood && b.dataset.moodKey === entryMood.key);
-    b.classList.toggle("selected", isSelected);
-    b.setAttribute("aria-checked", isSelected ? "true" : "false");
-  });
-}
-function openMoodPopover(){
-  document.getElementById("mood-popover").hidden = false;
-  document.getElementById("mood-widget-btn").setAttribute("aria-expanded", "true");
-}
-function closeMoodPopover(){
-  document.getElementById("mood-popover").hidden = true;
-  document.getElementById("mood-widget-btn").setAttribute("aria-expanded", "false");
-}
-function renderMoodWidget(){
-  const widgetBtn = document.getElementById("mood-widget-btn");
-  const popover = document.getElementById("mood-popover");
-  const wrap = document.getElementById("mood-popover-options");
-  wrap.innerHTML = MOOD_OPTIONS.map(m =>
-    `<button type="button" data-mood-key="${m.key}" role="menuitemradio" aria-checked="false"><span aria-hidden="true">${m.emoji}</span><span class="mood-popover-label">${m.label}</span></button>`
-  ).join("");
-  wrap.querySelectorAll("[data-mood-key]").forEach(btn => {
-    btn.addEventListener("click", () => {
-      entryMood = MOOD_OPTIONS.find(m => m.key === btn.dataset.moodKey);
-      saveMood();
-      updateMoodWidgetButton();
-      markMoodPopoverSelection();
-      closeMoodPopover();
-      widgetBtn.focus();
-    });
-  });
-  widgetBtn.addEventListener("click", () => {
-    if (popover.hidden) { openMoodPopover(); } else { closeMoodPopover(); }
-  });
-  document.getElementById("btn-mood-clear").addEventListener("click", () => {
-    entryMood = null;
-    saveMood();
-    updateMoodWidgetButton();
-    markMoodPopoverSelection();
-    closeMoodPopover();
-    widgetBtn.focus();
-  });
-  document.addEventListener("click", (e) => {
-    if (popover.hidden) return;
-    if (popover.contains(e.target) || widgetBtn.contains(e.target)) return;
-    closeMoodPopover();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && !popover.hidden){
-      closeMoodPopover();
-      widgetBtn.focus();
-    }
-  });
-  markMoodPopoverSelection();
-}
-
-function showScreen(id){
-  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-  const next = document.getElementById(id);
-  next.classList.add("active");
-  next.focus();
-}
-
-const GATEKEEPER_MESSAGES = {
-  tier0: "Dein Fundament (Ebene 0 · Biologie) ist gerade instabil (unter 30&nbsp;%). Fokus-Arbeit (Ebene 3 · Kognition) braucht Energie, die gerade fehlt — deshalb zuerst ein Schritt bei Biologie.",
-  tier0_chronic: "Dein Fundament (Ebene 0 · Biologie) liegt heute nicht extrem niedrig — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Das macht dein Fundament empfindlicher, als der heutige Wert allein zeigt — deshalb heute vorsichtshalber zuerst ein Schritt bei Biologie.",
-  tier1: "Dein Nervensystem wirkt gerade überreizt (Kampf/Flucht oder Erstarrung). Kompetenz oder Bedeutung können warten — zuerst geht es um Beruhigung (Ebene 1 · Emotion).",
-  tier1_chronic: "Dein Nervensystem wirkt heute nicht extrem überreizt — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Das macht dich empfindlicher für Stress, als der heutige Wert allein zeigt — deshalb heute vorsichtshalber zuerst ein Schritt bei Emotion.",
-  tier2: "Du fühlst dich gerade isoliert. Ohne Verbindung gelingt Integration von Sinn (Ebene 5) schwerer — deshalb zuerst ein Schritt bei Sozial.",
-  tier2_chronic: "Du fühlst dich heute nicht völlig isoliert — aber Bedeutung (Ebene 5) war über deine letzten Zyklen anhaltend gering. Ohne ausreichend soziale Verbindung gelingt Integration von Sinn schwerer, auch bei nur mäßiger Distanz — deshalb heute vorsichtshalber zuerst ein Schritt bei Sozial."
-};
-
-function renderResult(){
-  document.getElementById("btn-done").classList.remove("is-completing");
-  const tier = TIERS.find(t => t.id === currentTierId);
-  const gk = document.getElementById("gatekeeper-note");
-  gk.innerHTML = gatekeeperReason
-    ? `<div class="gatekeeper">${GATEKEEPER_MESSAGES[gatekeeperReason]}</div>`
-    : "";
-  const dn = document.getElementById("disruption-note");
-  dn.innerHTML = disruptionActive
-    ? `<div class="disruption-note">Es wirkt, als wäre bei dir gerade mehr los als sonst. Wir halten es heute bewusst einfach.</div>`
-    : "";
-  const resultTierLabel = document.getElementById("result-tier-label");
-  resultTierLabel.className = `tier-label tier-accent-${tier.id}`;
-  resultTierLabel.textContent = `Schwächstes Glied: Ebene ${tier.id} · ${tier.name}`;
-  const moodFramingEl = document.getElementById("result-mood-framing");
-  if (entryMood){
-    moodFramingEl.textContent = entryMood.framing;
-    moodFramingEl.style.display = "";
-  } else {
-    moodFramingEl.textContent = "";
-    moodFramingEl.style.display = "none";
-  }
-  document.getElementById("result-title").innerHTML =
-    currentDepth.title + (currentDepth.deepened ? `<span class="tag">Vertiefung</span>` : "");
-  document.getElementById("result-action").textContent = currentDepth.action;
-  document.getElementById("result-why").textContent = TIER_WHY[tier.id];
-
-  const stepsList = document.getElementById("result-steps");
-  stepsList.innerHTML = (currentDepth.steps || []).map(s => `<li>${s}</li>`).join("");
-  document.getElementById("result-variation").textContent = currentDepth.variation || "";
-}
-
-function prefersReducedMotion(){
-  return !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-}
-
-document.getElementById("btn-done").addEventListener("click", (e) => {
-  const btn = e.currentTarget;
-  if (btn.classList.contains("is-completing")) return; 
-  btn.classList.add("is-completing");
-  const delay = prefersReducedMotion() ? 0 : 480;
-  setTimeout(() => { showScreen("screen-feedback"); }, delay);
-});
-document.getElementById("btn-skip").addEventListener("click", () => {
-  weights[currentIntervention.id] = Math.max(0.2, weights[currentIntervention.id] - 0.15);
-  saveWeights();
-  logCycle({ qualiaLabel:"übersprungen", qualiaClass:"same" });
-  finishCycle("Übersprungen — Gewichtung leicht reduziert, kein Druck.");
-});
-
-let qualiaChoice = null;
-
-document.querySelectorAll("[data-qualia]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    qualiaChoice = parseInt(btn.dataset.qualia, 10);
-    document.querySelectorAll("[data-qualia]").forEach(b => {
-      b.classList.remove("selected");
-      b.setAttribute("aria-checked", "false");
-    });
-    btn.classList.add("selected");
-    btn.setAttribute("aria-checked", "true");
-    finishFeedback();
-  });
-});
-
-function finishFeedback(){
-  const id = currentIntervention.id;
-  if (qualiaChoice === 1) weights[id] = Math.min(3, weights[id] + 0.3);
-  if (qualiaChoice === -1) weights[id] = Math.max(0.2, weights[id] - 0.3);
-  saveWeights();
-
-  const qualiaText = qualiaChoice === 1 ? "Es hat spürbar geholfen — Gewichtung erhöht."
-                    : qualiaChoice === -1 ? "Es hat nicht geholfen — Gewichtung gesenkt."
-                    : "Kein spürbarer Unterschied — Gewichtung bleibt gleich.";
-
-  logCycle({
-    qualiaLabel: qualiaChoice === 1 ? "besser" : qualiaChoice === -1 ? "schlechter" : "gleich",
-    qualiaClass: qualiaChoice === 1 ? "better" : qualiaChoice === -1 ? "worse" : "same"
-  });
-  finishCycle(qualiaText);
-}
-
-function logCycle({ qualiaLabel, qualiaClass }){
-  const tier = TIERS.find(t => t.id === currentTierId);
-  const now = new Date();
-  sessionLog.unshift({
-    num: sessionLog.length + 1,
-    isoDate: now.toISOString().slice(0, 10), 
-    dateLabel: now.toLocaleDateString("de-DE", { day:"2-digit", month:"2-digit" }),
-    timeLabel: now.toLocaleTimeString("de-DE", { hour:"2-digit", minute:"2-digit" }),
-    timeBucket: getTimeContext().bucket, 
-    tierName: tier.name,
-    tierId: tier.id,
-    title: currentIntervention.title,
-    deepened: currentDepth ? currentDepth.deepened : false,
-    gatekeeper: gatekeeperReason,
-    answers: { ...answers }, 
-    carriedTierIds: [...carriedTierIds], 
-    qualiaLabel,
-    qualiaClass
-  });
-  saveHistory();
-}
-
-function computeStreak(){
-  const days = new Set(sessionLog.map(e => e.isoDate));
-  let streak = 0;
-  const cursor = new Date();
-  while (true){
-    const iso = cursor.toISOString().slice(0, 10);
-    if (days.has(iso)){
-      streak++;
-      cursor.setDate(cursor.getDate() - 1);
-    } else break;
-  }
-  return streak;
-}
-
-function computeTodaysCount(){
-  const today = new Date().toISOString().slice(0, 10);
-  return sessionLog.filter(e => e.isoDate === today).length;
-}
-
-function computeHelpfulRate(){
-  const withQualia = sessionLog.filter(e => e.qualiaClass === "better" || e.qualiaClass === "worse");
-  if (withQualia.length < 3) return null; 
-  const better = withQualia.filter(e => e.qualiaClass === "better").length;
-  return Math.round((better / withQualia.length) * 100);
-}
-
-function computeTopBottleneckTier(){
-  const MIN_ENTRIES = 5;
-  if (sessionLog.length < MIN_ENTRIES) return null;
-  const window = sessionLog.slice(0, 20); 
-  const counts = {};
-  window.forEach(e => { counts[e.tierId] = (counts[e.tierId] || 0) + 1; });
-  let topId = null, topCount = -1;
-  TIERS.forEach(t => {
-    const c = counts[t.id] || 0;
-    if (c > topCount){ topCount = c; topId = t.id; }
-  });
-  const tier = TIERS.find(t => t.id === topId);
-  return { tierId: tier.id, tierName: tier.name, count: topCount, windowSize: window.length };
-}
-
-function computeBestTimeOfDay(){
-  const MIN_TOTAL = 8;
-  const MIN_PER_BUCKET = 3;
-  const BUCKET_LABELS = { morning:"am Morgen", midday:"am Mittag", afternoon:"am Nachmittag", evening:"am Abend", night:"nachts" };
-  const withBucket = sessionLog.filter(e => typeof e.timeBucket === "string" && (e.qualiaClass === "better" || e.qualiaClass === "worse"));
-  if (withBucket.length < MIN_TOTAL) return null;
-  const buckets = {};
-  withBucket.forEach(e => {
-    if (!buckets[e.timeBucket]) buckets[e.timeBucket] = { better:0, total:0 };
-    buckets[e.timeBucket].total++;
-    if (e.qualiaClass === "better") buckets[e.timeBucket].better++;
-  });
-  let bestBucket = null, bestRate = -1;
-  Object.keys(buckets).forEach(bucket => {
-    const b = buckets[bucket];
-    if (b.total < MIN_PER_BUCKET) return; 
-    const rate = b.better / b.total;
-    if (rate > bestRate){ bestRate = rate; bestBucket = bucket; }
-  });
-  if (bestBucket === null) return null; 
-  return { bucket: bestBucket, label: BUCKET_LABELS[bestBucket] || bestBucket, rate: Math.round(bestRate * 100), sampleCount: buckets[bestBucket].total };
-}
-
-function renderProgress(){
-  const list = document.getElementById("progress-list");
-  const streak = computeStreak();
-  const today = computeTodaysCount();
-  const rate = computeHelpfulRate();
-  const topBottleneck = computeTopBottleneckTier();
-  const bestTime = computeBestTimeOfDay();
-
-  const streakText = streak <= 1
-    ? "Erster Tag deiner aktuellen Serie"
-    : `${streak} Tage in Folge`;
-  const todayText = today === 1 ? "Heute: dein erster Zyklus" : `Heute: dein ${today}. Zyklus`;
-
-  let html = `
-    <div class="progress-row"><span class="p-value">${streak}</span> ${streakText}</div>
-    <div class="progress-row"><span class="p-value">${today}</span> ${todayText.replace(/^Heute: /, "")}</div>
-  `;
-  if (rate !== null){
-    html += `<div class="progress-row"><span class="p-value">${rate}%</span> deiner bisherigen Zyklen haben spürbar geholfen</div>`;
-  }
-  if (topBottleneck !== null){
-    html += `<div class="progress-row">In deinen letzten ${topBottleneck.windowSize} Zyklen war Ebene ${topBottleneck.tierId} · ${topBottleneck.tierName} am häufigsten dein Engpass (${topBottleneck.count}×).</div>`;
-  }
-  if (bestTime !== null){
-    html += `<div class="progress-row">Zyklen ${bestTime.label} fühlen sich bei dir am häufigsten besser an (${bestTime.rate}% von ${bestTime.sampleCount}).</div>`;
-  }
-  list.innerHTML = html;
-}
-
-function finishCycle(text){
-  document.getElementById("summary-text").textContent = text;
-  renderWeightsTable();
-  renderSensitivityTable();
-  renderHistory();
-  renderProgress();
-  renderDayClose();
-  renderOutcome();
-  showScreen("screen-summary");
-}
-
-function renderHistory(){
-  const list = document.getElementById("history-list");
-  if (sessionLog.length === 0){
-    list.innerHTML = `<div class="history-empty">Noch keine Zyklen gespeichert.</div>`;
-    return;
-  }
-  list.innerHTML = sessionLog.map(entry => `
-    <div class="history-entry">
-      <div class="h-num">${entry.dateLabel || ""}<br>${entry.timeLabel || ""}</div>
-      <div class="h-main">
-        <span class="h-tier-dot" style="background-color:var(--tier${entry.tierId});" aria-hidden="true"></span>Ebene ${entry.tierId} · ${entry.tierName} — ${entry.title}${entry.gatekeeper ? " <span class='tag'>Vorrang</span>" : ""}${entry.deepened ? " <span class='tag'>Vertiefung</span>" : ""}
-      </div>
-      <div class="h-qualia ${entry.qualiaClass}">${entry.qualiaLabel}</div>
-    </div>
-  `).join("");
-}
-
-function renderWeightsTable(){
-  const table = document.getElementById("weights-table");
-  let html = "<tr><th>Intervention</th><th>Ebene</th><th>Gewicht</th></tr>";
-  INTERVENTIONS.forEach(iv => {
-    html += `<tr><td>#${iv.id} ${iv.title}</td><td>${iv.tier}</td><td>${weights[iv.id].toFixed(2)}</td></tr>`;
-  });
-  table.innerHTML = html;
-}
-
-function renderSensitivityTable(){
-  const table = document.getElementById("sensitivity-table");
-  const rules = [
-    { key:"tier0", label:"Ebene 0 · Biologie (Regel 1)", minSensitivity:0.7 },
-    { key:"tier1", label:"Ebene 1 · Emotion (Regel 2)", minSensitivity:1.0 },
-    { key:"tier2", label:"Ebene 2 · Sozial (Regel 3)", minSensitivity:1.0 }
-  ];
-  let html = "<tr><th>Regel</th><th>Multiplikator</th><th>Status</th></tr>";
-  rules.forEach(r => {
-    const d = computeGatekeeperSensitivityDetail(r.key, r.minSensitivity);
-    const status = d.isNeutral
-      ? `neutral (${d.sampleCount}/${d.minSamples} Zyklen)`
-      : `individuell gelernt (${d.sampleCount} Zyklen)`;
-    html += `<tr><td>${r.label}</td><td>${d.value.toFixed(2)}×</td><td>${status}</td></tr>`;
-  });
-  table.innerHTML = html;
-}
-
-function buildBackupPayload(){
-  return {
-    kind: "humaneed_backup",
-    version: 1,
-    exportedAt: new Date().toISOString(),
-    weights,
-    history: sessionLog,
-    reflections: dailyReflections,
-    outcomes: weeklyOutcomes
-  };
-}
-
-document.getElementById("btn-export-data").addEventListener("click", () => {
-  const payload = buildBackupPayload();
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  const stamp = new Date().toISOString().slice(0, 10);
-  a.href = url;
-  a.download = `humaneed-backup-${stamp}.json`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-});
-
-let pendingImport = null;
-
-document.getElementById("btn-import-data").addEventListener("click", () => {
-  document.getElementById("import-file-input").click();
-});
-
-document.getElementById("import-file-input").addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  e.target.value = ""; 
-  if (!file) return;
-  const statusEl = document.getElementById("import-status");
-  const reader = new FileReader();
-  reader.onload = () => {
-    let data;
-    try {
-      data = JSON.parse(reader.result);
-    } catch (err) {
-      statusEl.innerHTML = `<span style="color:var(--warn);">Datei konnte nicht gelesen werden — ist es eine gültige HUMANEED-Sicherung?</span>`;
-      return;
-    }
-    const looksValid =
-      data && typeof data === "object" &&
-      (data.weights === undefined || (typeof data.weights === "object" && data.weights !== null)) &&
-      (data.history === undefined || Array.isArray(data.history)) &&
-      (data.reflections === undefined || (typeof data.reflections === "object" && data.reflections !== null)) &&
-      (data.outcomes === undefined || (typeof data.outcomes === "object" && data.outcomes !== null)) &&
-      (data.weights || data.history || data.reflections || data.outcomes);
-    if (!looksValid) {
-      statusEl.innerHTML = `<span style="color:var(--warn);">Das sieht nicht nach einer HUMANEED-Sicherung aus.</span>`;
-      return;
-    }
-    pendingImport = data;
-    const entryCount = Array.isArray(data.history) ? data.history.length : 0;
-    const dateLabel = data.exportedAt ? new Date(data.exportedAt).toLocaleDateString("de-DE") : "unbekanntes Datum";
-    statusEl.innerHTML = `
-      <div>Sicherung erkannt (${entryCount} Zyklen, Stand ${dateLabel}). Bestehende Daten in diesem Browser werden dabei ersetzt.</div>
-      <button class="secondary-btn" id="btn-confirm-import" style="margin-top:8px;">Jetzt übernehmen</button>
-    `;
-    document.getElementById("btn-confirm-import").addEventListener("click", () => {
-      applyImport(pendingImport);
-      pendingImport = null;
-      statusEl.innerHTML = `<span style="color:var(--accent);">Import abgeschlossen.</span>`;
-    });
-  };
-  reader.readAsText(file);
-});
-
-function applyImport(data){
-  if (data.weights && typeof data.weights === "object"){
-    INTERVENTIONS.forEach(iv => {
-      weights[iv.id] = typeof data.weights[iv.id] === "number" ? data.weights[iv.id] : (weights[iv.id] ?? 1.0);
-    });
-    saveWeights();
-  }
-  if (Array.isArray(data.history)){
-    sessionLog = data.history.slice(0, HISTORY_LIMIT);
-    saveHistory();
-  }
-  if (data.reflections && typeof data.reflections === "object"){
-    dailyReflections = data.reflections;
-    saveReflections();
-  }
-  if (data.outcomes && typeof data.outcomes === "object"){
-    weeklyOutcomes = data.outcomes;
-    saveOutcomes();
-  }
-  renderWeightsTable();
-  renderSensitivityTable();
-  renderHistory();
-  renderProgress();
-  renderDayClose();
-  renderOutcome();
-}
-
-document.getElementById("btn-restart").addEventListener("click", () => {
-  answers = {};
-  currentTierId = null;
-  currentIntervention = null;
-  currentDepth = null;
-  qualiaChoice = null;
-  checkinPlan = computeCheckinPlan();
-  carriedTierIds = [];
-  forcedAskOverride = new Set();
-  document.querySelectorAll("[data-qualia]").forEach(b => {
-    b.classList.remove("selected");
-    b.setAttribute("aria-checked", "false");
-  });
-  renderGreeting();
-  renderCheckinStep(0, { focus: false });
-  showScreen("screen-checkin");
-});
-
-document.getElementById("btn-reset-all").addEventListener("click", () => {
-  const statusEl = document.getElementById("reset-status");
-  statusEl.innerHTML = `
-    <div style="color:var(--warn);">Wirklich alle gespeicherten Daten (Verlauf, Gewichtungen, Tagesreflexionen) unwiderruflich löschen?</div>
-    <div style="display:flex;gap:10px;margin-top:8px;">
-      <button class="secondary-btn" id="btn-confirm-reset">Ja, endgültig löschen</button>
-      <button class="secondary-btn" id="btn-cancel-reset">Abbrechen</button>
-    </div>
-  `;
-  document.getElementById("btn-confirm-reset").addEventListener("click", () => {
-    resetAllData();
-    renderWeightsTable();
-    renderSensitivityTable();
-    statusEl.innerHTML = `<span style="color:var(--accent);">Alle Daten wurden gelöscht.</span>`;
-  });
-  document.getElementById("btn-cancel-reset").addEventListener("click", () => {
-    statusEl.innerHTML = "";
-  });
-});
-
-document.getElementById("btn-welcome-start").addEventListener("click", () => {
-  try { localStorage.setItem(WELCOME_SEEN_KEY, "1"); } catch (e) { /* ignore */ }
-  showScreen("screen-checkin");
-});
-
-renderGreeting();
-checkinPlan = computeCheckinPlan(); 
-renderCheckinStep(0, { focus: false });
-entryMood = loadMood(); 
-renderMoodWidget(); 
-updateMoodWidgetButton();
-renderHistory();
-renderWeightsTable();
-renderSensitivityTable();
-renderProgress();
-renderDayClose();
-renderOutcome();
-try {
-  if (localStorage.getItem(WELCOME_SEEN_KEY)) {
-    document.getElementById("screen-welcome").classList.remove("active");
-    document.getElementById("screen-checkin").classList.add("active");
-  }
-} catch (e) { /* ignore */ }
+} catch (e) { }
 </script>
 </body>
 </html>
