@@ -3,73 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HUMANEED — Warm Premium Prototype</title>
+<title>HUMANEED — Premium Anthracite Prototype</title>
 <style>
   :root {
-    /* Premium Warm Light Mode: Alabaster & Caramel */
-    --bg: #f8f7f4;
+    /* Premium Light Mode: Tactile Anthracite & Slate */
+    --bg: #eff0f2;
     --surface: #ffffff;
-    --ink: #2b2a28;
-    --ink-soft: #7a7771;
-    --line: rgba(43, 42, 40, 0.08);
+    --ink: #191a1c;
+    --ink-soft: #64676c;
+    --line: rgba(25, 26, 28, 0.08);
     
-    /* Warm Gold/Caramel Accents */
-    --accent: #b4854b; 
-    --accent-soft: rgba(180, 133, 75, 0.08);
+    /* True Anthracite Accents */
+    --accent: #2c2e33; 
+    --accent-soft: rgba(44, 46, 51, 0.06);
     --on-accent: #ffffff;
     
-    --warn: #b05c48;
-    --warn-soft: rgba(176, 92, 72, 0.08);
-    --warn-border: rgba(176, 92, 72, 0.2);
-    --btn-disabled-bg: #e6e4df;
+    --warn: #9e3d32;
+    --warn-soft: rgba(158, 61, 50, 0.08);
+    --warn-border: rgba(158, 61, 50, 0.2);
+    --btn-disabled-bg: #e2e4e8;
     
-    --radius: 10px; /* Friendly but structured */
+    --radius: 8px; /* Balanced, tactile geometry */
 
-    /* Warm, earthy tier spectrum */
-    --tier0: #788a63; /* Muted Sage */
-    --tier1: #c47b57; /* Soft Terracotta */
-    --tier2: #c49d47; /* Warm Sand */
-    --tier3: #5f7a8c; /* Warm Slate */
-    --tier4: #967086; /* Dusty Plum */
-    --tier5: #b4854b; /* Caramel */
+    /* Sleek monochromatic anthracite tier spectrum */
+    --tier0: #585c63; 
+    --tier1: #646870; 
+    --tier2: #71757d; 
+    --tier3: #7e838b; 
+    --tier4: #8b9099; 
+    --tier5: #2c2e33;
 
-    /* Tactile Shadows */
-    --shadow-card: 0 10px 30px rgba(43, 42, 40, 0.05);
-    --shadow-glow: 0 4px 20px rgba(180, 133, 75, 0.15);
-    --card-bg-gradient: linear-gradient(145deg, #ffffff, #fcfbf9);
-    --header-gradient: radial-gradient(circle at top, rgba(180, 133, 75, 0.05) 0%, transparent 80%);
+    /* Tactile Shadows to prevent a "cold" flat look */
+    --shadow-card: 0 10px 40px rgba(25, 26, 28, 0.06);
+    --shadow-glow: 0 4px 15px rgba(44, 46, 51, 0.15);
+    --card-bg-gradient: linear-gradient(145deg, #ffffff, #fafafa);
+    --header-gradient: radial-gradient(circle at top, rgba(44, 46, 51, 0.04) 0%, transparent 80%);
   }
 
-  /* Dark Mode Integration - Deep Matte Black & Liquid Gold */
+  /* Dark Mode Integration - Deep Matte Black & Golden Amber (from reference image) */
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0f0f0e;
-      --surface: #181816;
-      --ink: #f0eee9;
-      --ink-soft: #8f8c86;
-      --line: rgba(240, 238, 233, 0.06);
+      --bg: #0d0e10;
+      --surface: #151619;
+      --ink: #eaebed;
+      --ink-soft: #8a8d94;
+      --line: rgba(234, 235, 237, 0.08);
       
-      --accent: #dca75a; /* Liquid gold / Warm amber */
-      --accent-soft: rgba(220, 167, 90, 0.1);
-      --on-accent: #0f0f0e;
+      --accent: #e5ac5a; 
+      --accent-soft: rgba(229, 172, 90, 0.1);
+      --on-accent: #0d0e10;
       
-      --warn: #cf6651;
-      --warn-soft: rgba(207, 102, 81, 0.1);
-      --warn-border: rgba(207, 102, 81, 0.25);
-      --btn-disabled-bg: #21201e;
+      --warn: #cc5847;
+      --warn-soft: rgba(204, 88, 71, 0.1);
+      --warn-border: rgba(204, 88, 71, 0.25);
+      --btn-disabled-bg: #1f2126;
 
-      /* Warm, glowing ember spectrum for dark mode */
       --tier0: #f4cf73; 
       --tier1: #e0b457; 
       --tier2: #c7923a; 
       --tier3: #b07521; 
       --tier4: #9c5c16; 
-      --tier5: #e8a658; 
+      --tier5: #e5ac5a; 
 
-      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.6);
-      --shadow-glow: 0 0 24px rgba(220, 167, 90, 0.15);
-      --card-bg-gradient: linear-gradient(145deg, #1c1c1a, #141412);
-      --header-gradient: radial-gradient(circle at top, rgba(220, 167, 90, 0.08) 0%, transparent 80%);
+      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.7);
+      --shadow-glow: 0 0 25px rgba(229, 172, 90, 0.15);
+      --card-bg-gradient: linear-gradient(145deg, #181a1d, #121316);
+      --header-gradient: radial-gradient(circle at top, rgba(229, 172, 90, 0.08) 0%, transparent 80%);
     }
   }
 
@@ -78,7 +77,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: "Inter", "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     line-height: 1.6;
     font-size: 15px;
     font-weight: 400;
@@ -195,7 +194,7 @@
     align-items: center;
     gap: 8px;
     padding: 14px 4px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--line);
     background: var(--bg);
     cursor: pointer;
@@ -228,7 +227,7 @@
     text-transform: uppercase;
     letter-spacing: 0.1em;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 6px;
     transition: all 0.2s;
     font-weight: 500;
   }
@@ -243,7 +242,7 @@
     font-size: 22px;
     letter-spacing: 0.25em;
     text-transform: uppercase;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--ink);
   }
   header p {
@@ -286,7 +285,6 @@
     overflow: hidden;
   }
   
-  /* Soft ambient top light on cards */
   .card::after {
     content: '';
     position: absolute;
@@ -312,7 +310,7 @@
   
   .question {
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.02em;
     margin: 0 0 24px 0;
     line-height: 1.4;
@@ -346,7 +344,7 @@
     width: 100%;
     text-align: left;
     padding: 16px 20px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--line);
     background: var(--bg);
     color: var(--ink);
@@ -383,7 +381,7 @@
     display: block;
     width: 100%;
     padding: 18px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--accent);
     background: var(--accent);
     color: var(--on-accent);
@@ -412,7 +410,7 @@
     display: block;
     width: 100%;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--line);
     background: transparent;
     color: var(--ink-soft);
@@ -463,7 +461,7 @@
   .progress-dot.done { background: var(--accent); opacity: 0.3; }
   .progress-dot.current {
     background: var(--accent);
-    box-shadow: 0 0 10px rgba(180, 133, 75, 0.4);
+    box-shadow: 0 0 10px rgba(44, 46, 51, 0.2);
   }
   
   .checkin-nav { display: flex; gap: 12px; margin-top: 28px; }
@@ -478,7 +476,7 @@
     font-weight: 400;
     margin-bottom: 24px;
     line-height: 1.6;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
   }
 
   .disruption-note {
@@ -489,12 +487,12 @@
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 24px;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 6px 6px 0;
   }
 
   .intervention-title {
     font-size: 24px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.02em;
     margin: 4px 0 12px 0;
     color: var(--ink);
@@ -527,7 +525,7 @@
     color: var(--ink-soft);
     background: var(--bg);
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
     border: 1px solid var(--line);
   }
   summary {
@@ -774,7 +772,7 @@
   </section>
 </main>
 
-<footer>HUMANEED · Core Protocol · v0.41 · Warm Premium Dual Theme</footer>
+<footer>HUMANEED · Core Protocol · v0.42 · Premium Anthracite Dual Theme</footer>
 
 <script>
 const TIERS = [
@@ -1030,7 +1028,7 @@ const INTERVENTIONS = [
     deepen:{ action:"Diesmal zusätzlich die Intensität einschätzen und merken, wo im Körper sich die Emotion zeigt.",
       steps:["Die Emotion wie gewohnt benennen.", "Die Intensität auf einer Skala von 1 bis 10 einschätzen.", "Kurz spüren, wo im Körper sich das Gefühl bemerkbar macht."] } },
   { id:"35", tier:1, title:"Der Kontakt zur Natur", action:"10 Minuten an einen grünen, natürlichen Ort gehen und bewusst mit allen Sinnen wahrnehmen.", proposal:false, bestTime:"any",
-    steps:["Einen Ort mit Bäumen, Grün oder Wasser in class Nähe aufsuchen.", "Langsam gehen und bewusst hinschauen, hören, riechen.", "Wenn möglich etwas Natürliches kurz berühren — Rinde, Gras, Wasser."],
+    steps:["Einen Ort mit Bäumen, Grün oder Wasser in der Nähe aufsuchen.", "Langsam gehen und bewusst hinschauen, hören, riechen.", "Wenn möglich etwas Natürliches kurz berühren — Rinde, Gras, Wasser."],
     variation:"Kein Grün in der Nähe? Auch ein paar Zimmerpflanzen oder ein bewusster Blick auf den Himmel wirken schon in klein.",
     deepen:{ action:"Diesmal 20 statt 10 Minuten, ohne Zeitdruck.",
       steps:["Wie gewohnt einen grünen Ort aufsuchen.", "Diesmal 20 statt 10 Minuten dort bleiben.", "Bewusst langsamer werden, je länger du dort bist."] } },
@@ -1585,7 +1583,7 @@ function computeChronicDisruption(){
   const BASELINE_N = 10;
   let suddenDrop = false;
   if (withAnswers.length >= MIN_ENTRIES_DROP){
-    const overallAvg = entry => TIERS.reduce((sum, t) => sum + entry.answers[t.id], 0) / TIERS.length;
+    const overallAvg = entry => TIERS.reduce((sum, t) => sum + overallAvg(e), 0) / TIERS.length;
     const recent = withAnswers.slice(0, RECENT_N);
     const baseline = withAnswers.slice(RECENT_N, RECENT_N + BASELINE_N);
     
