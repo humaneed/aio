@@ -1,121 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HUMANEED — Premium Anthracite Prototype</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>HUMANEED</title>
 <style>
   :root {
-    /* Premium Light Mode: Tactile Anthracite & Slate */
-    --bg: #eff0f2;
-    --surface: #ffffff;
-    --ink: #191a1c;
-    --ink-soft: #64676c;
-    --line: rgba(25, 26, 28, 0.08);
+    /* Premium Native Light Mode: Apple iOS Grouped Background */
+    --bg: #F2F2F7;
+    --bg-rgb: 242, 242, 247;
+    --surface: #FFFFFF;
+    --surface-rgb: 255, 255, 255;
+    --ink: #000000;
+    --ink-soft: #8E8E93;
+    --line: rgba(60, 60, 67, 0.1);
     
-    /* True Anthracite Accents */
-    --accent: #2c2e33; 
-    --accent-soft: rgba(44, 46, 51, 0.06);
-    --on-accent: #ffffff;
+    /* Anthracite Primary */
+    --accent: #1C1C1E; 
+    --accent-soft: #E5E5EA;
+    --on-accent: #FFFFFF;
     
-    --warn: #9e3d32;
-    --warn-soft: rgba(158, 61, 50, 0.08);
-    --warn-border: rgba(158, 61, 50, 0.2);
-    --btn-disabled-bg: #e2e4e8;
+    --warn: #FF3B30;
+    --warn-soft: rgba(255, 59, 48, 0.1);
+    --warn-border: rgba(255, 59, 48, 0.2);
+    --btn-disabled-bg: #E5E5EA;
+    --btn-disabled-ink: #AEAEB2;
     
-    --radius: 8px; /* Balanced, tactile geometry */
+    /* Native Geometry */
+    --radius-card: 20px;
+    --radius-btn: 14px;
+    --radius-pill: 99px;
 
-    /* Sleek monochromatic anthracite tier spectrum */
+    /* Anthracite Tiers */
     --tier0: #585c63; 
     --tier1: #646870; 
     --tier2: #71757d; 
     --tier3: #7e838b; 
     --tier4: #8b9099; 
-    --tier5: #2c2e33;
+    --tier5: #1C1C1E;
 
-    /* Tactile Shadows to prevent a "cold" flat look */
-    --shadow-card: 0 10px 40px rgba(25, 26, 28, 0.06);
-    --shadow-glow: 0 4px 15px rgba(44, 46, 51, 0.15);
-    --card-bg-gradient: linear-gradient(145deg, #ffffff, #fafafa);
-    --header-gradient: radial-gradient(circle at top, rgba(44, 46, 51, 0.04) 0%, transparent 80%);
+    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04);
+    --shadow-btn: 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
-  /* Dark Mode Integration - Deep Matte Black & Golden Amber (from reference image) */
+  /* Premium Native Dark Mode: OLED Black & Amber */
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #0d0e10;
-      --surface: #151619;
-      --ink: #eaebed;
-      --ink-soft: #8a8d94;
-      --line: rgba(234, 235, 237, 0.08);
+      --bg: #000000; /* True OLED Black */
+      --bg-rgb: 0, 0, 0;
+      --surface: #1C1C1E; /* Elevated Anthracite */
+      --surface-rgb: 28, 28, 30;
+      --ink: #FFFFFF;
+      --ink-soft: #EBEBF5;
+      --line: rgba(235, 235, 245, 0.15);
       
-      --accent: #e5ac5a; 
-      --accent-soft: rgba(229, 172, 90, 0.1);
-      --on-accent: #0d0e10;
+      --accent: #E5AC5A; /* Glowing Amber */
+      --accent-soft: rgba(229, 172, 90, 0.15);
+      --on-accent: #000000;
       
-      --warn: #cc5847;
-      --warn-soft: rgba(204, 88, 71, 0.1);
-      --warn-border: rgba(204, 88, 71, 0.25);
-      --btn-disabled-bg: #1f2126;
+      --warn: #FF453A;
+      --warn-soft: rgba(255, 69, 58, 0.15);
+      --warn-border: rgba(255, 69, 58, 0.3);
+      --btn-disabled-bg: #2C2C2E;
+      --btn-disabled-ink: #636366;
 
       --tier0: #f4cf73; 
       --tier1: #e0b457; 
       --tier2: #c7923a; 
       --tier3: #b07521; 
       --tier4: #9c5c16; 
-      --tier5: #e5ac5a; 
+      --tier5: #E5AC5A; 
 
-      --shadow-card: 0 12px 40px rgba(0, 0, 0, 0.7);
-      --shadow-glow: 0 0 25px rgba(229, 172, 90, 0.15);
-      --card-bg-gradient: linear-gradient(145deg, #181a1d, #121316);
-      --header-gradient: radial-gradient(circle at top, rgba(229, 172, 90, 0.08) 0%, transparent 80%);
+      --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.8);
+      --shadow-btn: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
   }
 
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
+  * { 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; /* Removes web tap highlight */
+  }
+  
+  html, body { margin: 0; padding: 0; height: 100%; }
+  
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-    line-height: 1.6;
-    font-size: 15px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
     font-weight: 400;
-    padding: 0 0 60px 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    transition: background 0.4s ease, color 0.4s ease;
+    overscroll-behavior-y: none; /* Prevents pull-to-refresh bounce in apps */
   }
 
-  a.skip-link {
-    position: absolute;
-    left: -999px;
-    top: auto;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    z-index: 1000;
-  }
-  a.skip-link:focus {
-    position: fixed;
-    left: 12px;
-    top: 12px;
-    width: auto;
-    height: auto;
-    padding: 12px 18px;
-    background: var(--accent);
-    color: var(--on-accent);
-    border-radius: var(--radius);
-    font-size: 13px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-  }
-
+  /* Accessibility */
+  a.skip-link { position: absolute; left: -999px; width: 1px; height: 1px; overflow: hidden; }
   a:focus-visible, button:focus-visible, input:focus-visible, details > summary:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 4px;
+    outline: 2px solid var(--accent); outline-offset: 2px;
   }
   .screen:focus-visible, #checkin-list .card:focus-visible { outline: none; }
 
@@ -123,23 +108,49 @@
     * { transition: none !important; animation: none !important; }
   }
 
+  /* Native App Header */
   header {
-    padding: 40px 20px 24px 20px;
-    text-align: center;
-    position: relative;
-    background: var(--header-gradient);
-    border-bottom: 1px solid var(--line);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: calc(env(safe-area-inset-top, 20px) + 16px) 24px 16px;
+    background: rgba(var(--bg-rgb), 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 0.5px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  
+  header p {
+    margin: 2px 0 0 0;
+    color: var(--ink-soft);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+  }
+
+  /* Native Icon Button for Mood */
   .mood-widget-btn {
     position: absolute;
-    top: 32px;
+    top: calc(env(safe-area-inset-top, 20px) + 16px);
     right: 24px;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    border: 1px dashed var(--ink-soft);
-    background: transparent;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-pill);
+    border: none;
+    background: var(--surface);
+    box-shadow: var(--shadow-btn);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,42 +158,45 @@
     cursor: pointer;
     color: var(--ink-soft);
     padding: 0;
-    transition: all 0.3s ease;
+    transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  .mood-widget-btn:active { transform: scale(0.92); }
   .mood-widget-btn.is-set {
-    border: 1px solid var(--accent);
-    box-shadow: var(--shadow-glow);
-    background: var(--surface);
-  }
-  .mood-widget-btn:hover {
-    border-color: var(--ink);
-    color: var(--ink);
+    background: var(--accent-soft);
+    color: var(--accent);
   }
   
+  /* Native Popover */
   .mood-popover {
     position: absolute;
-    top: 80px;
+    top: calc(env(safe-area-inset-top, 20px) + 64px);
     right: 24px;
-    z-index: 20;
+    z-index: 200;
     width: 280px;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
+    background: rgba(var(--surface-rgb), 0.85);
+    backdrop-filter: blur(30px) saturate(150%);
+    -webkit-backdrop-filter: blur(30px) saturate(150%);
+    border: 0.5px solid var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     padding: 20px;
     text-align: left;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    transform-origin: top right;
+    animation: popover-in 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+  @keyframes popover-in {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
   }
   .mood-popover[hidden] { display: none; }
+  
   .mood-popover-hint {
     margin: 0 0 16px 0;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    font-size: 13px;
     color: var(--ink-soft);
-    line-height: 1.5;
+    line-height: 1.4;
   }
+  
   .mood-popover-options {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -192,105 +206,68 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-    padding: 14px 4px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
+    gap: 6px;
+    padding: 12px 4px;
+    border-radius: var(--radius-btn);
+    border: 2px solid transparent;
     background: var(--bg);
     cursor: pointer;
-    font-size: 22px;
+    font-size: 24px;
     color: var(--ink);
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
   }
+  .mood-popover-options button:active { transform: scale(0.95); }
   .mood-popover-options button.selected {
     border-color: var(--accent);
     background: var(--accent-soft);
-    box-shadow: inset 0 0 15px rgba(0,0,0,0.02);
   }
   .mood-popover-options button .mood-popover-label {
     font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-soft);
     font-weight: 500;
+    color: var(--ink-soft);
   }
   
   .mood-popover-clear {
     display: block;
     width: 100%;
     margin-top: 16px;
-    padding: 10px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink-soft);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    padding: 12px;
+    border: none;
+    background: var(--btn-disabled-bg);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.2s;
-    font-weight: 500;
+    border-radius: var(--radius-btn);
   }
-  .mood-popover-clear:hover {
-    border-color: var(--ink);
-    color: var(--ink);
-    background: var(--bg);
-  }
+  .mood-popover-clear:active { transform: scale(0.98); opacity: 0.8; }
 
-  header h1 {
-    margin: 0;
-    font-size: 22px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    font-weight: 400;
-    color: var(--ink);
-  }
-  header p {
-    margin: 8px 0 0 0;
-    color: var(--ink-soft);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .context-greeting {
-    color: var(--accent) !important;
-    font-weight: 500;
-  }
-
+  /* Main Container */
   main {
-    max-width: 580px;
-    margin: 36px auto 0;
-    padding: 0 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px 20px calc(env(safe-area-inset-bottom, 20px) + 60px);
   }
 
   @keyframes fade-slide-in {
-    from { opacity: 0; transform: translateY(12px); }
+    from { opacity: 0; transform: translateY(16px); }
     to { opacity: 1; transform: translateY(0); }
   }
   .screen { display: none; }
   .screen.active {
     display: block;
-    animation: fade-slide-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+    animation: fade-slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .checkin-step-enter { animation: fade-slide-in 0.4s cubic-bezier(0.2, 0.8, 0.2, 1); }
 
+  /* Native Cards */
   .card {
-    background: var(--card-bg-gradient);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-bottom: 24px;
+    background: var(--surface);
+    border-radius: var(--radius-card);
+    padding: 24px;
+    margin-bottom: 16px;
     box-shadow: var(--shadow-card);
     position: relative;
-    overflow: hidden;
-  }
-  
-  .card::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    opacity: 0.3;
+    border: 0.5px solid var(--line);
   }
 
   .tier-label {
@@ -298,8 +275,8 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--accent);
-    margin-bottom: 16px;
-    font-weight: 500;
+    margin-bottom: 12px;
+    font-weight: 700;
   }
   .tier-accent-0 { color: var(--tier0); }
   .tier-accent-1 { color: var(--tier1); }
@@ -309,33 +286,32 @@
   .tier-accent-5 { color: var(--tier5); }
   
   .question {
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    margin: 0 0 24px 0;
-    line-height: 1.4;
-    color: var(--ink);
-  }
-  .carry-hint {
-    font-size: 14px;
-    color: var(--ink-soft);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     margin: 0 0 20px 0;
-    font-style: italic;
-  }
-  #btn-carry-override { margin-top: 12px; }
-
-  .welcome-text {
-    font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.3;
     color: var(--ink);
-    margin: 0 0 16px 0;
-    font-weight: 400;
   }
   
+  .carry-hint {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 20px 0;
+  }
+
+  .welcome-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 16px 0;
+  }
+  
+  /* Selectable Options */
   .options {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   .opt-btn {
     display: flex;
@@ -343,91 +319,78 @@
     gap: 16px;
     width: 100%;
     text-align: left;
-    padding: 16px 20px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
+    padding: 16px;
+    border-radius: var(--radius-btn);
+    border: 2px solid transparent;
     background: var(--bg);
     color: var(--ink);
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     cursor: pointer;
-    transition: all 0.25s ease;
+    transition: transform 0.15s, background 0.15s, border 0.15s;
+    user-select: none;
   }
+  .opt-btn:active { transform: scale(0.98); }
   .opt-btn .opt-icon {
     flex: 0 0 auto;
-    font-size: 20px;
-    opacity: 0.6;
+    font-size: 24px;
     filter: grayscale(100%);
-    transition: all 0.3s ease;
+    opacity: 0.6;
+    transition: all 0.2s;
   }
-  .opt-btn .opt-label { flex: 1; letter-spacing: 0.02em; }
-  .opt-btn:hover {
-    border-color: var(--ink-soft);
-    background: var(--surface);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
-  }
+  .opt-btn .opt-label { flex: 1; }
   .opt-btn.selected {
     border-color: var(--accent);
     background: var(--accent-soft);
-    box-shadow: var(--shadow-glow);
   }
   .opt-btn.selected .opt-icon {
-    opacity: 1;
     filter: grayscale(0%);
+    opacity: 1;
     transform: scale(1.1);
   }
 
+  /* Native Buttons */
   .primary-btn {
     display: block;
     width: 100%;
-    padding: 18px;
-    border-radius: 6px;
-    border: 1px solid var(--accent);
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: var(--radius-btn);
+    border: none;
     background: var(--accent);
     color: var(--on-accent);
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
+    font-size: 17px;
+    font-weight: 600;
     cursor: pointer;
-    margin-top: 12px;
-    transition: all 0.3s ease;
-    font-weight: 500;
+    margin-top: 8px;
+    transition: transform 0.15s, opacity 0.15s;
+    user-select: none;
   }
-  .primary-btn:hover:not(:disabled) {
-    box-shadow: var(--shadow-glow);
-    filter: brightness(1.05);
-  }
+  .primary-btn:active:not(:disabled) { transform: scale(0.96); opacity: 0.9; }
   .primary-btn:disabled {
-    border-color: var(--line);
     background: var(--btn-disabled-bg);
-    color: var(--ink-soft);
+    color: var(--btn-disabled-ink);
     cursor: not-allowed;
-    box-shadow: none;
-    filter: none;
   }
   
   .secondary-btn {
     display: block;
     width: 100%;
-    padding: 16px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--ink-soft);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: var(--radius-btn);
+    border: none;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 600;
     cursor: pointer;
     margin-top: 12px;
-    transition: all 0.2s ease;
-    font-weight: 500;
+    transition: transform 0.15s;
+    user-select: none;
   }
-  .secondary-btn:hover:not(:disabled) {
-    border-color: var(--ink);
-    color: var(--ink);
-    background: var(--bg);
-  }
-  .secondary-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .secondary-btn:active:not(:disabled) { transform: scale(0.96); background: var(--btn-disabled-bg); }
+  .secondary-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
   #btn-done { position: relative; overflow: hidden; }
   #btn-done .btn-done-label { display: block; transition: opacity .15s ease; }
@@ -441,230 +404,210 @@
   #btn-done.is-completing .btn-done-check { opacity: 1; transform: scale(1); }
   #btn-done.is-completing { cursor: default; }
 
-  .checkin-progress { margin-bottom: 24px; }
+  /* Native Progress Indicator */
+  .checkin-progress { margin-bottom: 24px; display: flex; flex-direction: column; align-items: center; }
   .checkin-progress-text {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
+    font-size: 12px;
+    font-weight: 600;
     color: var(--ink-soft);
-    margin-bottom: 12px;
-    font-weight: 500;
+    margin-bottom: 8px;
+    letter-spacing: 0.02em;
   }
-  .checkin-progress-dots { display: flex; gap: 8px; }
+  .checkin-progress-dots { display: flex; gap: 6px; width: 100%; }
   .progress-dot {
-    width: 100%;
+    flex: 1;
     height: 4px;
     background: var(--line);
-    transition: background 0.3s ease;
     border-radius: 2px;
+    transition: background 0.3s ease;
   }
-  .progress-dot.done { background: var(--accent); opacity: 0.3; }
-  .progress-dot.current {
-    background: var(--accent);
-    box-shadow: 0 0 10px rgba(44, 46, 51, 0.2);
-  }
+  .progress-dot.done { background: var(--accent); opacity: 0.4; }
+  .progress-dot.current { background: var(--accent); }
   
-  .checkin-nav { display: flex; gap: 12px; margin-top: 28px; }
+  .checkin-nav { display: flex; gap: 12px; margin-top: 24px; }
   .checkin-nav .secondary-btn, .checkin-nav .primary-btn { width: auto; flex: 1; margin-top: 0; }
 
   .gatekeeper {
     background: var(--warn-soft);
-    border-left: 3px solid var(--warn);
     color: var(--warn);
-    padding: 16px 20px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 24px;
-    line-height: 1.6;
-    border-radius: 0 6px 6px 0;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    border-radius: var(--radius-card);
   }
 
   .disruption-note {
     background: var(--accent-soft);
-    border-left: 3px solid var(--accent);
     color: var(--accent);
-    padding: 16px 20px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 24px;
-    border-radius: 0 6px 6px 0;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    border-radius: var(--radius-card);
   }
 
   .intervention-title {
-    font-size: 24px;
-    font-weight: 400;
-    letter-spacing: 0.02em;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     margin: 4px 0 12px 0;
     color: var(--ink);
   }
   .intervention-action {
-    font-size: 16px;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    font-size: 18px;
+    line-height: 1.4;
+    margin-bottom: 24px;
     color: var(--ink);
+    font-weight: 400;
   }
   
   .tag {
     display: inline-block;
-    font-size: 9px;
+    font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     background: var(--accent-soft);
     color: var(--accent);
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-left: 12px;
     vertical-align: middle;
-    border: 1px solid var(--line);
-    font-weight: 500;
+    font-weight: 700;
   }
   
+  /* Native Accordions */
   details {
-    margin-top: 16px;
-    font-size: 14px;
-    color: var(--ink-soft);
+    margin-top: 12px;
+    font-size: 15px;
     background: var(--bg);
-    padding: 16px;
-    border-radius: 6px;
-    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
   }
   summary {
     cursor: pointer;
-    color: var(--accent);
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 11px;
+    color: var(--ink);
+    font-weight: 600;
+    padding: 16px;
+    user-select: none;
   }
-  details p { margin: 12px 0 0 0; line-height: 1.6; font-weight: 400; }
-  details ol { margin: 12px 0 0 0; padding-left: 20px; font-weight: 400; }
-  details ol li { margin-bottom: 8px; padding-left: 4px; }
+  summary:active { background: rgba(0,0,0,0.03); }
+  details p { margin: 0; padding: 0 16px 16px; line-height: 1.5; color: var(--ink-soft); }
+  details ol { margin: 0; padding: 0 16px 16px 36px; color: var(--ink-soft); }
+  details ol li { margin-bottom: 8px; }
   
-  .variation-note { font-style: italic; margin-top: 16px !important; color: var(--ink-soft); }
+  .variation-note { font-style: normal; color: var(--ink-soft); margin-top: 16px !important; font-size: 14px; }
   .mood-framing { 
-    font-style: italic; 
     color: var(--ink-soft); 
-    font-size: 14px; 
+    font-size: 15px; 
     margin: 0 0 20px 0; 
-    border-left: 2px solid var(--line); 
-    padding-left: 16px; 
   }
 
   .row { display: flex; gap: 12px; }
-  .row .opt-btn { flex: 1; text-align: center; justify-content: center; padding: 20px 10px; }
+  .row .opt-btn { flex: 1; text-align: center; justify-content: center; padding: 16px 8px; flex-direction: column; gap: 8px; }
+  .row .opt-btn .opt-label { flex: none; font-size: 14px; }
 
-  .dayclose-question { font-size: 16px; font-weight: 400; color: var(--ink); margin-bottom: 20px; text-align: center; }
-  .dayclose-done { font-size: 14px; color: var(--accent); text-align: center; font-weight: 500; }
+  .dayclose-question { font-size: 17px; font-weight: 600; color: var(--ink); margin-bottom: 16px; text-align: center; letter-spacing: -0.01em; }
+  .dayclose-done { font-size: 15px; color: var(--accent); text-align: center; font-weight: 500; }
   .dayclose-done .change-link {
-    color: var(--ink-soft); text-decoration: none; cursor: pointer; margin-left: 12px;
-    background: var(--bg); border: 1px solid var(--line); padding: 4px 10px; border-radius: 6px; 
-    font-size: 10px; text-transform: uppercase; font-weight: 500; letter-spacing: 0.1em;
+    color: var(--ink-soft); cursor: pointer; margin-left: 12px;
+    background: var(--bg); border: none; padding: 6px 12px; border-radius: var(--radius-pill); 
+    font-size: 12px; font-weight: 600;
   }
-  .dayclose-done .change-link:hover { border-color: var(--ink); color: var(--ink); }
 
   .advanced-section {
-    margin-top: 48px;
+    margin-top: 32px;
     background: transparent;
-    border-top: 1px solid var(--line);
-    padding: 24px 0 0 0;
-    border-radius: 0;
+    padding: 0;
   }
-  .advanced-section summary { font-size: 11px; color: var(--ink-soft); letter-spacing: 0.1em; }
-  .advanced-group { margin-top: 32px; padding-top: 0; border-top: none; }
+  .advanced-section summary { font-size: 13px; color: var(--ink-soft); background: transparent; padding: 16px 0; border-top: 0.5px solid var(--line); border-radius: 0; }
+  .advanced-group { margin-top: 24px; }
   .advanced-label {
-    font-size: 10px;
-    letter-spacing: 0.15em;
+    font-size: 13px;
     text-transform: uppercase;
     color: var(--ink-soft);
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 8px;
-    font-weight: 500;
+    margin-bottom: 12px;
+    font-weight: 600;
   }
-  .advanced-section table { width: 100%; border-collapse: collapse; font-size: 13px; color: var(--ink-soft); font-weight: 400; }
-  .advanced-section td, .advanced-section th { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; }
-  .advanced-section th { font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; }
+  .advanced-section table { width: 100%; border-collapse: collapse; font-size: 14px; color: var(--ink); }
+  .advanced-section td, .advanced-section th { padding: 12px 8px; border-bottom: 0.5px solid var(--line); text-align: left; }
+  .advanced-section th { font-weight: 600; color: var(--ink-soft); font-size: 12px; text-transform: uppercase; }
 
   .history-entry {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px;
-    font-weight: 400;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 0.5px solid var(--line);
+    font-size: 15px;
   }
   .history-entry:last-child { border-bottom: none; }
-  .history-entry .h-num { color: var(--ink-soft); font-size: 11px; min-width: 48px; line-height: 1.5; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 500; }
-  .history-entry .h-main { flex: 1; color: var(--ink); line-height: 1.5; }
+  .history-entry .h-num { color: var(--ink-soft); font-size: 12px; min-width: 48px; line-height: 1.4; }
+  .history-entry .h-main { flex: 1; color: var(--ink); line-height: 1.4; font-weight: 500;}
   .h-tier-dot {
     display: inline-block;
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    margin-right: 12px;
-    vertical-align: middle;
+    margin-right: 8px;
   }
-  .history-entry .h-qualia { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 4px; background: var(--bg); font-weight: 500; }
-  .h-qualia.better { color: var(--accent); border: 1px solid var(--accent-soft); }
-  .h-qualia.worse { color: var(--warn); border: 1px solid var(--warn-border); }
-  .h-qualia.same { color: var(--ink-soft); border: 1px solid var(--line); }
-  .history-empty { color: var(--ink-soft); font-size: 14px; font-weight: 400; text-align: center; padding: 24px 0; }
+  .history-entry .h-qualia { font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px; background: var(--bg); }
+  .h-qualia.better { color: var(--accent); background: var(--accent-soft); }
+  .h-qualia.worse { color: var(--warn); background: var(--warn-soft); }
+  .h-qualia.same { color: var(--ink-soft); }
+  .history-empty { color: var(--ink-soft); font-size: 15px; text-align: center; padding: 24px 0; }
 
   .progress-row {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 16px;
-    padding: 10px 0;
-    font-size: 14px;
-    font-weight: 400;
+    padding: 12px 0;
+    font-size: 15px;
     color: var(--ink);
-    line-height: 1.5;
+    border-bottom: 0.5px solid var(--line);
   }
-  .progress-row .p-value { font-weight: 500; color: var(--accent); min-width: 32px; font-size: 18px; text-align: right; }
+  .progress-row:last-child { border-bottom: none; }
+  .progress-row .p-value { font-weight: 700; color: var(--accent); min-width: 40px; font-size: 20px; }
 
-  #progress-card { border-top: 3px solid var(--accent); }
-  #dayclose-card { border-top: 3px solid var(--tier5); }
-  #history-card { border-top: 3px solid var(--ink-soft); }
+  #progress-card .tier-label, #dayclose-card .tier-label, #history-card .tier-label, #outcome-card .tier-label { margin-bottom: 8px; }
 
   footer {
     text-align: center;
     color: var(--ink-soft);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-top: 50px;
+    font-size: 12px;
+    margin-top: 40px;
+    font-weight: 500;
   }
 </style>
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">Zum Hauptinhalt springen</a>
 
 <header>
   <h1>HUMANEED</h1>
   <p id="context-greeting" class="context-greeting" aria-live="polite"></p>
-  <button id="mood-widget-btn" class="mood-widget-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Select mood">
+  <button id="mood-widget-btn" class="mood-widget-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Stimmung wählen">
     <span id="mood-widget-emoji" aria-hidden="true">+</span>
   </button>
-  <div id="mood-popover" class="mood-popover" hidden role="menu" aria-label="Select mood">
-    <p class="mood-popover-hint">Adjust the invisible cause. Alters phrasing, not outcome.</p>
+  <div id="mood-popover" class="mood-popover" hidden role="menu" aria-label="Stimmung wählen">
+    <p class="mood-popover-hint">Ändert nur die Formulierung, nicht die Logik.</p>
     <div id="mood-popover-options" class="mood-popover-options"></div>
-    <button class="mood-popover-clear" id="btn-mood-clear" type="button">Reset Pattern</button>
+    <button class="mood-popover-clear" id="btn-mood-clear" type="button">Zurücksetzen</button>
   </div>
 </header>
 
 <main id="main-content" tabindex="-1">
   <!-- SCREEN 0: WILLKOMMEN -->
-  <section id="screen-welcome" class="screen active" tabindex="-1" aria-label="Welcome">
+  <section id="screen-welcome" class="screen active" tabindex="-1" aria-label="Willkommen">
     <div class="card">
-      <div class="tier-label">DECODE THE URGE.</div>
+      <div class="tier-label">HUMANEED IN EINEM SATZ</div>
       <div class="question">Symptoms are camouflage.</div>
-      <p class="welcome-text">Every day, HUMANEED decodes the one area demanding your deepest psychological attention — biology, emotion, social connection, cognition, competence, or meaning — prescribing a single actionable step.</p>
-      <p class="welcome-text">No points, no false signals, no pressure: just a brief diagnostic, an intervention, and analyzing the outcome.</p>
-      <p class="carry-hint">Diagnostic takes under 60 seconds.</p>
-      <button class="primary-btn" id="btn-welcome-start" type="button">Initiate Diagnostic</button>
+      <p class="welcome-text">Jeden Tag findet HUMANEED den einen Bereich, der bei dir gerade am meisten Aufmerksamkeit braucht — Körper, Gefühl, soziale Nähe, Fokus, Können oder Sinn — und schlägt dafür genau eine kleine, machbare Handlung vor.</p>
+      <p class="welcome-text">Kein Punkte-System, kein Druck: nur ein kurzer Check-in, ein gezielter Impuls und die Analyse der Wirkung.</p>
+      <p class="carry-hint">Dauert unter einer Minute.</p>
+      <button class="primary-btn" id="btn-welcome-start" type="button">Diagnose starten</button>
     </div>
   </section>
 
@@ -673,13 +616,13 @@
     <div class="checkin-progress" id="checkin-progress" aria-live="polite"></div>
     <div id="checkin-list"></div>
     <div class="checkin-nav">
-      <button class="secondary-btn" id="btn-checkin-back" type="button">Back</button>
-      <button class="primary-btn" id="btn-checkin-next" type="button" disabled>Next</button>
+      <button class="secondary-btn" id="btn-checkin-back" type="button">Zurück</button>
+      <button class="primary-btn" id="btn-checkin-next" type="button" disabled>Weiter</button>
     </div>
   </section>
 
   <!-- SCREEN 2: RESULT / INTERVENTION -->
-  <section id="screen-result" class="screen" tabindex="-1" aria-label="Recommendation">
+  <section id="screen-result" class="screen" tabindex="-1" aria-label="Empfehlung">
     <div id="gatekeeper-note" aria-live="polite"></div>
     <div id="disruption-note" aria-live="polite"></div>
     <div class="card">
@@ -688,91 +631,91 @@
       <div class="intervention-title" id="result-title"></div>
       <div class="intervention-action" id="result-action"></div>
       <details>
-        <summary>True Causation Steps</summary>
+        <summary>Umsetzung</summary>
         <ol id="result-steps"></ol>
         <p id="result-variation" class="variation-note"></p>
       </details>
       <details>
-        <summary>System Rationale</summary>
+        <summary>System-Logik</summary>
         <p id="result-why"></p>
       </details>
     </div>
     <button class="primary-btn" id="btn-done">
-      <span class="btn-done-label">Mark Complete</span>
+      <span class="btn-done-label">Erledigt</span>
       <span class="btn-done-check" aria-hidden="true">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"></polyline></svg>
       </span>
     </button>
-    <button class="secondary-btn" id="btn-skip">Skip Cycle</button>
+    <button class="secondary-btn" id="btn-skip">Heute überspringen</button>
   </section>
 
   <!-- SCREEN 3: QUALIA FEEDBACK -->
   <section id="screen-feedback" class="screen" tabindex="-1" aria-label="Feedback">
     <div class="card">
-      <div class="question" id="feedback-question">Analyze the outcome. How does the system respond?</div>
+      <div class="question" id="feedback-question">Wie fühlst du dich jetzt, im Vergleich zu eben?</div>
       <div class="row" role="radiogroup" aria-labelledby="feedback-question">
-        <button class="opt-btn" data-qualia="-1" role="radio" aria-checked="false">Worse</button>
-        <button class="opt-btn" data-qualia="0" role="radio" aria-checked="false">Static</button>
-        <button class="opt-btn" data-qualia="1" role="radio" aria-checked="false">Better</button>
+        <button class="opt-btn" data-qualia="-1" role="radio" aria-checked="false"><span class="opt-icon">📉</span><span class="opt-label">Schlechter</span></button>
+        <button class="opt-btn" data-qualia="0" role="radio" aria-checked="false"><span class="opt-icon">➖</span><span class="opt-label">Gleich</span></button>
+        <button class="opt-btn" data-qualia="1" role="radio" aria-checked="false"><span class="opt-icon">📈</span><span class="opt-label">Besser</span></button>
       </div>
     </div>
   </section>
 
   <!-- SCREEN 4: SUMMARY -->
   <section id="screen-summary" class="screen" tabindex="-1" aria-label="Progress and History">
-    <div class="card">
-      <div class="question">Structure Calibrated.</div>
-      <p id="summary-text" style="color:var(--ink-soft);font-size:15px;font-weight:400;"></p>
+    <div class="card" style="border: none; background: transparent; box-shadow: none; padding: 0; margin-bottom: 32px;">
+      <div class="question">Struktur angepasst.</div>
+      <p id="summary-text" style="color:var(--ink-soft); font-size:16px; margin:0;"></p>
     </div>
     <div class="card" id="progress-card">
-      <div class="tier-label">System Progress</div>
+      <div class="tier-label">Dein Fortschritt</div>
       <div id="progress-list"></div>
     </div>
     <div class="card" id="dayclose-card">
-      <div class="tier-label">End of Cycle Analysis</div>
+      <div class="tier-label">Tagesabschluss</div>
       <div id="dayclose-content"></div>
     </div>
     <div class="card" id="outcome-card">
-      <div class="tier-label">Macro Efficacy</div>
-      <p style="color:var(--ink-soft);font-size:13px;margin-top:-8px;font-weight:400; line-height: 1.6;">Longitudinal measurement detached from daily metrics.</p>
+      <div class="tier-label">Makro-Wirkung</div>
+      <p style="color:var(--ink-soft);font-size:14px; margin-top:-4px; margin-bottom:16px;">Unabhängig von Tages-Metriken.</p>
       <div id="outcome-content"></div>
     </div>
     <div class="card" id="history-card">
-      <div class="tier-label">Diagnostic History</div>
-      <p style="color:var(--ink-soft);font-size:13px;margin-top:-8px;font-weight:400; line-height: 1.6;">Encrypted locally in browser state.</p>
+      <div class="tier-label">Diagnose-Verlauf</div>
+      <p style="color:var(--ink-soft);font-size:14px; margin-top:-4px; margin-bottom:16px;">Lokal auf deinem Gerät gespeichert.</p>
       <div id="history-list"></div>
     </div>
-    <button class="primary-btn" id="btn-restart">Initiate New Cycle</button>
+    <button class="primary-btn" id="btn-restart">Neuen Zyklus starten</button>
     
     <details class="advanced-section">
-      <summary>Advanced Diagnostics</summary>
+      <summary>Erweiterte System-Optionen</summary>
       <div class="advanced-group">
-        <div class="advanced-label">Data Architecture</div>
-        <div id="backup-controls" style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button class="secondary-btn" id="btn-export-data">Export System Data</button>
-          <button class="secondary-btn" id="btn-import-data">Import System Data</button>
+        <div class="advanced-label">Daten-Architektur</div>
+        <div id="backup-controls" style="display:flex;gap:12px;flex-direction:column;">
+          <button class="secondary-btn" id="btn-export-data">Daten exportieren</button>
+          <button class="secondary-btn" id="btn-import-data">Daten importieren</button>
           <input type="file" id="import-file-input" accept="application/json" style="display:none;">
         </div>
-        <div id="import-status" style="font-size:13px;margin-top:16px;" aria-live="polite"></div>
+        <div id="import-status" style="font-size:14px;margin-top:16px;" aria-live="polite"></div>
       </div>
       <div class="advanced-group">
-        <div class="advanced-label">Internal Node Weights</div>
+        <div class="advanced-label">Interne Gewichtungen</div>
         <table id="weights-table"></table>
       </div>
       <div class="advanced-group">
-        <div class="advanced-label">Gatekeeper Sensitivity</div>
+        <div class="advanced-label">Gatekeeper-Sensibilität</div>
         <table id="sensitivity-table"></table>
       </div>
       <div class="advanced-group">
-        <div class="advanced-label">System Override</div>
-        <button class="secondary-btn" id="btn-reset-all" style="border-color: var(--warn); color: var(--warn);">Purge All Diagnostics</button>
-        <div id="reset-status" style="font-size:13px;margin-top:16px;" aria-live="polite"></div>
+        <div class="advanced-label">System-Reset</div>
+        <button class="secondary-btn" id="btn-reset-all" style="color: var(--warn);">Alle Daten unwiderruflich löschen</button>
+        <div id="reset-status" style="font-size:14px;margin-top:16px;" aria-live="polite"></div>
       </div>
     </details>
   </section>
 </main>
 
-<footer>HUMANEED · Core Protocol · v0.42 · Premium Anthracite Dual Theme</footer>
+<footer>HUMANEED · Core Protocol · v0.43 · Native App Style</footer>
 
 <script>
 const TIERS = [
@@ -1211,15 +1154,15 @@ function renderDayClose(){
     content.innerHTML = `
       <div class="dayclose-question">Bist du dir heute treu geblieben, oder hast du dich verbogen?</div>
       <div class="row">
-        <button class="opt-btn" id="btn-dayclose-held">Treu geblieben</button>
-        <button class="opt-btn" id="btn-dayclose-bent">Verbogen</button>
+        <button class="opt-btn" id="btn-dayclose-held"><span class="opt-label">Treu geblieben</span></button>
+        <button class="opt-btn" id="btn-dayclose-bent"><span class="opt-label">Verbogen</span></button>
       </div>
     `;
     document.getElementById("btn-dayclose-held").addEventListener("click", () => setTodaysReflection("held"));
     document.getElementById("btn-dayclose-bent").addEventListener("click", () => setTodaysReflection("bent"));
   } else {
     const label = existing === "held" ? "Dir treu geblieben." : "Heute verbogen — kein Problem, morgen ist ein neuer Tag.";
-    content.innerHTML = `<div class="dayclose-done">Heute schon beantwortet: ${label}<button type="button" class="change-link" id="btn-dayclose-change">ändern</button></div>`;
+    content.innerHTML = `<div class="dayclose-done">Heute schon beantwortet: ${label}<button type="button" class="change-link" id="btn-dayclose-change">ÄNDERN</button></div>`;
     document.getElementById("btn-dayclose-change").addEventListener("click", renderDayCloseUnanswered);
   }
 }
@@ -1314,17 +1257,17 @@ function renderOutcome(){
   if (existing === undefined){
     html += `
       <div class="dayclose-question">Wie ging es dir in der letzten Woche insgesamt?</div>
-      <div id="outcome-options"></div>
+      <div id="outcome-options" class="options"></div>
     `;
   } else {
-    html += `<div class="dayclose-done">Für die letzte Woche eingetragen: ${OUTCOME_LABELS[existing]}<button type="button" class="change-link" id="btn-outcome-change">ändern</button></div>`;
+    html += `<div class="dayclose-done">Für die letzte Woche eingetragen: ${OUTCOME_LABELS[existing]}<button type="button" class="change-link" id="btn-outcome-change">ÄNDERN</button></div>`;
   }
   const trend = computeOutcomeTrend();
   if (trend){
     const compareLabel = trend.isConsecutive
       ? "Verglichen mit der Vorwoche"
       : "Verglichen mit deinem letzten Eintrag (dazwischen wurden Wochen ausgelassen)";
-    html += `<div class="progress-row" style="margin-top:16px;">${compareLabel}: ${trend.direction} · Verlauf: ${trend.sequence}</div>`;
+    html += `<div class="progress-row" style="margin-top:16px; border:none; padding-bottom:0;">${compareLabel}: ${trend.direction} <br> Verlauf: ${trend.sequence}</div>`;
   }
   content.innerHTML = html;
   if (existing === undefined){
@@ -1430,7 +1373,7 @@ function renderCheckinProgress(){
     return `<span class="progress-dot ${state}"${style}></span>`;
   }).join("");
   document.getElementById("checkin-progress").innerHTML = `
-    <div class="checkin-progress-text">Step ${checkinStep + 1} of ${TIERS.length}</div>
+    <div class="checkin-progress-text">Schritt ${checkinStep + 1} von ${TIERS.length}</div>
     <div class="checkin-progress-dots" aria-hidden="true">${dots}</div>
   `;
 }
@@ -1441,7 +1384,7 @@ function updateCheckinNav(){
   backBtn.disabled = checkinStep === 0;
   const answered = answers[TIERS[checkinStep].id] !== undefined;
   nextBtn.disabled = !answered;
-  nextBtn.textContent = checkinStep === TIERS.length - 1 ? "Analyze Status" : "Next";
+  nextBtn.textContent = checkinStep === TIERS.length - 1 ? "Diagnose abschließen" : "Weiter";
 }
 
 function renderCheckinStep(index, opts = {}){
@@ -1458,7 +1401,7 @@ function renderCheckinStep(index, opts = {}){
 
   if (showCarryCard){
     card.innerHTML = `
-      <div class="tier-label tier-accent-${tier.id}">Tier ${tier.id} // ${tier.name}</div>
+      <div class="tier-label tier-accent-${tier.id}">Ebene ${tier.id} // ${tier.name}</div>
       <div class="question" id="checkin-question-${tier.id}">${tier.question}</div>
       <p class="carry-hint">In den letzten Tagen ähnlich eingeschätzt — passt das noch?</p>
       <button class="primary-btn" id="btn-carry-confirm" type="button">Passt noch</button>
@@ -1477,7 +1420,7 @@ function renderCheckinStep(index, opts = {}){
     });
   } else {
     card.innerHTML = `
-      <div class="tier-label tier-accent-${tier.id}">Node ${tier.id} // ${tier.name}</div>
+      <div class="tier-label tier-accent-${tier.id}">Ebene ${tier.id} // ${tier.name}</div>
       <div class="question" id="checkin-question-${tier.id}">${tier.question}</div>
       <div class="options" data-tier="${tier.id}" role="radiogroup" aria-labelledby="checkin-question-${tier.id}"></div>
     `;
@@ -1517,7 +1460,7 @@ function scheduleAutoAdvance(){
   autoAdvanceTimer = setTimeout(() => {
     autoAdvanceTimer = null;
     if (checkinStep === stepAtSchedule) advanceCheckin();
-  }, 450);
+  }, 350); /* slightly faster for native feel */
 }
 
 function advanceCheckin(){
@@ -1805,6 +1748,7 @@ function showScreen(id){
   const next = document.getElementById(id);
   next.classList.add("active");
   next.focus();
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top like native page push
 }
 
 const GATEKEEPER_MESSAGES = {
@@ -1829,7 +1773,7 @@ function renderResult(){
     : "";
   const resultTierLabel = document.getElementById("result-tier-label");
   resultTierLabel.className = `tier-label tier-accent-${tier.id}`;
-  resultTierLabel.textContent = `Analyzed Focus: Tier ${tier.id} // ${tier.name}`;
+  resultTierLabel.textContent = `Analyzed Focus: Ebene ${tier.id} // ${tier.name}`;
   const moodFramingEl = document.getElementById("result-mood-framing");
   if (entryMood){
     moodFramingEl.textContent = entryMood.framing;
@@ -1856,14 +1800,14 @@ document.getElementById("btn-done").addEventListener("click", (e) => {
   const btn = e.currentTarget;
   if (btn.classList.contains("is-completing")) return; 
   btn.classList.add("is-completing");
-  const delay = prefersReducedMotion() ? 0 : 480;
+  const delay = prefersReducedMotion() ? 0 : 350;
   setTimeout(() => { showScreen("screen-feedback"); }, delay);
 });
 document.getElementById("btn-skip").addEventListener("click", () => {
   weights[currentIntervention.id] = Math.max(0.2, weights[currentIntervention.id] - 0.15);
   saveWeights();
   logCycle({ qualiaLabel:"übersprungen", qualiaClass:"same" });
-  finishCycle("Cycle bypassed. System weight slightly reduced.");
+  finishCycle("Zyklus übersprungen. System-Gewichtung leicht reduziert.");
 });
 
 let qualiaChoice = null;
@@ -1877,7 +1821,9 @@ document.querySelectorAll("[data-qualia]").forEach(btn => {
     });
     btn.classList.add("selected");
     btn.setAttribute("aria-checked", "true");
-    finishFeedback();
+    
+    // Auto-advance feedback for native feel
+    setTimeout(() => finishFeedback(), 300);
   });
 });
 
@@ -1887,9 +1833,9 @@ function finishFeedback(){
   if (qualiaChoice === -1) weights[id] = Math.max(0.2, weights[id] - 0.3);
   saveWeights();
 
-  const qualiaText = qualiaChoice === 1 ? "Positive feedback received. Node weight increased."
-                    : qualiaChoice === -1 ? "Negative feedback received. Node weight decreased."
-                    : "Neutral feedback received. Node weight maintained.";
+  const qualiaText = qualiaChoice === 1 ? "Positives Feedback registriert. Gewichtung erhöht."
+                    : qualiaChoice === -1 ? "Negatives Feedback registriert. Gewichtung gesenkt."
+                    : "Neutrales Feedback registriert. Gewichtung beibehalten.";
 
   logCycle({
     qualiaLabel: qualiaChoice === 1 ? "besser" : qualiaChoice === -1 ? "schlechter" : "gleich",
@@ -1993,22 +1939,28 @@ function renderProgress(){
   const bestTime = computeBestTimeOfDay();
 
   const streakText = streak <= 1
-    ? "Current streak initiated."
-    : `${streak} consecutive active days`;
-  const todayText = today === 1 ? "Today: Initial cycle" : `Today: Cycle ${today} complete`;
+    ? "Aktuelle Serie gestartet"
+    : `${streak} aktive Tage in Folge`;
+  const todayText = today === 1 ? "Heute: Erster Zyklus" : `Heute: ${today} Zyklen abgeschlossen`;
 
   let html = `
     <div class="progress-row"><span class="p-value">${streak}</span> ${streakText}</div>
     <div class="progress-row"><span class="p-value">${today}</span> ${todayText.replace(/^Heute: /, "")}</div>
   `;
   if (rate !== null){
-    html += `<div class="progress-row"><span class="p-value">${rate}%</span> historical efficacy rate across cycles</div>`;
+    html += `<div class="progress-row"><span class="p-value">${rate}%</span> Historische Erfolgsquote (helfen)</div>`;
   }
   if (topBottleneck !== null){
-    html += `<div class="progress-row" style="display:block; margin-top:8px;">Over the past ${topBottleneck.windowSize} cycles, your primary bottleneck has been <br><span style="color:var(--accent); font-weight:500;">Tier ${topBottleneck.tierId} // ${topBottleneck.tierName}</span> (${topBottleneck.count} occurences).</div>`;
+    html += `<div class="progress-row" style="flex-direction:column; align-items:flex-start; gap:8px;">
+      <span style="color:var(--ink-soft); font-size:13px;">Häufigster Engpass (letzte ${topBottleneck.windowSize} Zyklen)</span>
+      <div style="font-weight:600; color:var(--ink);">Ebene ${topBottleneck.tierId} // ${topBottleneck.tierName} <span style="font-weight:400; color:var(--ink-soft);">(${topBottleneck.count}×)</span></div>
+    </div>`;
   }
   if (bestTime !== null){
-    html += `<div class="progress-row" style="display:block; margin-top:8px;">Your system responds best <span style="color:var(--accent); font-weight:500;">${bestTime.label}</span> (${bestTime.rate}% efficacy from ${bestTime.sampleCount} recorded cycles).</div>`;
+    html += `<div class="progress-row" style="flex-direction:column; align-items:flex-start; gap:8px;">
+      <span style="color:var(--ink-soft); font-size:13px;">Beste Reaktionszeit des Systems</span>
+      <div style="font-weight:600; color:var(--ink);">${bestTime.label} <span style="font-weight:400; color:var(--ink-soft);">(${bestTime.rate}% positiv bei ${bestTime.sampleCount} Zyklen)</span></div>
+    </div>`;
   }
   list.innerHTML = html;
 }
@@ -2027,14 +1979,14 @@ function finishCycle(text){
 function renderHistory(){
   const list = document.getElementById("history-list");
   if (sessionLog.length === 0){
-    list.innerHTML = `<div class="history-empty">No diagnostic data recorded yet.</div>`;
+    list.innerHTML = `<div class="history-empty">Noch keine Diagnose-Daten vorhanden.</div>`;
     return;
   }
   list.innerHTML = sessionLog.map(entry => `
     <div class="history-entry">
       <div class="h-num">${entry.dateLabel || ""}<br>${entry.timeLabel || ""}</div>
       <div class="h-main">
-        <span class="h-tier-dot" style="background-color:var(--tier${entry.tierId});" aria-hidden="true"></span>Tier ${entry.tierId} // ${entry.tierName}<br><span style="opacity:0.7; font-size:12px;">${entry.title}</span>${entry.gatekeeper ? " <span class='tag'>Priority</span>" : ""}${entry.deepened ? " <span class='tag'>Deep</span>" : ""}
+        <span class="h-tier-dot" style="background-color:var(--tier${entry.tierId});" aria-hidden="true"></span>Ebene ${entry.tierId} // ${entry.tierName}<br><span style="opacity:0.7; font-size:13px; display:inline-block; margin-top:4px;">${entry.title}</span>${entry.gatekeeper ? " <span class='tag'>Priority</span>" : ""}${entry.deepened ? " <span class='tag'>Deep</span>" : ""}
       </div>
       <div class="h-qualia ${entry.qualiaClass}">${entry.qualiaLabel}</div>
     </div>
@@ -2057,7 +2009,7 @@ function renderSensitivityTable(){
     { key:"tier1", label:"Ebene 1 · Emotion (Regel 2)", minSensitivity:1.0 },
     { key:"tier2", label:"Ebene 2 · Sozial (Regel 3)", minSensitivity:1.0 }
   ];
-  let html = "<tr><th>Rule</th><th>Multiplier</th><th>State</th></tr>";
+  let html = "<tr><th>Regel</th><th>Multiplikator</th><th>Status</th></tr>";
   rules.forEach(r => {
     const d = computeGatekeeperSensitivityDetail(r.key, r.minSensitivity);
     const status = d.isNeutral
@@ -2129,8 +2081,8 @@ document.getElementById("import-file-input").addEventListener("change", (e) => {
     const entryCount = Array.isArray(data.history) ? data.history.length : 0;
     const dateLabel = data.exportedAt ? new Date(data.exportedAt).toLocaleDateString("de-DE") : "Unknown Date";
     statusEl.innerHTML = `
-      <div style="color:var(--ink);">Archive detected (${entryCount} cycles, generated ${dateLabel}). Current local state will be overwritten.</div>
-      <button class="secondary-btn" id="btn-confirm-import" style="margin-top:16px;">Confirm Override</button>
+      <div style="color:var(--ink);">Archiv erkannt (${entryCount} Zyklen, Stand ${dateLabel}). Lokale Daten werden überschrieben.</div>
+      <button class="secondary-btn" id="btn-confirm-import" style="margin-top:16px;">Überschreiben bestätigen</button>
     `;
     document.getElementById("btn-confirm-import").addEventListener("click", () => {
       applyImport(pendingImport);
@@ -2189,17 +2141,17 @@ document.getElementById("btn-restart").addEventListener("click", () => {
 document.getElementById("btn-reset-all").addEventListener("click", () => {
   const statusEl = document.getElementById("reset-status");
   statusEl.innerHTML = `
-    <div style="color:var(--warn); margin-bottom: 12px;">CRITICAL: This will permanently purge all local diagnostic history, learned weights, and outcome logs.</div>
+    <div style="color:var(--warn); margin-bottom: 16px;">KRITISCH: Dies löscht permanent den lokalen Verlauf, alle gelernten Gewichtungen und Log-Daten.</div>
     <div style="display:flex;gap:12px;">
-      <button class="secondary-btn" id="btn-confirm-reset" style="border-color:var(--warn); color:var(--warn);">Execute Purge</button>
-      <button class="secondary-btn" id="btn-cancel-reset">Abort</button>
+      <button class="secondary-btn" id="btn-confirm-reset" style="color:var(--warn);">Löschen ausführen</button>
+      <button class="primary-btn" id="btn-cancel-reset" style="margin-top:12px;">Abbrechen</button>
     </div>
   `;
   document.getElementById("btn-confirm-reset").addEventListener("click", () => {
     resetAllData();
     renderWeightsTable();
     renderSensitivityTable();
-    statusEl.innerHTML = `<span style="color:var(--accent);">System memory purged.</span>`;
+    statusEl.innerHTML = `<span style="color:var(--accent);">System-Speicher geleert.</span>`;
   });
   document.getElementById("btn-cancel-reset").addEventListener("click", () => {
     statusEl.innerHTML = "";
